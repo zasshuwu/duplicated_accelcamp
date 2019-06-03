@@ -7,8 +7,6 @@ from MyFunctions import *
 
 '''Add user time selection functionality'''
 def LoadRaw_1( fullPathName):
-    ''' gets rid of ; stop ... in csv file
-    completed with a comment argument'''
     # unpack makes it column-major
     block =np.loadtxt( fullPathName,dtype=float, comments= ";", delimiter=',', usecols=(0,1,2,3), unpack=True,
                        skiprows=1)
