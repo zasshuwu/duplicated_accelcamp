@@ -1,17 +1,14 @@
 import numpy
 import matplotlib
+import matplotlib.pyplot as plt
 from MyFunctions import *
-from Load_A import * #Pseudo to be changed with LoadAccel
-myOpts = {}
-myOpts['initialfile'] = 'TopRight_Feb18.csv'
-'''Test file was TopRight_Feb18.csv'''
-fullPathName = dialogOpenFilename(myOpts)
-a = LoadRaw_3(fullPathName)
+from LoadAccel import * #Pseudo to be changed with LoadAccel
+
+a, time = Load_X2()
 print(a)
 
-time = a[0]
-ax = a[1]
-ay = a[2]
+ax = a[0]
+ay = a[1]
 def graphing():
     """display graphs before user times"""
     avg_ax = np.average(ax)
