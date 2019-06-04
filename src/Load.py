@@ -9,7 +9,7 @@ file_structure = "name.type.model.csv".split(".")
 type_index = file_structure.index("type")
 model_index = file_structure.index("model")
 
-def Load(dirpath=None):
+def LoadDataSet(dirpath=None):
     if(dirpath==None):
         root = Tk()
         root.withdraw()
@@ -24,17 +24,19 @@ def Load(dirpath=None):
     i = 1
     runs_files = []
     while(True):
-        run = list(filter(lambda x: "run"+str(i) in x, files))
+        run = list(filter(lambda x: x == "run"+str(i), files))
         if(run != []):
-            runs_files.append(run)
+            runs_files += run
         else:
             break
         i+=1
     print("Found "+str(len(runs_files))+" runs")
     runs_data = []
     for run in runs_files:
-        runs_data += LoadRun(dirpath+run+"/")
-    return crun
+        print("-----------------"+run+"-----------------")
+        runs_data.append(LoadRun(dirpath+"/"+run+"/"))
+        print("-------------------------------------")
+    return runs_data
         
 def LoadRun(dirpath=None):
     if(dirpath==None):
@@ -47,16 +49,16 @@ def LoadRun(dirpath=None):
     for i in files:
         print("Found: "+i)
     print("----------------------------")
-    accels_files = list(filter(lambda x: x.slip(".")[type_index]=="accel", run))
+    accels_files = list(filter(lambda x: x.split(".")[type_index]=="accel", files))
     accels_data = []
     for file in accels_files:
         print("processing "+file+"...")
-        accels_data += Load_Any(model=file.split(".")[model_index].capitalize(), filepath=dirpath+"/"+file)
+        accels_data.append(Load_Any(model=file.split(".")[model_index].capitalize(), filepath=dirpath+"/"+file))
 
-    omega_files = list(filter(lambda x: x.slip(".")[type_index]=="omega", run))
+    omega_files = list(filter(lambda x: x.split(".")[type_index]=="omega", files))
     omega_data = []
-    for file in accels_files:
+    for file in omega_files:
         print("processing "+file+"...")
-        omega_data += Load_Omega(filepath=dirpath+"/"+file)
+        omega_data.append(Load_Omega(filepath=str(dirpath+"/"+file)))
 
     return { "accel": accels_data, "omega": omega_data }    

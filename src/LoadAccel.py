@@ -21,8 +21,7 @@ def Load_X(filepath = None):
     for y in range(len(t)):
         t[y]-=t0
 
-    #STILL NEED TO CONVERT COUNTS TO M/S2
-    return a, t
+    return AccelData(a, t)
 
 def Load_Samsung(filepath = None):
     if(filepath == None):
@@ -56,7 +55,7 @@ def Load_X2(filepath = None):
 
 def Load_Any(model,filepath=""):
     try:
-        return eval(Model_Dict[model]+filepath+")")
+        return eval(Model_Dict[model]+"'"+filepath+"')")
     except KeyError:
         return "Model is not currently supported"
 
