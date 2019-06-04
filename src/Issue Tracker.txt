@@ -5,4 +5,13 @@ Day 1 (Monday):
 			2) For different X-models and settings, the conversion rate between counts and g's is different
 	turntable:
 	Battery wires found loose could not conduct experiment
-	
+Day 2:
+	Script stalling
+	conversion x6 tbd
+	Load_xxx.py is fully functional
+	naming format set in stone
+		File
+			name/id.type.device.csv
+			Type: accel or omega
+	directory struct
+	data-> dataset# -> Run# -> files(files should not be visible)

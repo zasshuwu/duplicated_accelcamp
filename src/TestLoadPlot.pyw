@@ -1,7 +1,8 @@
 import numpy as np
 import os
-from Load_A import *
+from LoadAccel import *
 from MyFunctions import *
 from PlotAccel import *
 
 graphing()
+#second_graph()
