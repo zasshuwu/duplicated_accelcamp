@@ -6,7 +6,7 @@ from MyFunctions import *
 #create variable to grab sample rate
 
 '''Add user time selection functionality'''
-def LoadRaw_1(fullPathName):
+def LoadRaw_1(fullPathName): #q1,samsung
     # unpack makes it column-major
     block =np.loadtxt( fullPathName,dtype=float, comments= ";", delimiter=',', usecols=(0,1,2,3), unpack=True,
                        skiprows=1)
@@ -18,7 +18,7 @@ def LoadRaw_1(fullPathName):
     iz=2
     return a
 
-def LoadRaw_2(fullPathName):
+def LoadRaw_2(fullPathName): #Data-008
     ''' gets rid of ; stop ... in csv file
     completed with a comment argument'''
     # unpack makes it column-major
@@ -31,7 +31,7 @@ def LoadRaw_2(fullPathName):
     iy=1
     iz=2
     return a
-def LoadRaw_3(fullPathName):
+def LoadRaw_3(fullPathName): #Top_right
     ''' gets rid of ; stop ... in csv file
     completed with a comment argument'''
     # unpack makes it column-major
