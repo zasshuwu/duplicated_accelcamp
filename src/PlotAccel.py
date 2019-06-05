@@ -3,16 +3,17 @@ import matplotlib.pyplot as plt
 from MyFunctions import *
 from Load import *
 
-r=LoadRun()
-a= r["accel"][0].a #a[0] is time
-time= r["accel"][0].t
-ax = a[0]
-ay= a[1]
 
-om_time = r["omega"][0].t
-om_vel = r['omega'][0].omega
 
-def graphing():
+def Plot(filepath=None):
+    r = LoadRun(filepath)
+    a = r["accel"][0].a  # a[0] is time
+    time = r["accel"][0].t
+    ax = a[0]
+    ay = a[1]
+
+    om_time = r["omega"][0].t
+    om_vel = r['omega'][0].omega
     avg_ax = np.average(ax)
     avg_ay = np.average(ay)
     print("The average acceleration in x is %s\nThe average acceleration in y is %s" %(avg_ax,avg_ay))
@@ -53,7 +54,7 @@ def graphing():
     #plt.show(block=False)
     print("step 1")
     plt.show(block=False)
-    plt.pause(2)
+    plt.pause(8)
     plt.close()
 
     try:
@@ -85,6 +86,5 @@ def graphing():
     plt.plot(x, z)  # plots time v voltage
     plt.plot(x, a)  # plots time v voltage
 
-    plt.show(block=False)
-    print("---Plot graph finish---")
     plt.show()
+
