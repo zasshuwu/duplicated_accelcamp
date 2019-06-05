@@ -13,8 +13,8 @@ def LoadDataSet(dirpath=None):
     if(dirpath==None):
         root = Tk()
         root.withdraw()
-        dirpath = filedialog.askdirectory(parent=root,initialdir="/",title='Please select a dataset')
-
+        dirpath = filedialog.askdirectory(parent=root,initialdir="./",title='Please select a dataset')
+    
     files = os.listdir(dirpath)
     print("-------Found "+str(len(files))+ " files-------")
     for i in files:
@@ -35,14 +35,13 @@ def LoadDataSet(dirpath=None):
     for run in runs_files:
         print("-----------------"+run+"-----------------")
         runs_data.append(LoadRun(dirpath+"/"+run+"/"))
-        print("-------------------------------------")
     return runs_data
         
 def LoadRun(dirpath=None):
     if(dirpath==None):
         root = Tk()
         root.withdraw()
-        dirpath = filedialog.askdirectory(parent=root,initialdir="/",title='Please select a dataset')
+        dirpath = filedialog.askdirectory(parent=root,initialdir="./",title='Please select a run')
 
     files = os.listdir(dirpath)
     print("-------Found "+str(len(files))+ " files-------")
