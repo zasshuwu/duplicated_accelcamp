@@ -17,6 +17,7 @@ def graphing():
     avg_ay = np.average(ay)
     print("The average acceleration in x is %s\nThe average acceleration in y is %s" %(avg_ax,avg_ay))
     #plt.title('raw data: close window to show RMS analysis')
+    fig = plt.figure()
     plt.subplot(3,1,1)
     plt.plot(time,ax, label="Accel in x")
     plt.minorticks_on()
@@ -49,13 +50,12 @@ def graphing():
     om_vel_mean = [np.mean(om_vel)]*len(om_time)
     om_mean_line = plt.plot(om_time,om_vel_mean, label='Mean', linestyle='--')
     plt.legend(['Angular Velocity', 'Average Angular Velocity'])
-    plt.show()
+    #plt.show(block=False)
+    print("step 1")
+    plt.show(block=False)
+    plt.pause(2)
+    plt.close()
 
-
-
-
-
-def second_graph():
     try:
         Start = input("Starting time")
         End = input("End time")
@@ -76,6 +76,7 @@ def second_graph():
     print("method 2: " + str(avg_x_2))
 
     file = pd.read_excel('C:\\Users\\Jeff\\Downloads\\charging.xlsx', header=1, sheet_name=0, index_col=4)
+
     x = np.arange(0, 235.5, 0.5)  # needs to be fixed to take in the x values of the excel file
     y = file.iloc[:, 1]  # takes first voltage column
     z = file.iloc[:, 2]  # takes second voltage column
@@ -83,4 +84,7 @@ def second_graph():
     plt.plot(x, y)  # plots time v voltage
     plt.plot(x, z)  # plots time v voltage
     plt.plot(x, a)  # plots time v voltage
-    plt.show()  # displays graph
+
+    plt.show(block=False)
+    print("---Plot graph finish---")
+    plt.show()
