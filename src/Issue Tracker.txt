@@ -15,3 +15,6 @@ Day 2:
 			Type: accel or omega
 	directory struct
 	data-> dataset# -> Run# -> files(files should not be visible)
+
+Day 3:
+	user selected time in PlotAcc after time synchronization
