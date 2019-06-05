@@ -1,7 +1,7 @@
 import numpy as np
 import os
-from MyFunctions import *
-from DataStructures import *
+from MyFunctions import dialogOpenFilename
+from DataStructures import AccelData
 
 Model_Dict = {
     "X2":"Load_X2(",

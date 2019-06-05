@@ -2,7 +2,6 @@ from LoadAccel import *
 from LoadOmega import *
 import numpy as np
 import os
-from MyFunctions import *
 from tkinter import *
 
 file_structure = "name.type.model.csv".split(".")
