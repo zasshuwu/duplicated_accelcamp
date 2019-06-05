@@ -1,7 +1,7 @@
 import numpy as np
 import os
-from MyFunctions import *
-from DataStructures import *
+from MyFunctions import dialogOpenFilename
+from DataStructures import RotaryData
 
 def Load_Omega(filepath=None):
     if(filepath == None):
