@@ -4,5 +4,4 @@ from LoadAccel import *
 from MyFunctions import *
 from PlotAccel import *
 
-graphing()
-#second_graph()
+Plot()
