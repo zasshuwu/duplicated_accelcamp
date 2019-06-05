@@ -47,7 +47,7 @@ def infer_params(A:np.ndarray, B:np.ndarray, C:np.ndarray):
     kinetics_B = curvature(rotate(ph_B, param_phi), param_r)
     kinetics_C = curvature(rotate(ph_C, param_phi), param_r)
 
-    total_loss = kinetics_A + kinetics_B + kinetics_C
+    total_loss = tf.square(kinetics_A) + tf.square(kinetics_B) + tf.square(kinetics_C)
 
     init = tf.global_variables_initializer()
 
