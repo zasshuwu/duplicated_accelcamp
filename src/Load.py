@@ -32,7 +32,7 @@ def LoadDataSet(dirpath=None):
     print("Found "+str(len(runs_files))+" runs")
     runs_data = []
     for run in runs_files:
-        print("-----------------"+run+"-----------------")
+        print("\n\n-----------------"+run+"-----------------")
         runs_data.append(LoadRun(dirpath+"/"+run+"/"))
     return runs_data
         
@@ -42,16 +42,38 @@ def LoadRun(dirpath=None):
         root.withdraw()
         dirpath = filedialog.askdirectory(parent=root,initialdir="./",title='Please select a run')
 
-    files = os.listdir(dirpath)
-    print("-------Found "+str(len(files))+ " files-------")
-    for i in files:
+    found_files = os.listdir(dirpath)
+    print("-------Found "+str(len(found_files))+ " files-------")
+    for i in found_files:
         print("Found: "+i)
+    print("The Following Files Will be Ignored:")
+    not_file = list(filter(lambda x: ((x.split(".")[type_index]!="accel" and
+                                      x.split(".")[type_index]!="omega") or
+                                      x.split(".")[-1].lower()!="csv" or
+                                      len(x.split(".")) != 4
+                                      ),
+                           found_files))
+    for i in not_file:
+        print("- "+i+("(Wrong File Structure)" if len(i.split(".")) != 4
+                      else "(Wrong File Format)" if i.split(".")[-1].lower()!="csv"
+                      else "(Unsupported Type)" if i.split(".")[type_index]!="accel" and i.split(".")[type_index]!="omega"
+                      else ""
+                        ))
+    if(not_file == []):
+        print("--None--")
+
     print("----------------------------")
+    files = list(filter(lambda x: not_file.count(x) == 0,
+                           found_files))
     accels_files = list(filter(lambda x: x.split(".")[type_index]=="accel", files))
     accels_data = []
     for file in accels_files:
         print("processing "+file+"...")
-        accels_data.append(Load_Any(model=file.split(".")[model_index].capitalize(), filepath=dirpath+"/"+file))
+        data = Load_Any(model=file.split(".")[model_index].capitalize(), filepath=dirpath+"/"+file)
+        if(data != "Model is not currently supported"):
+            accels_data.append(data)
+        else:
+            print("Failed to Load: "+file+" (Model not supported)")
 
     omega_files = list(filter(lambda x: x.split(".")[type_index]=="omega", files))
     omega_data = []
