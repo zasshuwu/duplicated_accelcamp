@@ -16,5 +16,10 @@ Day 2:
 	directory struct
 	data-> dataset# -> Run# -> files(files should not be visible)
 
+
+
 Day 3:
 	user selected time in PlotAcc after time synchronization
+
+TensorFlow first setup with Guillaume from Mila.
+todo: install TensorFlow on our machines, validate that we can run src/tf/tfPhysics.py
