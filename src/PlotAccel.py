@@ -51,10 +51,10 @@ def Plot(filepath=None):
     om_mean_line = plt.plot(om_time,om_vel_mean, label='Mean', linestyle='--')
     plt.legend(['Angular Velocity', 'Average Angular Velocity'])
     #plt.show(block=False)
-    print("step 1")
-    plt.show(block=False)
-    plt.pause(8)
-    plt.close()
+    plt.draw()
+#    plt.show(block=False)
+ #   plt.pause()
+    plt.show()
 
     try:
         Start = input("Starting time")
