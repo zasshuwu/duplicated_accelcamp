@@ -45,3 +45,9 @@ ImportError: numpy.core.umath failed to import
 2019-06-06 10:03:26.833173: F tensorflow/python/lib/core/bfloat16.cc:675] Check failed: PyBfloat16_Type.tp_base != nullptr 
 
 '''
+
+	Jerome's works with anaconda
+
+	spike tracker algorithm is complete
+		alignment
+	catch errors that may occur
