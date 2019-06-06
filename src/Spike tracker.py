@@ -36,16 +36,24 @@ def FindSpkieTime_run(dirpath=None):
     t1 = time1[np.argmax(abs_mag)]
     t2 = time2[np.argmax(abs_omega)]
     delta = t2 - t1
+    time2 = od.t
     time2 -= delta
+    print(time2)
+    z = len(list(filter(lambda x: x < 0, time2)))
     time2 = np.array(list(filter(lambda x: x >= 0, time2)))
+    omega = b[z:]
+    abs_omega = np.absolute(omega)
 
-    print(np.amax(abs_mag))
+    time1 = list(filter(lambda x: x <= time2[-1], list(time1)))
+    ax = a[0][:len(time1)]
+    ay = a[1][:len(time1)]
+    mag = np.sqrt(np.square(ax) + np.square(ay))
+    abs_mag = np.absolute(mag)
+''' print(np.amax(abs_mag))
     print(np.amax(abs_omega))
     print("Time of max Acceleration: " + str(time1[np.argmax(abs_mag)]))
-    print("Time of max Omega: " + str(time2[np.argmax(abs_omega)]))
+    print("Time of max Omega: " + str(time2[np.argmax(abs_omega)]))'''
 
-    omega = b[:len(time2)]
-    abs_omega = np.absolute(omega)
 
 FindSpkieTime_run()
 
