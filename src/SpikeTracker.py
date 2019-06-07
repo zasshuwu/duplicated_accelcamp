@@ -4,6 +4,7 @@ from DataStructures import *
 adjust = 0.5
 
 def SpikeAdjust(AccelDatas, RotaryDatas):
+    global adjust
     ad = AccelDatas[0]
     od = RotaryDatas[0]
 
@@ -27,6 +28,7 @@ def SpikeAdjust(AccelDatas, RotaryDatas):
 
     t1 = time1[np.argmax(abs_mag)]
     t2 = time2[np.argmax(abs_omega)]
+    adjust = t1 - adjust
     delta = t2 - t1
     time2 = od.t
     time2 -= delta + adjust
