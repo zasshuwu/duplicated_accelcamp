@@ -4,6 +4,8 @@ import numpy as np
 import os
 from tkinter import *
 
+defaultdir = "../data"
+
 file_structure = "name.type.model.csv".split(".")
 type_index = file_structure.index("type")
 model_index = file_structure.index("model")
@@ -12,7 +14,7 @@ def LoadDataSet(dirpath=None):
     if(dirpath==None):
         root = Tk()
         root.withdraw()
-        dirpath = filedialog.askdirectory(parent=root,initialdir="./",title='Please select a dataset')
+        dirpath = filedialog.askdirectory(parent=root,initialdir=defaultdir,title='Please select a dataset')
     
     files = os.listdir(dirpath)
     print("-------Found "+str(len(files))+ " files-------")
@@ -40,7 +42,7 @@ def LoadRun(dirpath=None):
     if(dirpath==None):
         root = Tk()
         root.withdraw()
-        dirpath = filedialog.askdirectory(parent=root,initialdir="./",title='Please select a run')
+        dirpath = filedialog.askdirectory(parent=root,initialdir=defaultdir,title='Please select a run')
 
     found_files = os.listdir(dirpath)
     print("-------Found "+str(len(found_files))+ " files-------")

@@ -1,5 +1,4 @@
 import numpy as np
-from MyFunctions import *
 from DataStructures import *
 
 adjust = 0.5
@@ -31,15 +30,15 @@ def SpikeAdjust(AccelDatas, RotaryDatas):
     delta = t2 - t1
     time2 = od.t
     time2 -= delta + adjust
-    print(time2)
+
     z = len(list(filter(lambda x: x < 0, time2)))
     time2 = np.array(list(filter(lambda x: x >= 0, time2)))
     omega = b[z:]
-    abs_omega = np.absolute(omega)
+
     temp_t = ad.t - adjust
     w = len(list(filter(lambda x: x < 0, temp_t)))
     time1 = list(filter(lambda x: 0 <= x <= time2[-1], temp_t))
-    print(time1[-1])
+
     ax = a[0][w:len(time1)+w]
     ay = a[1][w:len(time1)+w]
     return [AccelData([ax,ay,ad.a[2]],time1,ad.samplerate)],[RotaryData(omega,time2,od.samplerate)]
