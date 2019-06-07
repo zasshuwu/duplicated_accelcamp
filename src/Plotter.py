@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
-
+from DataStructures import *
+import numpy as np
 
 
 def Plot(AccelDatas, RotaryDatas):

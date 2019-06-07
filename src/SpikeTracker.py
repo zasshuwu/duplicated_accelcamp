@@ -1,5 +1,6 @@
 import numpy as np
 from MyFunctions import *
+from DataStructures import *
 
 adjust = 0.5
 
