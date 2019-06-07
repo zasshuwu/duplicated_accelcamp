@@ -1,8 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import numpy as np
 from MyFunctions import *
-from Load import *
 
 adjust = 0.5
 
