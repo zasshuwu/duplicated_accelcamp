@@ -4,3 +4,12 @@ src/__pycache__/DataStructures.cpython-37.pyc
 src/__pycache__/LoadAccel.cpython-37.pyc
 src/__pycache__/LoadOmega.cpython-37.pyc
 src/__pycache__/PlotAccel.cpython-37.pyc
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/2019_06_AccelerationCamp.iml
+src/__pycache__/MyFunctions.cpython-37.pyc
+src/__pycache__/SpikeTracker.cpython-37.pyc
+src/__pycache__/Plotter.cpython-37.pyc
+src/__pycache__/MyFunctions.cpython-37.pyc

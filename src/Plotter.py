@@ -1,18 +1,16 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 from Load import *
 
 
 
-def Plot(filepath=None):
-    r = LoadRun(filepath)
-    a = r["accel"][0].a  # a[0] is time
-    time = r["accel"][0].t
+def Plot(AccelDatas, RotaryDatas):
+    a = AccelDatas[0].a 
+    time = AccelDatas[0].t
     ax = a[0]
     ay = a[1]
 
-    om_time = r["omega"][0].t
-    om_vel = r['omega'][0].omega
+    om_time = RotaryDatas[0].t
+    om_vel = RotaryDatas[0].omega
     avg_ax = np.average(ax)
     avg_ay = np.average(ay)
     print("The average acceleration in x is %s\nThe average acceleration in y is %s" %(avg_ax,avg_ay))
@@ -55,7 +53,7 @@ def Plot(filepath=None):
 #    plt.show(block=False)
  #   plt.pause()
     plt.show()
-
+    '''
     try:
         Start = input("Starting time")
         End = input("End time")
@@ -67,7 +65,6 @@ def Plot(filepath=None):
         Start = input("Starting time")
         End = input("End time")
 
-    '''user selected time'''
     plt.clf()
     n = 0
     avg_x = 0
@@ -85,5 +82,5 @@ def Plot(filepath=None):
     plt.plot(x, z)  # plots time v voltage
     plt.plot(x, a)  # plots time v voltage
 
-    plt.show()
+    plt.show()'''
 

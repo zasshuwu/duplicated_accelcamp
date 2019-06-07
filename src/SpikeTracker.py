@@ -3,15 +3,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 from MyFunctions import *
 from Load import *
-import pandas as pd
 
 adjust = 0.5
 
-def FindSpkieTime_run(dirpath=None):
-    global mag, abs_mag, time1, ax, ay,time2,omega,abs_omega
-    r = LoadRun(dirpath)
-    ad = r["accel"][0]
-    od = r["omega"][0]
+def SpikeAdjust(AccelDatas, RotaryDatas):
+    ad = AccelDatas[0]
+    od = RotaryDatas[0]
 
     a = ad.a  # a[0] is time
     time1 = ad.t
@@ -47,38 +44,4 @@ def FindSpkieTime_run(dirpath=None):
     print(time1[-1])
     ax = a[0][w:len(time1)+w]
     ay = a[1][w:len(time1)+w]
-    mag = np.sqrt(np.square(ax) + np.square(ay))
-    abs_mag = np.absolute(mag)
-''' print(np.amax(abs_mag))
-    print(np.amax(abs_omega))
-    print("Time of max Acceleration: " + str(time1[np.argmax(abs_mag)]))
-    print("Time of max Omega: " + str(time2[np.argmax(abs_omega)]))'''
-
-
-FindSpkieTime_run()
-
-
-
-
-
-
-
-
-
-
-
-plt.subplot(2, 1, 1)
-plt.plot(time1,mag, label="Acceleration")
-plt.minorticks_on()
-plt.grid(b=True, which='both', color='0.65',linestyle='-')
-plt.xlabel("Time (s)")
-plt.ylabel("Acceleration (m/s^2)")
-
-plt.subplot(2,1,2)
-plt.subplots_adjust(hspace=0.3)
-plt.plot(time2,omega, label='Accel in y')
-plt.minorticks_on()
-plt.grid(b=True, which='both', color='0.65',linestyle='-')
-plt.xlabel("Time (s)")
-plt.ylabel("Angular Velocity (rad/s)")
-plt.show()
+    return [AccelData([ax,ay,ad.a[2]],time1,ad.samplerate)],[RotaryData(omega,time2,od.samplerate)]
