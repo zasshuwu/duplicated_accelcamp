@@ -2,6 +2,8 @@
 import numpy as np
 import tensorflow as tf
 
+##################################### tensorflow utilities
+
 # simplification to run a session
 # allows us to quickly build tests of low-level tf elements
 # must be called AFTER creation of thigs like: param_phi = tf.Variable(1.0, name="phi")
@@ -11,11 +13,13 @@ def tfSessionInit():
     sess.run(init)
     return sess;
 
-# expects a numpy array
+# simplify making a placeholder
 def tfMakePlaceholder( aArray ):
     # tensorflow seems to dislike float64
     assert aArray.dtype == np.float32
     return tf.placeholder( aArray.dtype, aArray.shape )
+
+########################################## parametrized functions
 
 # functions from which we build our physics models
 # the param_ variables are the ones that will be optimized
@@ -24,16 +28,16 @@ def tfMakePlaceholder( aArray ):
 # rotate a 3-vector in the xy plane, i.e. rotation about the z-axis
 # phi is in radians
 
-def rot_xy(aVec3, param_phi):
+def rot_xy(vec3, theta):
     # from https://stackoverflow.com/questions/37042748/how-to-create-a-rotation-matrix-in-tensorflow
-    rotation_matrix = [[tf.cos(param_phi), -tf.sin(param_phi),0],
-                       [tf.sin(param_phi), tf.cos(param_phi),0],
+    rot_matrix = [[tf.cos(theta), -tf.sin(theta),0],
+                       [tf.sin(theta), tf.cos(theta),0],
                        [0.0,0.0,0.0]]
 
-    # reshape to make tf.matmul happy
-    aVec3 = tf.reshape(aVec3, [3,1])
+    # reshape to make tf.matmul happy ; no performance cost
+    vec3 = tf.reshape(vec3, [3,1])
 
-    return tf.matmul(rotation_matrix, aVec3)
+    return tf.matmul(rot_matrix, vec3)
 
 
 def rot_2D(A, param_phi):
@@ -44,6 +48,26 @@ def rot_2D(A, param_phi):
     # to make tf.matmul happy
     A = tf.reshape(A, [2,1])
     return tf.matmul(rotation_matrix, A)
+
+
+def curvature(A, param_r):
+    # TODO : IMPLEMENT THIS
+    return tf.reduce_sum(A * param_r)
+
+# test degree of validity of the following hypothesis:
+# 3-vectors A and Anext are 3-vecs in which we expect:
+# [0] = tangential component
+#  [1] = radial componet
+#  [2] = perpendicular-to-plane component
+# over the local time interval, and correspond to a radius of curvature param_r
+
+def curvatureRealOne(A, Anext, deltaT, param_r):
+    # TODO : IMPLEMENT THIS
+    return tf.reduce_sum(A * param_r)
+
+
+
+########################################## unit testing
 
 def testrot2D( ):
 
@@ -89,15 +113,6 @@ def test_rot_xy():
     #vec_out = rot_xy(vec1,phi)
     # assert( vec_out = [0,1,0])
     return 0
-
-# test degree of validity of the following hypothesis:
-# 3-vectors A and Anext are in the approrpiate radial-tangential coordinates
-# over the local time interval, and correspond to a radius of curvature param_r
-
-def curvature(A, param_r):
-    # TODO : IMPLEMENT THIS
-    return tf.reduce_sum(A * param_r)
-
 
 def runTests():
 #    sess = tfSessionInit()
