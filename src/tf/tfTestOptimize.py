@@ -22,6 +22,7 @@ def simpleTest2():
     A = np.random.rand(2)
     A[0] = 99.0
     A[1] = 88.0
+    print("A shape", A.shape)
 
     ph_A = tf.placeholder(tf.float32, A.shape)
 
