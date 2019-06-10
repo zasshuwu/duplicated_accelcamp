@@ -3,9 +3,14 @@ from Plotter import *
 from Curvature import *
 import matplotlib.pyplot as plt
 
-acceldat = LoadRun()["accel"][0]
-adot = GenADot(acceldat)
-yx2 = Genyx2(acceldat)
+_range = [13,18]
 
-plt.scatter(yx2,adot)
+acceldat = LoadRun()["accel"][0]
+
+mask = np.logical_not((_range[0] <= acceldat.t[:-1]) ^ (_range[1] >= acceldat.t[:-1]))
+
+adot = GenADot(acceldat)[mask]
+yx2 = Genyx2(acceldat)[mask]
+
+plt.scatter(yx2,np.square(adot))
 plt.show()

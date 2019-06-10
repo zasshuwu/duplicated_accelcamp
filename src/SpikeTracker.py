@@ -21,7 +21,7 @@ def SpikeAdjust(AccelDatas, RotaryDatas):
 
     b = od.omega
     time2 = od.t
-    time2 = list(filter(lambda x: x < 5, list(time2)))
+    time2 = list(filter(lambda x: x < 7, list(time2)))
 
     omega = b[:len(time2)]
     abs_omega = np.absolute(omega)
