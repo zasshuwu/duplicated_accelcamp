@@ -3,9 +3,7 @@ class AccelData:
         self.a = a
         self.t = t
         self.samplerate = sr
-
-    def len(self):
-        return len(self.a[0])
+        self.len = len(self.a[0])
 
 class RotaryData:
     def __init__(self,omega,t,sr):

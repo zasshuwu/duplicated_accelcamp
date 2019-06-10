@@ -55,3 +55,8 @@ ImportError: numpy.core.umath failed to import
 Day 5:
 	FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
   Y[sl] = X[sl] 
+
+
+Day 6:
+	Fixed a levelling issue using four scissor stands to make small compensations to create a flat and level surface
+	
