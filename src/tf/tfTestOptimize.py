@@ -3,7 +3,6 @@ import numpy as np
 import tensorflow as tf
 from tfPhysics import *
 
-
 def rotate(A, param_phi):
     # from https://stackoverflow.com/questions/37042748/how-to-create-a-rotation-matrix-in-tensorflow
     rotation_matrix = [[tf.cos(param_phi), -tf.sin(param_phi)],
@@ -74,9 +73,9 @@ def infer_params(A:np.ndarray, B:np.ndarray, C:np.ndarray):
     param_phi = tf.Variable(0.0, name="phi")
     param_r = tf.Variable(1.0, name="r")
 
-    kinetics_A = curvature(rotate(ph_A, param_phi), param_r)
-    kinetics_B = curvature(rotate(ph_B, param_phi), param_r)
-    kinetics_C = curvature(rotate(ph_C, param_phi), param_r)
+    kinetics_A = curvatureBogus(rotate(ph_A, param_phi), param_r)
+    kinetics_B = curvatureBogus(rotate(ph_B, param_phi), param_r)
+    kinetics_C = curvatureBogus(rotate(ph_C, param_phi), param_r)
 
     total_loss = tf.square(kinetics_A) + tf.square(kinetics_B) + tf.square(kinetics_C)
 

@@ -11,7 +11,7 @@ def rotate(A:tf.Tensor, param_phi):
     return tf.transpose(tf.matmul(rotation_matrix, tf.transpose(A)))
 
 
-def curvature(A, param_r):
+def curvatureBogusLocal(A, param_r):
     # this returns a tensor of shape (window_size,)
     return tf.reduce_sum(A * param_r, axis=1)
 
@@ -36,7 +36,7 @@ def infer_params(A:np.ndarray):
     param_phi = tf.Variable(0.0, name="phi")
     param_r = tf.Variable(1.0, name="r")
 
-    kinetics_A = curvature(rotate(ph_A, param_phi), param_r)
+    kinetics_A = curvatureBogusLocal(rotate(ph_A, param_phi), param_r)
     total_loss = tf.reduce_mean(tf.square(kinetics_A))
 
     # total_error = tf.sum([error(X, param_phi, param_r) for X in [ph_A, ph_B, ph_C]])

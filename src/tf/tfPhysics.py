@@ -50,20 +50,23 @@ def rot_2D(A, param_phi):
     return tf.matmul(rotation_matrix, A)
 
 
-def curvature(A, param_r):
+def curvatureBogus(A, param_r):
     # TODO : IMPLEMENT THIS
     return tf.reduce_sum(A * param_r)
 
 # test degree of validity of the following hypothesis:
-# 3-vectors A and Anext are 3-vecs in which we expect:
+# A and Anext are 3-vecs in which we expect:
 # [0] = tangential component
-#  [1] = radial componet
-#  [2] = perpendicular-to-plane component
+# [1] = radial componet
+# [2] = perpendicular-to-plane component
 # over the local time interval, and correspond to a radius of curvature param_r
 
-def curvatureRealOne(A, Anext, deltaT, param_r):
+def curvature(A, Anext, deltaT, param_r):
     # TODO : IMPLEMENT THIS
-    return tf.reduce_sum(A * param_r)
+    ardot = ( Anext[1]-A[1] ) / deltaT
+    term1 = param_r * tf.square(ardot)
+    term2 = 4*A[1]*tf.square(A[0])
+    return term1-term2
 
 
 
