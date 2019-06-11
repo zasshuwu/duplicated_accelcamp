@@ -59,4 +59,5 @@ Day 5:
 
 Day 6:
 	Fixed a levelling issue using four scissor stands to make small compensations to create a flat and level surface
-	
+Day 7:
+	Addressed and prioritized all tasks sent by mio.
