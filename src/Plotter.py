@@ -1,9 +1,14 @@
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams["savefig.dpi"] = 300
 from DataStructures import *
 import numpy as np
+from datetime import date
 
 
 def Plot(AccelDatas, RotaryDatas):
+
+
     a = AccelDatas[0].a 
     time = AccelDatas[0].t
     ax = a[0]
@@ -11,13 +16,15 @@ def Plot(AccelDatas, RotaryDatas):
 
     om_time = RotaryDatas[0].t
     om_vel = RotaryDatas[0].omega
-    #plt.title('raw data: close window to show RMS analysis')
+
     fig = plt.figure()
+
     plt.subplot(3,1,1)
+    plt.title(date.today())
     plt.plot(time,ax, label="Accel in x")
     plt.minorticks_on()
     plt.grid(b=True, which='both', color='0.65',linestyle='-')
-    plt.ylabel("Accel in x-direction", fontsize=8)
+    plt.ylabel("Accel in x ($m/s^2$)", fontsize=8)
     plt.legend(['Accel in x'],loc= 0)
     plt.xlim(0,np.max(om_time))
     plt.gca().set_xticklabels([])
@@ -27,7 +34,7 @@ def Plot(AccelDatas, RotaryDatas):
     plt.plot(time,ay, label='Accel in y')
     plt.minorticks_on()
     plt.grid(b=True, which='both', color='0.65',linestyle='-')
-    plt.ylabel("Accel in y-direction", fontsize=8)
+    plt.ylabel("Accel in y ($m/s^2$)", fontsize=8)
     plt.legend(['Accel in y'],loc= 0)
     plt.xlim(0,np.max(om_time))
     plt.gca().set_xticklabels([])
@@ -38,14 +45,15 @@ def Plot(AccelDatas, RotaryDatas):
     plt.plot(om_time,om_vel, label='Angular Velocity')
     plt.minorticks_on()
     plt.grid(b=True, which='both', color='0.65',linestyle='-')
-    plt.xlabel("Time")
-    plt.ylabel("Angular Velocity", fontsize=8)
+    plt.xlabel("Time (s)")
+    plt.ylabel("Angular Velocity (rad/s)", fontsize=8)
     plt.legend(['Angular Vel'],loc= 0)
     plt.xlim(0,np.max(om_time))
     #plt.show(block=False)
     plt.draw()
 #    plt.show(block=False)
  #   plt.pause()
+
     plt.show()
 
 def Curv_plot(ar,at,r, loss, time):
@@ -56,6 +64,7 @@ def Curv_plot(ar,at,r, loss, time):
     plt.grid(b=True, which='both', color='0.65', linestyle='-')
     plt.xlabel("Time")
     plt.xlim([np.max(time)])
+    plt.gca().set_xticklabels([])
 
     plt.subplot(4, 1, 2)
     plt.subplots_adjust(hspace=05.0)
@@ -64,6 +73,7 @@ def Curv_plot(ar,at,r, loss, time):
     plt.grid(b=True, which='both', color='0.65', linestyle='-')
     plt.xlabel("Time")
     plt.xlim([np.max(time)])
+    plt.gca().set_xticklabels([])
 
     plt.subplot(4, 1, 3)
     plt.subplots_adjust(hspace=01.0)
@@ -80,6 +90,7 @@ def Curv_plot(ar,at,r, loss, time):
     plt.grid(b=True, which='both', color='0.65', linestyle='-')
     plt.xlabel("Time")
     plt.xlim([0, np.max(time)])
+    plt.gca().set_xticklabels([])
     plt.draw()
     #    plt.show(block=False)
     #   plt.pause()
