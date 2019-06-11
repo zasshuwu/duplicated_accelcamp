@@ -43,4 +43,4 @@ def SpikeAdjust(AccelDatas, RotaryDatas):
 
     ax = a[0][w:len(time1)+w]
     ay = a[1][w:len(time1)+w]
-    return [AccelData([ax,ay,ad.a[2]],time1,ad.samplerate)],[RotaryData(omega,time2,od.samplerate)]
+    return [AccelData([ax,ay,ad.a[2]],time1)],[RotaryData(omega,time2)]

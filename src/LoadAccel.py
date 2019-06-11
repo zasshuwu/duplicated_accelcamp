@@ -21,7 +21,7 @@ def Load_X(filepath = None):
     for y in range(len(t)):
         t[y]-=t0
 
-    return AccelData(a, t, 64)
+    return AccelData(a, t)
 
 def Load_Samsung(filepath = None):
     if(filepath == None):
@@ -36,7 +36,7 @@ def Load_Samsung(filepath = None):
         t[y]-=t0
 
     a *= 9.807    
-    return AccelData(a, t, 64)
+    return AccelData(a, t)
 
 def Load_X16(filepath = None):
     #Since Load_X works with X16s, it just returns Load_X()
