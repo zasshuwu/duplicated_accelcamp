@@ -18,6 +18,5 @@ ad_accel[0].a = np.array(
     ]
 )
 ad_accel[0].t = ad_omega[0].t
-ad_accel.GenVec3()
 
 Plot(ad_accel, ad_omega)
