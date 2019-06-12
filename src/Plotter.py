@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.rcParams["savefig.dpi"] = 300
+matplotlib.rcParams["savefig.dpi"] = 250
 from DataStructures import *
 import numpy as np
 from datetime import date
@@ -63,7 +63,7 @@ def Curv_plot(ar,at,r, loss, time):
     plt.minorticks_on()
     plt.grid(b=True, which='both', color='0.65', linestyle='-')
     plt.xlabel("Time")
-    plt.xlim([np.max(time)])
+    plt.xlim([0, np.max(time)])
     plt.gca().set_xticklabels([])
 
     plt.subplot(4, 1, 2)
@@ -72,7 +72,7 @@ def Curv_plot(ar,at,r, loss, time):
     plt.minorticks_on()
     plt.grid(b=True, which='both', color='0.65', linestyle='-')
     plt.xlabel("Time")
-    plt.xlim([np.max(time)])
+    plt.xlim([0, np.max(time)])
     plt.gca().set_xticklabels([])
 
     plt.subplot(4, 1, 3)
