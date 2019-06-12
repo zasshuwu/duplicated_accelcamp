@@ -61,3 +61,8 @@ Day 6:
 	Fixed a levelling issue using four scissor stands to make small compensations to create a flat and level surface
 Day 7:
 	Addressed and prioritized all tasks sent by mio.
+
+Day 8:
+	TestCurvature line 32 breaks the script
+	TestLoadPlot just not working.
+	Load.py and LoadRun in that, acceldata Time is larger that omegadata Time
