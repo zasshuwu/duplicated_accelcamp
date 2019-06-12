@@ -5,56 +5,66 @@ from DataStructures import *
 import numpy as np
 from datetime import date
 
+def applyPlotStyle1( plt, om_time ):
+
+    plt.subplots_adjust(hspace=0.07)
+    plt.xlim(0, np.max(om_time))
+
+    plt.minorticks_on()
+
+    plt.grid(b=True, which='major', color='0.65', linestyle='-',linewidth='1.0')
+    plt.grid(b=True, which='minor', color='0.65', linestyle='-', linewidth='0.2')
+    plt.gca().set_xticklabels([])
+    return
+
+class MultiTimeSeriesPlotter:
+    def __init__( self, _nbPlots, _tArray):
+        self.tArray = _tArray
+        self.nbPlots = _nbPlots
+        self.iPlot = 0
+
+        return
+
+    def applyStyle(self):
+        plt.subplots_adjust(hspace=0.07)
+        plt.xlim(0, np.max(self.tArray))
+        plt.minorticks_on()
+        plt.grid(b=True, which='major', color='0.65', linestyle='-', linewidth='1.0')
+        plt.grid(b=True, which='minor', color='0.65', linestyle='-', linewidth='0.2')
+        plt.gca().set_xticklabels([])
+
+# yAxisLabel must be in double quotes eg "A_x ($m/s^2$)"
+    def appendSignal(self, _array, yAxisLabel):
+        self.iPlot=self.iPlot+1
+        plt.subplot(self.nbPlots, 1, self.iPlot)
+        plt.plot(self.tArray, _array)
+        plt.ylabel(yAxisLabel, fontsize=8)
+
+        self.applyStyle()
+        return
+
+    def display(self):
+        plt.draw()
+        plt.show()
+
+
+
 
 def Plot(AccelDatas, RotaryDatas):
+    tArray = RotaryDatas[0].t
+    a = AccelDatas[0].a
+    omegaArray = RotaryDatas[0].omega
+
+    myPlotter = MultiTimeSeriesPlotter(3, tArray )
+
+    myPlotter.appendSignal(a[0],"A_x ($m/s^2$)")
+    myPlotter.appendSignal(a[1], "A_y ($m/s^2$)")
+    myPlotter.appendSignal(omegaArray, "omega (rad/s)")
+
+    myPlotter.display()
 
 
-    a = AccelDatas[0].a 
-    time = AccelDatas[0].t
-    ax = a[0]
-    ay = a[1]
 
-    om_time = RotaryDatas[0].t
-    om_vel = RotaryDatas[0].omega
-
-    fig = plt.figure()
-
-    plt.subplot(3,1,1)
-    plt.title(date.today())
-    plt.plot(time,ax, label="Accel in x")
-    plt.minorticks_on()
-    plt.grid(b=True, which='both', color='0.65',linestyle='-')
-    plt.ylabel("Accel in x ($m/s^2$)", fontsize=8)
-    plt.legend(['Accel in x'],loc= 0)
-    plt.xlim(0,np.max(om_time))
-    plt.gca().set_xticklabels([])
-
-    plt.subplot(3,1,2)
-    plt.subplots_adjust(hspace=0.07)
-    plt.plot(time,ay, label='Accel in y')
-    plt.minorticks_on()
-    plt.grid(b=True, which='both', color='0.65',linestyle='-')
-    plt.ylabel("Accel in y ($m/s^2$)", fontsize=8)
-    plt.legend(['Accel in y'],loc= 0)
-    plt.xlim(0,np.max(om_time))
-    plt.gca().set_xticklabels([])
-
-
-    plt.subplot(3,1,3)
-    plt.subplots_adjust(hspace=0.07)
-    plt.plot(om_time,om_vel, label='Angular Velocity')
-    plt.minorticks_on()
-    plt.grid(b=True, which='both', color='0.65',linestyle='-')
-    plt.xlabel("Time (s)")
-    plt.ylabel("Angular Velocity (rad/s)", fontsize=8)
-    plt.legend(['Angular Vel'],loc= 0)
-    plt.xlim(0,np.max(om_time))
-    #plt.show(block=False)
-    plt.draw()
-#    plt.show(block=False)
- #   plt.pause()
-
-    plt.show()
 
 def Curv_plot(ar,at,r, loss, time):
     fig = plt.figure()
