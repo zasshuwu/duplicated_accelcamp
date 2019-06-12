@@ -11,8 +11,8 @@ from DataStructures import *
 from Simulate import *
 
 #CONFIG
-use_synthetic_data = True
-use_omega_file = False
+use_synthetic_data = True if input("use synthetic data? (y/n): ") == "y" else False
+use_omega_file = True if input("use omega file? (y/n): ") == "y" else False
 
 class outputData:
     def __init__(self, length):
@@ -35,7 +35,7 @@ class minimizer_curvature_noRot:
         self.init = tf.global_variables_initializer()
 
         self.opt = tf.train.GradientDescentOptimizer(learning_rate=0.1)
-        self.opt_op = self.opt.minimize(self.loss, var_list=[self.param_r] )
+        self.opt_op = self.opt.minimize(self.loss, var_list=[self.param_r])
 
     def run(self, A, ANext):
 
@@ -68,7 +68,7 @@ def main():
     deltaT = ad.t[1] - ad.t[0]
     minner = minimizer_curvature_noRot(deltaT)
     length = ad.len - 1
-    output = outputData( length)
+    output = outputData(length)
     for i in range(length):
         A= ad.vec3[i]
         ANext = ad.vec3[i+1]

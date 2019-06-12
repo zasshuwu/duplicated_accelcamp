@@ -63,9 +63,9 @@ def curvatureBogus(A, param_r):
 
 def curvature(A, Anext, deltaT, param_r):
     # TODO : IMPLEMENT THIS
-    ardot = ( Anext[1]-A[1] ) / deltaT
+    ardot = ( Anext[0]-A[0] ) / deltaT
     term1 = param_r * tf.square(ardot)
-    term2 = 4*A[1]*tf.square(A[0])
+    term2 = 4*A[0]*tf.square(A[1])
     return term1-term2
 
 
