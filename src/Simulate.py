@@ -20,7 +20,7 @@ def convertOmegaAccel(OmegaData, radius):
     at = []
     az = []
     for i in range(OmegaData.len - 1):
-        ar.append(OmegaData.omega[i] ** 2 + radius)
+        ar.append(OmegaData.omega[i] ** 2 * radius)
         at.append(radius*(OmegaData.omega[i + 1] - OmegaData.omega[i]) / deltaT)
         az.append(0)
     ar = np.array(ar)

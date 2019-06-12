@@ -12,7 +12,8 @@ from Simulate import *
 
 #CONFIG
 use_synthetic_data = True if input("use synthetic data? (y/n): ") == "y" else False
-use_omega_file = True if input("use omega file? (y/n): ") == "y" else False
+if use_synthetic_data:
+    use_omega_file = True if input("use omega file? (y/n): ") == "y" else False
 
 class outputData:
     def __init__(self, length):
