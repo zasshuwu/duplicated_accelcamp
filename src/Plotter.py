@@ -5,18 +5,6 @@ from DataStructures import *
 import numpy as np
 from datetime import date
 
-def applyPlotStyle1( plt, om_time ):
-
-    plt.subplots_adjust(hspace=0.07)
-    plt.xlim(0, np.max(om_time))
-
-    plt.minorticks_on()
-
-    plt.grid(b=True, which='major', color='0.65', linestyle='-',linewidth='1.0')
-    plt.grid(b=True, which='minor', color='0.65', linestyle='-', linewidth='0.2')
-    plt.gca().set_xticklabels([])
-    return
-
 class MultiTimeSeriesPlotter:
     def __init__( self, _nbPlots, _tArray):
         self.tArray = _tArray
@@ -37,6 +25,15 @@ class MultiTimeSeriesPlotter:
     def appendSignal(self, _array, yAxisLabel):
         self.iPlot=self.iPlot+1
         plt.subplot(self.nbPlots, 1, self.iPlot)
+
+        undersize = np.size(self.tArray)-np.size(_array)
+        if undersize>0:
+            np.pad(_array, (0, undersize), 'constant', constant_values=1)
+        elif undersize<0:
+            print("Error: MultiTimeSeriesPlotter: length of appendSignal > self.tArray")
+            print( "Error details: label for appending signal ", yAxisLabel)
+            exit(1)
+
         plt.plot(self.tArray, _array)
         plt.ylabel(yAxisLabel, fontsize=8)
 
@@ -62,9 +59,6 @@ def Plot(AccelDatas, RotaryDatas):
     myPlotter.appendSignal(omegaArray, "omega (rad/s)")
 
     myPlotter.display()
-
-
-
 
 def Curv_plot(ar,at,r, loss, time):
     fig = plt.figure()

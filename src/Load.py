@@ -37,6 +37,8 @@ def LoadDataSet(dirpath=None):
         print("\n\n-----------------"+run+"-----------------")
         runs_data.append(LoadRun(dirpath+"/"+run+"/"))
     return runs_data
+
+
         
 def LoadRun(dirpath=None):
     if(dirpath==None):
@@ -82,5 +84,16 @@ def LoadRun(dirpath=None):
     for file in omega_files:
         print("processing "+file+"...")
         omega_data.append(Load_Omega(filepath=str(dirpath+"/"+file)))
+
+    # AccelData arrays may not have same length as Rotary arrays
+    diff = np.size(accels_data[0].t) - np.size(omega_data[0].omega)
+    if( diff > 0):
+        utilPadWithZeroes( omega_data[0].omega, diff)
+        utilPadWithZeroes(omega_data[0].t, diff)
+    elif( diff < 0):
+        utilPadWithZeroes(accels_data[0].a[0], diff)
+        utilPadWithZeroes(accels_data[0].a[1], diff)
+        utilPadWithZeroes(accels_data[0].a[2], diff)
+        utilPadWithZeroes(accels_data[0].t, diff )
 
     return { "accel": accels_data, "omega": omega_data }    
