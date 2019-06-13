@@ -10,22 +10,24 @@ class MultiTimeSeriesPlotter:
         self.tArray = _tArray
         self.nbPlots = _nbPlots
         self.iPlot = 0
+        fig = plt.figure()
+        fig.suptitle(date.today())
 
     def applyStyle(self):
-        plt.subplots_adjust(hspace=0.07)
+        plt.subplots_adjust(hspace=0.2)
         plt.xlim(0, np.max(self.tArray))
         plt.minorticks_on()
         plt.grid(b=True, which='major', color='0.65', linestyle='-', linewidth='1.0')
         plt.grid(b=True, which='minor', color='0.65', linestyle='-', linewidth='0.2')
 
 # yAxisLabel must be in double quotes eg "A_x ($m/s^2$)"
-    def appendSignal(self, _array, yAxisLabel):
+    def appendSignal(self, _array, yAxisLabel, title):
         self.iPlot=self.iPlot+1
-        plt.subplot(self.nbPlots, 1, self.iPlot)
+        ax = plt.subplot(self.nbPlots, 1, self.iPlot)
 
         undersize = np.size(self.tArray)-np.size(_array)
         if undersize>0:
-            np.pad(_array, (0, undersize), 'constant')
+            _array = np.pad(_array, (0, undersize), 'constant', constant_values=0)
         elif undersize<0:
             _array = _array[:len(_array)+undersize]
             '''
@@ -35,6 +37,7 @@ class MultiTimeSeriesPlotter:
 
         plt.plot(self.tArray, _array)
         plt.ylabel(yAxisLabel, fontsize=8)
+        ax.set_title(title, loc='right', pad=-0.01, fontsize=7)
 
         self.applyStyle()
         if(self.nbPlots != self.iPlot):
@@ -46,6 +49,8 @@ class MultiTimeSeriesPlotter:
                 labelbottom=False
             )
             plt.gca().set_xticklabels([])
+        else:
+            plt.xlabel("Time (s)")
 
     def display(self):
         plt.draw()
@@ -56,14 +61,13 @@ class MultiTimeSeriesPlotter:
 
 def Plot(AccelDatas, RotaryDatas):
     tArray = RotaryDatas[0].t
-    a = AccelDatas[0].a
-    omegaArray = RotaryDatas[0].omega
 
-    myPlotter = MultiTimeSeriesPlotter(3, tArray )
-
-    myPlotter.appendSignal(a[0],"A_x ($m/s^2$)")
-    myPlotter.appendSignal(a[1], "A_y ($m/s^2$)")
-    myPlotter.appendSignal(omegaArray, "omega (rad/s)")
+    myPlotter = MultiTimeSeriesPlotter(len(AccelDatas)*2+len(RotaryDatas), tArray)
+    for accel in AccelDatas:
+        myPlotter.appendSignal(accel.a[0],"$A_x (m/s^2)$", accel.model)
+        myPlotter.appendSignal(accel.a[1], "$A_y (m/s^2)$", accel.model)
+    for omega in RotaryDatas:
+        myPlotter.appendSignal(omega.omega, "omega (rad/s)", "Pasco")
 
     myPlotter.display()
 

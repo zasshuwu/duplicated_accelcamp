@@ -85,18 +85,4 @@ def LoadRun(dirpath=None):
         print("processing "+file+"...")
         omega_data.append(Load_Omega(filepath=str(dirpath+"/"+file)))
 
-    # AccelData arrays may not have same length as Rotary arrays
-    diff = np.size(accels_data[0].t) - np.size(omega_data[0].omega)
-
-    if( diff > 0):
-        omega_data[0].omega = np.pad(omega_data[0].omega, (0, diff), 'constant', constant_values=0)
-        omega_data[0].t = np.pad(omega_data[0].t, (0, diff), 'constant', constant_values=0)
-    elif( diff < 0):
-        accels_data[0].a = np.array([
-            np.array(list(accels_data[0].a[0])+[0]*-diff),
-            np.array(list(accels_data[0].a[1])+[0]*-diff),
-            np.array(list(accels_data[0].a[2])+[0]*-diff)
-        ])
-        accels_data[0].t = np.pad(accels_data[0].t, (0, -diff), 'constant', constant_values=0)
-
     return {"accel": accels_data, "omega": omega_data}

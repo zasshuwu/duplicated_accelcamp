@@ -20,6 +20,6 @@ ad_accel[0].a = np.array(
 ad_accel[0].t = ad_omega[0].t
 
 for i in range(200):
-    print(ad_accel[0].a[2][i])
+    print(ad_accel[0].a[0][i])
 
 Plot(ad_accel, ad_omega)

@@ -22,7 +22,7 @@ def Load_X(filepath = None):
     for y in range(len(t)):
         t[y]-=t0
 
-    return AccelData(a, t)
+    return AccelData(a, t, "X")
 
 def Load_Samsung(filepath = None):
     if(filepath == None):
@@ -37,11 +37,12 @@ def Load_Samsung(filepath = None):
         t[y]-=t0
 
     a *= 9.807    
-    return AccelData(a, t)
+    return AccelData(a, t, "Samsung")
 
 def Load_X16(filepath = None):
     #Since Load_X works with X16s, it just returns Load_X()
     data = Load_X(filepath)
+    data.model = "X16"
     return data
 
 def Load_X2(filepath = None):
@@ -51,6 +52,7 @@ def Load_X2(filepath = None):
 
     data.a /= 13108
     data.a *= 9.807
+    data.model = "X2"
     
     return data
 
@@ -72,7 +74,7 @@ def Load_Pocket(filepath=None):
     t0 = t[0]
     for y in range(len(t)):
         t[y] -= t0
-    return AccelData(a, t)
+    return AccelData(a, t, "Pocket Lab")
 
 
 

@@ -1,10 +1,11 @@
 import numpy as np
 
 class AccelData:
-    def __init__(self,a,t):
+    def __init__(self,a,t, model):
         self.a = a
         self.t = t
         self.len = len(self.a[0])
+        self.model = model
         self.GenVec3()
 
     def GenVec3(self):
