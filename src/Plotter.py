@@ -11,15 +11,12 @@ class MultiTimeSeriesPlotter:
         self.nbPlots = _nbPlots
         self.iPlot = 0
 
-        return
-
     def applyStyle(self):
         plt.subplots_adjust(hspace=0.07)
         plt.xlim(0, np.max(self.tArray))
         plt.minorticks_on()
         plt.grid(b=True, which='major', color='0.65', linestyle='-', linewidth='1.0')
         plt.grid(b=True, which='minor', color='0.65', linestyle='-', linewidth='0.2')
-        plt.gca().set_xticklabels([])
 
 # yAxisLabel must be in double quotes eg "A_x ($m/s^2$)"
     def appendSignal(self, _array, yAxisLabel):
@@ -28,17 +25,27 @@ class MultiTimeSeriesPlotter:
 
         undersize = np.size(self.tArray)-np.size(_array)
         if undersize>0:
-            np.pad(_array, (0, undersize), 'constant', constant_values=1)
+            np.pad(_array, (0, undersize), 'constant')
         elif undersize<0:
+            _array = _array[:len(_array)+undersize]
+            '''
             print("Error: MultiTimeSeriesPlotter: length of appendSignal > self.tArray")
             print( "Error details: label for appending signal ", yAxisLabel)
-            exit(1)
+            exit(1)'''
 
         plt.plot(self.tArray, _array)
         plt.ylabel(yAxisLabel, fontsize=8)
 
         self.applyStyle()
-        return
+        if(self.nbPlots != self.iPlot):
+            plt.tick_params(
+                axis='x',
+                which='both',
+                bottom=False,
+                top=False,
+                labelbottom=False
+            )
+            plt.gca().set_xticklabels([])
 
     def display(self):
         plt.draw()

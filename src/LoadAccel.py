@@ -6,7 +6,8 @@ from DataStructures import AccelData
 Model_Dict = {
     "X2":"Load_X2(",
     "X16":"Load_X16(",
-    "Samsung":"Load_Samsung("
+    "Samsung":"Load_Samsung(",
+    "Pocket":"Load_Pocket("
 }
 
 def Load_X(filepath = None):
@@ -58,6 +59,20 @@ def Load_Any(model,filepath=""):
         return eval(Model_Dict[model]+"'"+filepath+"')")
     except KeyError:
         return "Model is not currently supported"
+
+
+def Load_Pocket(filepath=None):
+    if (filepath == None):
+        filepath = dialogOpenFilename()
+
+    block = np.loadtxt(filepath, dtype=float, delimiter=',', usecols=(0, 1, 2, 3), unpack=True, skiprows=1)
+    # a = [ax, ay, az] | t = [t]
+    a = block[1:]
+    t = block[0]
+    t0 = t[0]
+    for y in range(len(t)):
+        t[y] -= t0
+    return AccelData(a, t)
 
 
 
