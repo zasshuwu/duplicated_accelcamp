@@ -75,5 +75,7 @@ def dialogOpenFilename( usrOptions = dialogOpenDefaultOptions ):
 
     return filedialog.askopenfilename(**usrOptions)
 
+def min_lambda(ftn, array):
+    return sorted(array, key=ftn)[0]
 # if main()..
 #plottest()

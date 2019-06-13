@@ -3,44 +3,87 @@ from DataStructures import *
 
 adjust = 0.5
 
-def SpikeAdjust(AccelDatas, RotaryDatas):
+def SpikeAdjust(_AccelDatas, _RotaryDatas):
     global adjust
-    ad = AccelDatas[0]
-    od = RotaryDatas[0]
+    AccelDatas = _AccelDatas
+    RotaryDatas = _RotaryDatas
 
-    a = ad.a  # a[0] is time
-    time1 = ad.t
+    time_list = []
+    min_t_list = None
+    min_t_list_spike = None
+    '''================Acceleration================='''
+    for ad in AccelDatas:
+        a = ad.a  # a[0] is time
+        time1 = ad.t
+        time1 = list(filter(lambda x: x < 7, list(time1)))
+        ax = a[0][:len(time1)]
+        ay = a[1][:len(time1)]
 
-    time1 = list(filter(lambda x: x < 7, list(time1)))
-    ax = a[0][:len(time1)]
-    ay = a[1][:len(time1)]
+        mag = np.sqrt(np.square(ax) + np.square(ay))
 
-    mag = np.sqrt(np.square(ax) + np.square(ay))
+        abs_mag = np.absolute(mag)
+        time_list.append(time1[np.argmax(abs_mag)])
+        if min_t_list is None:
+            min_t_list = ad.t
+            min_t_list_spike = time1[np.argmax(abs_mag)]
+        elif len(min_t_list) > len(ad.t):
+            min_t_list = ad.t
+            min_t_list_spike = time1[np.argmax(abs_mag)]
 
-    abs_mag = np.absolute(mag)
+    '''================Omega================='''
+    for od in RotaryDatas:
+        b = od.omega
+        time2 = od.t
+        time2 = list(filter(lambda x: x < 7, list(time2)))
 
-    b = od.omega
-    time2 = od.t
-    time2 = list(filter(lambda x: x < 7, list(time2)))
+        omega = b[:len(time2)]
+        abs_omega = np.absolute(omega)
+        time_list.append(time2[np.argmax(abs_omega)])
+        if min_t_list is None:
+            min_t_list = od.t
+            min_t_list_spike = time2[np.argmax(abs_omega)]
+        elif len(min_t_list) > len(od.t):
+            min_t_list = od.t
+            min_t_list_spike = time2[np.argmax(abs_omega)]
 
-    omega = b[:len(time2)]
-    abs_omega = np.absolute(omega)
+    '''================Process================='''
+    time_list.sort()
+    min_val = time_list[0]
+    adjust = min_val - adjust
+    min_t_list -= (min_t_list_spike - min_val) + adjust
+    for i in range(len(AccelDatas)):
+        ad = AccelDatas[i]
+        a = ad.a  # a[0] is time
+        time1 = ad.t
+        time1 = list(filter(lambda x: x < 7, list(time1)))
+        ax = a[0][:len(time1)]
+        ay = a[1][:len(time1)]
 
-    t1 = time1[np.argmax(abs_mag)]
-    t2 = time2[np.argmax(abs_omega)]
-    adjust = t1 - adjust
-    delta = t2 - t1
-    time2 = od.t
-    time2 -= delta + adjust
+        mag = np.sqrt(np.square(ax) + np.square(ay))
 
-    z = len(list(filter(lambda x: x < 0, time2)))
-    time2 = np.array(list(filter(lambda x: x >= 0, time2)))
-    omega = b[z:]
+        abs_mag = np.absolute(mag)
+        delta = time1[np.argmax(abs_mag)] - min_val
+        time1 = ad.t - (delta + adjust)
+        z = len(list(filter(lambda x: x < 0, time1)))
+        AccelDatas[i].t = np.array(list(filter(lambda x: x >= 0, time1)))
+        AccelDatas[i].a = np.array([
+            a[0][z:],
+            a[1][z:],
+            ad.a[2]
+        ])
 
-    temp_t = ad.t - adjust
-    w = len(list(filter(lambda x: x < 0, temp_t)))
-    time1 = list(filter(lambda x: 0 <= x <= time2[-1], temp_t))
+    for i in range(len(RotaryDatas)):
+        od = RotaryDatas[i]
+        b = od.omega
+        time2 = od.t
+        time2 = list(filter(lambda x: x < 7, list(time2)))
 
-    ax = a[0][w:len(time1)+w]
-    ay = a[1][w:len(time1)+w]
-    return [AccelData([ax,ay,ad.a[2]],time1)],[RotaryData(omega,time2)]
+        omega = b[:len(time2)]
+        abs_omega = np.absolute(omega)
+        delta = time2[np.argmax(abs_omega)] - min_val
+        time2 -= delta + adjust
+        z = len(list(filter(lambda x: x < 0, time2)))
+        RotaryDatas[i].t = np.array(list(filter(lambda x: x >= 0, time2)))
+        RotaryDatas[i].omega = b[z:]
+
+    return AccelDatas, RotaryDatas
