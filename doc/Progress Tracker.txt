@@ -1,3 +1,5 @@
+def utilPadWithZeroes(_array, _length):
+    _array = np.pad(_array, (0, _length), 'constant', constant_values=0)
 Day 1 (Monday):
 	Device:
 		All X-Models:
