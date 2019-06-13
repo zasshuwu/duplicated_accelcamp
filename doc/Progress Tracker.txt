@@ -68,3 +68,7 @@ Day 8:
 	TestCurvature line 32 breaks the script
 	TestLoadPlot just not working.
 	Load.py and LoadRun in that, acceldata Time is larger that omegadata Time
+Problems with curvature detector not behaving as expected.
+ran excel simulation of curvature detector ( Samantha ). Seems to suggest discretization is an issue.
+
+Day 9:
