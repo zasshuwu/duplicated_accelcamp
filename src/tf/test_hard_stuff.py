@@ -6,7 +6,7 @@ import tensorflow as tf
 # One option would be to include things in the PYTHONPATH environment variable,
 # but it would be a messy solution. Hmmm ...
 #
-# from ./tfPhysics import tfSessionInitRun
+# from tfPhysics import tfSessionInitRun
 
 
 class TestTensorflowOperations(unittest.TestCase):
