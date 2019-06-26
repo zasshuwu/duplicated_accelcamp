@@ -37,4 +37,13 @@ adot = GenADot(acceldat)[mask]
 yx2 = Genyx2(acceldat)[mask]
 
 plt.scatter(yx2, np.square(adot))
+if __name__ != "__main__":
+    def close_event():
+        plt.close() #timer calls this function after 3 seconds and closes the window
+
+    fig = plt.figure()
+    timer = fig.canvas.new_timer(interval = 1000) #creating a timer object and setting an interval of 3000 milliseconds
+    timer.add_callback(close_event)
+
+    timer.start()
 plt.show()
