@@ -31,10 +31,10 @@ else:
 if use_range:
     mask = np.logical_not((_range[0] <= acceldat.t[:-1]) ^ (_range[1] >= acceldat.t[:-1]))
 else:
-    mask = np.array([True]*len(acceldat.t[:-2]))
+    mask = np.array([True]*len(acceldat.t[:-1]))
 
-#adot = GenADot(acceldat)[mask]
-#yx2 = Genyx2(acceldat)[mask]
+adot = GenADot(acceldat)[mask]
+yx2 = Genyx2(acceldat)[mask]
 
-#plt.scatter(yx2, np.square(adot))
-#plt.show()
+plt.scatter(yx2, np.square(adot))
+plt.show()
