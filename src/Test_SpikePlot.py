@@ -4,10 +4,18 @@ from Plotter import *
 from scipy.signal import resample
 from MyFunctions import min_lambda
 
-run = LoadRun()
+from unittest import *
 
-ad_accel = run["accel"]
-ad_omega = run["omega"]
+
+dataDir = "../data/2019 06 12/0 degrees/run1/"
+ad_accel = [LoadAccelFile(dataDir+"run1.accel.x2.CSV")]
+ad_omega = [Load_Omega(dataDir+"run1.omega.pasco.csv")]
+
+
+#run = LoadRun()
+
+#ad_accel = run["accel"]
+#ad_omega = run["omega"]
 
 ad_accel, ad_omega = SpikeAdjust(ad_accel, ad_omega)
 

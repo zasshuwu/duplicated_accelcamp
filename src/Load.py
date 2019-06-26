@@ -4,11 +4,11 @@ import numpy as np
 import os
 from tkinter import *
 
+
+
 defaultdir = "../data"
 
-file_structure = "name.type.model.csv".split(".")
-type_index = file_structure.index("type")
-model_index = file_structure.index("model")
+
 
 def LoadDataSet(dirpath=None):
     if(dirpath==None):

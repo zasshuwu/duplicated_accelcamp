@@ -3,12 +3,33 @@ import os
 from MyFunctions import dialogOpenFilename
 from DataStructures import AccelData
 
+# structure we impose on data filenames
+file_structure = "name.type.model.csv".split(".")
+type_index = file_structure.index("type")
+model_index = file_structure.index("model")
+
+# mapping of accelerometer sensor types to the names of the functions that load them
 Model_Dict = {
     "X2":"Load_X2(",
     "X16":"Load_X16(",
     "Samsung":"Load_Samsung(",
     "Pocket":"Load_Pocket("
 }
+
+def LoadAccelFile(filename):
+    modelType = filename.split("/")[-1].split(".")[model_index].capitalize()
+    accelData = Load_Any(modelType, filename)
+    return accelData
+
+
+def Load_Any(model,filepath=""):
+    try:
+        return eval(Model_Dict[model]+"'"+filepath+"')")
+    except KeyError:
+        return "Model is not currently supported"
+
+
+########### individual load functions for each sensor type #########################
 
 def Load_X(filepath = None):
     if(filepath == None):
@@ -55,12 +76,6 @@ def Load_X2(filepath = None):
     data.model = "X2"
     
     return data
-
-def Load_Any(model,filepath=""):
-    try:
-        return eval(Model_Dict[model]+"'"+filepath+"')")
-    except KeyError:
-        return "Model is not currently supported"
 
 
 def Load_Pocket(filepath=None):

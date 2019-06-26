@@ -1,0 +1,9 @@
+
+Testing infrastructure:
+- get unittest package working
+- rework existing tests to automation mode: ie. remove need for user input
+
+PyCharm features:
+- how to find source definitions
+eg from Load import *  : why cant I click on "Load" and it opens the file?
+eg run = LoadRun()  : why cant i click on LoadRun() and it brings me to its source-code definition?
