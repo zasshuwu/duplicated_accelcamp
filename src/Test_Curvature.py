@@ -33,8 +33,8 @@ if use_range:
 else:
     mask = np.array([True]*len(acceldat.t[:-2]))
 
-adot = GenADot(acceldat)[mask]
-yx2 = Genyx2(acceldat)[mask]
+#adot = GenADot(acceldat)[mask]
+#yx2 = Genyx2(acceldat)[mask]
 
-plt.scatter(yx2, np.square(adot))
-plt.show()
+#plt.scatter(yx2, np.square(adot))
+#plt.show()
