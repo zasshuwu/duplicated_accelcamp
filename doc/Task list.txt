@@ -1,7 +1,7 @@
 
 Testing infrastructure:
-- get unittest package working
-- rework existing tests to automation mode: ie. remove need for user input
+- get unittest package working DONE
+- rework existing tests to automation mode: DONE
 
 PyCharm features:
 - how to find source definitions
@@ -10,3 +10,4 @@ eg run = LoadRun()  : why cant i click on LoadRun() and it brings me to its sour
 
 refactoring:
 - Test_SPikePlot : make SpikeAdjust() work on single AccelData, then MultiSpikeAdjust()
+
