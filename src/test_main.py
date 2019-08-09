@@ -2,6 +2,10 @@ import unittest
 
 class TestOthers(unittest.TestCase):
 
+    def test_DataStructures(self):
+        import DataStructuresNew
+        DataStructuresNew.test_DataStructures()
+
     def test_spike(self):
         import Test_SpikePlot
 
