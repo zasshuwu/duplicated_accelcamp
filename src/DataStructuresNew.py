@@ -36,6 +36,8 @@ def isScalarArrayOfDoubles( a: np.ndarray) -> bool:
 class TimeSeries:
 
     # self.t is an array of doubles ; i.e. t[i] is the i-th t-value
+    # todo: store self.delta_t, an array of doubles ( more efficient for core computations )
+    # todo: provide self.getTArray() ( used mostly by plot utilities )
 
     def __init__(self, as_t):
         assert (isScalarArrayOfDoubles(as_t))
@@ -44,13 +46,13 @@ class TimeSeries:
     def len(self) -> int:
         return len(self.t)
 
-class AccelTS (TimeSeries):
+class AccelData (TimeSeries):
 
     # self.a is an array of vec3's  ; i.e. a[i] is an array of length 3 holding the acceleration vector at time t[i]
     # ( this is the opposite of the current AccelData, in which a[i] is an array of length n holding
     # the values of the i-th component of the acceleration vector for all time steps.
 
-    def __init__(self, as_t, av3_a  ) -> None :
+    def __init__(self, as_t, av3_a  ):
 
         TimeSeries.__init__(self,as_t)
 
@@ -59,18 +61,19 @@ class AccelTS (TimeSeries):
 
         self.model = "unspecified sensor model"
 
-    def len(self)-> int:
-        return len(self.t)
+    def getSingleAxis(self, axisIndex):
+        return self.a[:,axisIndex]
 
-class RotaryTS (TimeSeries):
 
-    def __init__(self, as_t, av3_omega):
+class RotaryData (TimeSeries):
+
+    def __init__(self, as_t, as_omega):
 
         TimeSeries.__init__(self,as_t)
 
-        assertIsArrayOfVec3(av3_omega, context="RotaryData constructor")
-        assert( len(av3_omega)==self.len() )
-        self.omega = av3_omega
+        assert isScalarArrayOfDoubles(as_omega), "RotaryData constructor"
+        assert( len(as_omega)==self.len() )
+        self.omega = as_omega
 
 
 ################ test ################
@@ -101,9 +104,16 @@ def test_DataStructures() -> None:
 
 
     t = np.ndarray(shape=(10,), dtype=np.double)
-    ad = AccelTS(t,av3_good)
-    rd = RotaryTS(t,av3_good)
+    ad = AccelData(t,av3_good)
 
     t_bad = np.ndarray(shape=(9,), dtype=np.double)
+
+    av3_good[0] = [1,2,3]
+    av3_good[1] = [4,5,6]
+    av3_good[2] = [7,8,9]
+    xValues = ad.getSingleAxis(axisIndex=0)
+    print('x values ', xValues[:3])
+    xValues = ad.getSingleAxis(axisIndex=2)
+    print('z values ', xValues[:3])
 
 if __name__ == "__main__" : test_DataStructures()
