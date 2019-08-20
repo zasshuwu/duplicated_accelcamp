@@ -72,3 +72,11 @@ Day 8:
 Day 9:
 	Jerome did it all, what a guy!! Jeff supervised mostly.
 spike tracker for multiple sensors. "pad" for time series of different lengths to plot them. matplotlib polishing.
+
+AUGUST 2019:
+Aug 13: defined new DataStructures.py with type checking and new format
+	TODO: rework code to use the new formats
+Aug 20: Reworking code for DataStructuresNew.py
+	TODO: create a branch mechanism on github so we can continue the reworking together. currently broken in my local copy.
+	TODO: refactor: rename SpikeAdjust() to SpikeAdjustMulti() and have it call a new funciton SpikeAdjust() with takes as args only a single AccelData and RotaryData
+	TODO: similar refactor for the Load() function into a LoadMulti() and a Load().
