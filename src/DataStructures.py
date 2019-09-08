@@ -1,5 +1,5 @@
 import numpy as np
-
+'''this may be deprecated and this is testing the pull request and branching tools'''
 class AccelData:
     def __init__(self,a,t, model):
         self.a = a
