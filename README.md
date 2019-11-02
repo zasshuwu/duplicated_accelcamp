@@ -44,6 +44,27 @@ zero x.png --> #001a
 ```
 
 ## Section 2: Quickstart - root_dir: /src
+### Formats:
+***WARNING:*** The project is still not setup for out-of-the-box cross-platform execution. Therefore, directory paths are not yet configured for Apple (DARWIN) and Linux (Linux) platforms. However, a Windows PC with PyCharm installed can run the scripts rather readily. That being said, dependencies i.e., packages and modules need to be correctly configured in order to run the scripts. Refer to the list of dependencies below.
+
+### Understanding modules and dependencies:
+Based on the ```TestLoadPlot.pyw``` file in ```src``` folder, I drew up the following mapping of dependencies and modules...
+- Python 3.6 and up is required. Have not tested with older versions, but Python 2.7 will definitely break.
+```
+tkinter (002c)*
+numpy (002c)
+os (002a)
+Load (002b)
+  | LoadAccel (002b)
+    | MyFunctions --> dialogOpenFilename
+    | DataStructures --> AccelData
+  | LoadOmega (002b)
+  | tkinter (002a)
+| MyFunctions (002b)
+| Plotter (002b)
+```
+*: tkinter has shown not working on DARWIN platform in several compatibility tests. This problem is still being investigated by the team.
+
 ### Processing and plotting raw data:
 - New users who just forked the repo should running TestLoadPlot.pyw script to get started and get a taste of this whole project.
 - Open up your favorite terminal/bash
@@ -70,17 +91,3 @@ $ { local_python_executable_PATH } TestLoadPlot.pyw
 - Raw data collected from test devices should be named ```run#.accel.modelName.csv``` and placed in ```/data/Dataset#/run#/```
 - Raw data are collected in two different ways as described in the ```/tutorials/doc/AccelCamp Tutorial.docx``` file
 
-## Section 3: Understanding modules and dependencies
-Based on the ```TestLoadPlot.pyw``` file in ```src``` folder, I drew up the following mapping of dependencies and modules...
-```
-numpy (002c)
-os (002a)
-Load (002b)
-  | LoadAccel (002b)
-    | MyFunctions --> dialogOpenFilename
-    | DataStructures --> AccelData
-  | LoadOmega (002b)
-  | tkinter (002a)
-| MyFunctions (002b)
-| Plotter (002b)
-```

@@ -2,7 +2,10 @@ print ("hello")
 
 import numpy as np
 # unpack makes it column-major
-block =np.loadtxt( "C:\svn\pythonDev1\PythonTestData1.csv", delimiter=',', usecols=(2,3,4,5), unpack=True, skiprows = 6  )
+
+pathToFile = "./PythonTestData1.csv" # IMPORTANT: Path format on different OSes.
+
+block =np.loadtxt( "./PythonTestData1.csv", delimiter=',', usecols=(2,3,4,5), unpack=True, skiprows = 6  )
 
 t= block[0]
 a= block[1:]
@@ -43,11 +46,11 @@ np.savetxt('new.csv',block.transpose(),delimiter=',')
 #
 #     for i = 1 range()
 
-In [183]: arr = np.arange(10)
+# In [183]: arr = np.arange(10)
 
-In [184]: np.save('some_array', arr)
+# In [184]: np.save('some_array', arr)
 
-If the file path does not already end in .npy, the extension will be appended. The array on disk can then be loaded using np.load:
+# If the file path does not already end in .npy, the extension will be appended. The array on disk can then be loaded using np.load:
 
-In [185]: np.load('some_array.npy')
-Out[185]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+# In [185]: np.load('some_array.npy')
+# Out[185]: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
