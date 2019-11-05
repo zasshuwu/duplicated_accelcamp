@@ -1,7 +1,7 @@
 import numpy as np
 import os
 from MyFunctions import dialogOpenFilename
-from DataStructures import AccelData
+from DataStructuresNew import AccelData
 
 # structure we impose on data filenames
 file_structure = "name.type.model.csv".split(".")
@@ -38,12 +38,14 @@ def Load_X(filepath = None):
     block = np.loadtxt(filepath, dtype=float, comments= ";", delimiter=',', usecols=(0,1,2,3), unpack=True)
     #a = [ax, ay, az] | t = [t]
     a = block[1:]
+    aTranspose = a.transpose()
+
     t = block[0]
     t0 = t[0]
     for y in range(len(t)):
         t[y]-=t0
 
-    return AccelData(a, t, "X")
+    return AccelData(t, aTranspose, "X")
 
 def Load_Samsung(filepath = None):
     if(filepath == None):

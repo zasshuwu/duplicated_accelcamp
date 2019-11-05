@@ -51,15 +51,18 @@ class AccelData (TimeSeries):
     # self.a is an array of vec3's  ; i.e. a[i] is an array of length 3 holding the acceleration vector at time t[i]
     # ( this is the opposite of the current AccelData, in which a[i] is an array of length n holding
     # the values of the i-th component of the acceleration vector for all time steps.
+    # i.e. old layout : a[axis][time]
+    #      new layout : a[time][axis]
 
-    def __init__(self, as_t, av3_a  ):
+    def __init__(self, as_t, av3_a, sModelType = "unspecified model type"  ):
 
         TimeSeries.__init__(self,as_t)
 
         assertIsArrayOfVec3(av3_a, context = "Accel constructor")
         self.a = av3_a
 
-        self.model = "unspecified sensor model"
+        self.model = sModelType
+
 
     def getSingleAxis(self, axisIndex):
         return self.a[:,axisIndex]
