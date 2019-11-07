@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Accelerometric Data Analysis
 
 # About
@@ -48,6 +49,9 @@ $ { local_python_executable_PATH } TestLoadPlot.pyw
 
 # Development Annotations
 ```
+=======
+# Accelerometer Project
+>>>>>>> replacing an existing file with local file: HAN-s-README.md to README.md
 Some legends to get started:
 - Annotation codes:
   - 001: convention
@@ -58,11 +62,16 @@ Some legends to get started:
     - 002a: built-in
     - 002b: user-defined
     - 002c: installed via pipelines
+<<<<<<< HEAD
 ```
 -----------------------------------
 
 
 # Section 2: File Structure
+=======
+-----------------------------------
+## Section 1: File Structure
+>>>>>>> replacing an existing file with local file: HAN-s-README.md to README.md
 ```
 .
 ..
@@ -89,6 +98,7 @@ Figure_2.png
 Figure_12.png
 Figure_9001.png
 Figure_Dataset3_run1.png
+<<<<<<< HEAD
 ML fig.png --> #001c
 README.md
 unittest setup.png --> #001c
@@ -100,6 +110,42 @@ zero x.png --> #001c
 - Raw data are collected in two different ways as described in the ```/tutorials/doc/AccelCamp Tutorial.docx``` file
 
 # Section 3: Understanding modules and dependencies
+=======
+ML fig.png --> #001a
+README.md
+unittest setup.png --> #001a
+zero x.png --> #001a
+```
+
+## Section 2: Quickstart - root_dir: /src
+### Processing and plotting raw data:
+- New users who just forked the repo should running TestLoadPlot.pyw script to get started and get a taste of this whole project.
+- Open up your favorite terminal/bash
+- Change working directory to ```~/nameOfRepo/src/```
+- Run the aforementioned script file
+- Below are the example commands
+```
+$ cd nameOfRepo/src
+$ { local_python_executable_PATH } TestLoadPlot.pyw
+```
+- A file-selecting dialog should pop up at this point.
+- Go to and select ``` ~/data/2019 06 12/run1 ``` folder.
+- Refer to the following illustrative screenshots:
+
+**IF (ENV==DARWIN (i.e. Apple, macOS)):**
+
+**IF (ENV==WIN32 (i.e. Windows distros)):**
+
+**IF (ENV==LINUX (i.e. Ubuntu, etc.)):**
+
+- The return should be a plot by matplotlib like this:
+
+### Raw Data Collection
+- Raw data collected from test devices should be named ```run#.accel.modelName.csv``` and placed in ```/data/Dataset#/run#/```
+- Raw data are collected in two different ways as described in the ```/tutorials/doc/AccelCamp Tutorial.docx``` file
+
+## Section 3: Understanding modules and dependencies
+>>>>>>> replacing an existing file with local file: HAN-s-README.md to README.md
 Based on the ```TestLoadPlot.pyw``` file in ```src``` folder, I drew up the following mapping of dependencies and modules...
 ```
 numpy (002c)
@@ -112,4 +158,8 @@ Load (002b)
   | tkinter (002a)
 | MyFunctions (002b)
 | Plotter (002b)
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> replacing an existing file with local file: HAN-s-README.md to README.md
