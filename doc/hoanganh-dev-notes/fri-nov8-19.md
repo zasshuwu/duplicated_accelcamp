@@ -1,9 +1,14 @@
 # Project Test log
 <<<<<<< HEAD
+<<<<<<< HEAD
 **Date:** Friday, November 8, 2019
 **Tester:** Hoang Anh
 =======
 >>>>>>> added new test note on commit date
+=======
+**Date:** Friday, Novemeber 8, 2019
+**Tester:** Hoang Anh
+>>>>>>> update previous dev note
 
 ### Run environment:
 - Run successful with Python version 3.7.3
