@@ -1,6 +1,9 @@
 # Project Test log
+<<<<<<< HEAD
 **Date:** Friday, November 8, 2019
 **Tester:** Hoang Anh
+=======
+>>>>>>> added new test note on commit date
 
 ### Run environment:
 - Run successful with Python version 3.7.3
@@ -18,6 +21,7 @@ System Software Overview:
       System Integrity Protection: Enabled
       Time since boot: 15 days 3:25
 ```
+<<<<<<< HEAD
 Note: To display your own system information, please refer to the instructions below.
 
 - For Ubuntu/Linux:
@@ -36,6 +40,8 @@ $ SPSoftwareDataType
 2. Type "dxdiag" into dialog box
 3. Press Enter  
 ```
+=======
+>>>>>>> added new test note on commit date
 
 ### DataStructuresNew.py (ON BRANCH master)
 - Run output:
@@ -76,9 +82,12 @@ by running the script below
 ```
 $ python3 -m pip install <module name 1> <module name 2> ...
 ```
+<<<<<<< HEAD
 - After the fix, LoadAccel.py runs successful, no error output yielded.
 ## TestLoadPlot.pyw - Successful run on DARWIN platform
 Run output:
 ![Run 1](img/run_1.png)
 
 # --- End of Testing Log --- 
+=======
+>>>>>>> added new test note on commit date
