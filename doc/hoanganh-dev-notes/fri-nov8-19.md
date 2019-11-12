@@ -88,6 +88,7 @@ by running the script below
 $ python3 -m pip install <module name 1> <module name 2> ...
 ```
 <<<<<<< HEAD
+<<<<<<< HEAD
 - After the fix, LoadAccel.py runs successful, no error output yielded.
 ## TestLoadPlot.pyw - Successful run on DARWIN platform
 Run output:
@@ -96,3 +97,8 @@ Run output:
 # --- End of Testing Log --- 
 =======
 >>>>>>> added new test note on commit date
+=======
+## TestLoadPlot.pyw - Successful run on DARWIN platform
+Run output:
+![Run 1](img/run_1.png)
+>>>>>>> update on run-ability
