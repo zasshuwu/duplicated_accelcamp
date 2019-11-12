@@ -99,6 +99,7 @@ Figure_12.png
 Figure_9001.png
 Figure_Dataset3_run1.png
 <<<<<<< HEAD
+<<<<<<< HEAD
 ML fig.png --> #001c
 README.md
 unittest setup.png --> #001c
@@ -112,9 +113,12 @@ zero x.png --> #001c
 # Section 3: Understanding modules and dependencies
 =======
 ML fig.png --> #001a
+=======
+ML fig.png --> #001c
+>>>>>>> fixed some minor bloopers in doc files
 README.md
-unittest setup.png --> #001a
-zero x.png --> #001a
+unittest setup.png --> #001c
+zero x.png --> #001c
 ```
 
 ## Section 2: Quickstart - root_dir: /src
@@ -133,12 +137,16 @@ $ { local_python_executable_PATH } TestLoadPlot.pyw
 - Refer to the following illustrative screenshots:
 
 **IF (ENV==DARWIN (i.e. Apple, macOS)):**
+(TBA)
 
 **IF (ENV==WIN32 (i.e. Windows distros)):**
+(TBA)
 
 **IF (ENV==LINUX (i.e. Ubuntu, etc.)):**
+(TBA)
 
-- The return should be a plot by matplotlib like this:
+### The output should be a plot by matplotlib like this:
+![Demo Plot](doc/hoanganh-dev-notes/img/run_1.png)
 
 ### Raw Data Collection
 - Raw data collected from test devices should be named ```run#.accel.modelName.csv``` and placed in ```/data/Dataset#/run#/```
