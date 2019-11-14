@@ -27,6 +27,9 @@ System Software Overview:
       Time since boot: 15 days 3:25
 ```
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
 Note: To display your own system information, please refer to the instructions below.
 
 - For Ubuntu/Linux:
@@ -45,8 +48,11 @@ $ SPSoftwareDataType
 2. Type "dxdiag" into dialog box
 3. Press Enter  
 ```
+<<<<<<< HEAD
 =======
 >>>>>>> added new test note on commit date
+=======
+>>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
 
 ### DataStructuresNew.py (ON BRANCH master)
 - Run output:

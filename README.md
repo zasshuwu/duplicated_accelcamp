@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
 # Accelerometric Data Analysis
 
 # About
@@ -36,10 +39,17 @@ $ { local_python_executable_PATH } TestLoadPlot.pyw
 - Refer to the following illustrative screenshots:
 
 **IF (ENV==DARWIN (i.e. Apple, macOS)):**
+<<<<<<< HEAD
 ![macOS Dialog](doc/img/TestLoadPlot-Mac.png)
 
 **IF (ENV==WIN32 (i.e. Windows distros)):**
 ![Windows Dialog](doc/img/TestLoadPlot-Windows.jpg)
+=======
+
+
+**IF (ENV==WIN32 (i.e. Windows distros)):**
+
+>>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
 
 **IF (ENV==LINUX (i.e. Ubuntu, etc.)):**
 ![Ubuntu Dialog](doc/img/TestLoadPlot-Ubuntu-Linux.png)
@@ -49,9 +59,12 @@ $ { local_python_executable_PATH } TestLoadPlot.pyw
 
 # Development Annotations
 ```
+<<<<<<< HEAD
 =======
 # Accelerometer Project
 >>>>>>> replacing an existing file with local file: HAN-s-README.md to README.md
+=======
+>>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
 Some legends to get started:
 - Annotation codes:
   - 001: convention
@@ -63,6 +76,7 @@ Some legends to get started:
     - 002b: user-defined
     - 002c: installed via pipelines
 <<<<<<< HEAD
+<<<<<<< HEAD
 ```
 -----------------------------------
 
@@ -72,6 +86,13 @@ Some legends to get started:
 -----------------------------------
 ## Section 1: File Structure
 >>>>>>> replacing an existing file with local file: HAN-s-README.md to README.md
+=======
+```
+-----------------------------------
+
+
+# Section 2: File Structure
+>>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
 ```
 .
 ..
@@ -107,6 +128,7 @@ zero x.png --> #001c
 ```
 
 ## Raw Data Collection
+<<<<<<< HEAD
 - Raw data collected from test devices should be named ```run#.accel.modelName.csv``` and placed in ```/data/Dataset#/run#/```
 - Raw data are collected in two different ways as described in the ```/tutorials/doc/AccelCamp Tutorial.docx``` file
 
@@ -154,6 +176,12 @@ $ { local_python_executable_PATH } TestLoadPlot.pyw
 
 ## Section 3: Understanding modules and dependencies
 >>>>>>> replacing an existing file with local file: HAN-s-README.md to README.md
+=======
+- Raw data collected from test devices should be named ```run#.accel.modelName.csv``` and placed in ```/data/Dataset#/run#/```
+- Raw data are collected in two different ways as described in the ```/tutorials/doc/AccelCamp Tutorial.docx``` file
+
+# Section 3: Understanding modules and dependencies
+>>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
 Based on the ```TestLoadPlot.pyw``` file in ```src``` folder, I drew up the following mapping of dependencies and modules...
 ```
 numpy (002c)
@@ -167,7 +195,11 @@ Load (002b)
 | MyFunctions (002b)
 | Plotter (002b)
 <<<<<<< HEAD
+<<<<<<< HEAD
 ```
 =======
 ```
 >>>>>>> replacing an existing file with local file: HAN-s-README.md to README.md
+=======
+```
+>>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
