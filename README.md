@@ -40,12 +40,16 @@ $ { local_python_executable_PATH } TestLoadPlot.pyw
 
 **IF (ENV==DARWIN (i.e. Apple, macOS)):**
 <<<<<<< HEAD
+<<<<<<< HEAD
 ![macOS Dialog](doc/img/TestLoadPlot-Mac.png)
 
 **IF (ENV==WIN32 (i.e. Windows distros)):**
 ![Windows Dialog](doc/img/TestLoadPlot-Windows.jpg)
 =======
 
+=======
+![macOS Dialog](doc/img/TestLoadPlot-Mac.png)
+>>>>>>> changes on macos complete
 
 **IF (ENV==WIN32 (i.e. Windows distros)):**
 
