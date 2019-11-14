@@ -45,6 +45,7 @@ $ { local_python_executable_PATH } TestLoadPlot.pyw
 
 **IF (ENV==WIN32 (i.e. Windows distros)):**
 ![Windows Dialog](doc/img/TestLoadPlot-Windows.jpg)
+<<<<<<< HEAD
 =======
 
 =======
@@ -54,6 +55,8 @@ $ { local_python_executable_PATH } TestLoadPlot.pyw
 **IF (ENV==WIN32 (i.e. Windows distros)):**
 
 >>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
+=======
+>>>>>>> Added About section to README.md, resolve comments made about pull request 3 considering the docs. Added illustrations for quick start in README.md
 
 **IF (ENV==LINUX (i.e. Ubuntu, etc.)):**
 ![Ubuntu Dialog](doc/img/TestLoadPlot-Ubuntu-Linux.png)

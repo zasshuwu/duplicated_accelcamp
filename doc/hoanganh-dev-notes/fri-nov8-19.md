@@ -1,12 +1,16 @@
 # Project Test log
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 **Date:** Friday, November 8, 2019
 **Tester:** Hoang Anh
 =======
 >>>>>>> added new test note on commit date
 =======
 **Date:** Friday, Novemeber 8, 2019
+=======
+**Date:** Friday, November 8, 2019
+>>>>>>> Added About section to README.md, resolve comments made about pull request 3 considering the docs. Added illustrations for quick start in README.md
 **Tester:** Hoang Anh
 >>>>>>> update previous dev note
 
