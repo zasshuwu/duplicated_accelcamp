@@ -215,5 +215,9 @@ Load (002b)
 ```
 
 # Troubleshooting
+<<<<<<< HEAD
 Please refer to the following link to more errors [troubleshooting](doc/troubleshooting/).
 >>>>>>> added troubleshooting.md in doc, added solution for windows tkinter bug, added latest dev notes
+=======
+Please refer to the following link to more errors [troubleshooting](doc/troubleshooting.md/).
+>>>>>>> fix some relative link issues in README.md
