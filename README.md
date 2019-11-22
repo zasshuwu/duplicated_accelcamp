@@ -203,6 +203,7 @@ Load (002b)
 | Plotter (002b)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ```
 =======
 ```
@@ -210,3 +211,9 @@ Load (002b)
 =======
 ```
 >>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
+=======
+```
+
+# Troubleshooting
+Please refer to the following link to more errors [troubleshooting](doc/troubleshooting/).
+>>>>>>> added troubleshooting.md in doc, added solution for windows tkinter bug, added latest dev notes
