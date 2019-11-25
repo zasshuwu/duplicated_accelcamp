@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
 # Accelerometric Data Analysis
 
 # About
@@ -45,18 +41,6 @@ $ { local_python_executable_PATH } TestLoadPlot.pyw
 
 **IF (ENV==WIN32 (i.e. Windows distros)):**
 ![Windows Dialog](doc/img/TestLoadPlot-Windows.jpg)
-<<<<<<< HEAD
-=======
-
-=======
-![macOS Dialog](doc/img/TestLoadPlot-Mac.png)
->>>>>>> changes on macos complete
-
-**IF (ENV==WIN32 (i.e. Windows distros)):**
-
->>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
-=======
->>>>>>> Added About section to README.md, resolve comments made about pull request 3 considering the docs. Added illustrations for quick start in README.md
 
 **IF (ENV==LINUX (i.e. Ubuntu, etc.)):**
 ![Ubuntu Dialog](doc/img/TestLoadPlot-Ubuntu-Linux.png)
@@ -66,12 +50,6 @@ $ { local_python_executable_PATH } TestLoadPlot.pyw
 
 # Development Annotations
 ```
-<<<<<<< HEAD
-=======
-# Accelerometer Project
->>>>>>> replacing an existing file with local file: HAN-s-README.md to README.md
-=======
->>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
 Some legends to get started:
 - Annotation codes:
   - 001: convention
@@ -82,24 +60,9 @@ Some legends to get started:
     - 002a: built-in
     - 002b: user-defined
     - 002c: installed via pipelines
-<<<<<<< HEAD
-<<<<<<< HEAD
 ```
------------------------------------
-
 
 # Section 2: File Structure
-=======
------------------------------------
-## Section 1: File Structure
->>>>>>> replacing an existing file with local file: HAN-s-README.md to README.md
-=======
-```
------------------------------------
-
-
-# Section 2: File Structure
->>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
 ```
 .
 ..
@@ -126,8 +89,6 @@ Figure_2.png
 Figure_12.png
 Figure_9001.png
 Figure_Dataset3_run1.png
-<<<<<<< HEAD
-<<<<<<< HEAD
 ML fig.png --> #001c
 README.md
 unittest setup.png --> #001c
@@ -135,61 +96,14 @@ zero x.png --> #001c
 ```
 
 ## Raw Data Collection
-<<<<<<< HEAD
+
 - Raw data collected from test devices should be named ```run#.accel.modelName.csv``` and placed in ```/data/Dataset#/run#/```
 - Raw data are collected in two different ways as described in the ```/tutorials/doc/AccelCamp Tutorial.docx``` file
 
 # Section 3: Understanding modules and dependencies
-=======
-ML fig.png --> #001a
-=======
-ML fig.png --> #001c
->>>>>>> fixed some minor bloopers in doc files
-README.md
-unittest setup.png --> #001c
-zero x.png --> #001c
-```
 
-## Section 2: Quickstart - root_dir: /src
-### Processing and plotting raw data:
-- New users who just forked the repo should running TestLoadPlot.pyw script to get started and get a taste of this whole project.
-- Open up your favorite terminal/bash
-- Change working directory to ```~/nameOfRepo/src/```
-- Run the aforementioned script file
-- Below are the example commands
-```
-$ cd nameOfRepo/src
-$ { local_python_executable_PATH } TestLoadPlot.pyw
-```
-- A file-selecting dialog should pop up at this point.
-- Go to and select ``` ~/data/2019 06 12/run1 ``` folder.
-- Refer to the following illustrative screenshots:
-
-**IF (ENV==DARWIN (i.e. Apple, macOS)):**
-(TBA)
-
-**IF (ENV==WIN32 (i.e. Windows distros)):**
-(TBA)
-
-**IF (ENV==LINUX (i.e. Ubuntu, etc.)):**
-(TBA)
-
-### The output should be a plot by matplotlib like this:
-![Demo Plot](doc/hoanganh-dev-notes/img/run_1.png)
-
-### Raw Data Collection
-- Raw data collected from test devices should be named ```run#.accel.modelName.csv``` and placed in ```/data/Dataset#/run#/```
-- Raw data are collected in two different ways as described in the ```/tutorials/doc/AccelCamp Tutorial.docx``` file
-
-## Section 3: Understanding modules and dependencies
->>>>>>> replacing an existing file with local file: HAN-s-README.md to README.md
-=======
-- Raw data collected from test devices should be named ```run#.accel.modelName.csv``` and placed in ```/data/Dataset#/run#/```
-- Raw data are collected in two different ways as described in the ```/tutorials/doc/AccelCamp Tutorial.docx``` file
-
-# Section 3: Understanding modules and dependencies
->>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
 Based on the ```TestLoadPlot.pyw``` file in ```src``` folder, I drew up the following mapping of dependencies and modules...
+
 ```
 numpy (002c)
 os (002a)
@@ -201,23 +115,8 @@ Load (002b)
   | tkinter (002a)
 | MyFunctions (002b)
 | Plotter (002b)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-```
-=======
-```
->>>>>>> replacing an existing file with local file: HAN-s-README.md to README.md
-=======
-```
->>>>>>> complete changes for documentation on Ubuntu, now moving to Mac
-=======
 ```
 
 # Troubleshooting
-<<<<<<< HEAD
 Please refer to the following link to more errors [troubleshooting](doc/troubleshooting/).
->>>>>>> added troubleshooting.md in doc, added solution for windows tkinter bug, added latest dev notes
-=======
-Please refer to the following link to more errors [troubleshooting](doc/troubleshooting.md/).
->>>>>>> fix some relative link issues in README.md
+
