@@ -118,5 +118,5 @@ Load (002b)
 ```
 
 # Troubleshooting
-Please refer to the following link to more errors [troubleshooting](doc/troubleshooting/).
+Please refer to the following link to more errors [troubleshooting](doc/troubleshooting.md/).
 
