@@ -87,3 +87,20 @@ def SpikeAdjust(_AccelDatas, _RotaryDatas):
         RotaryDatas[i].omega = b[z:]
 
     return AccelDatas, RotaryDatas
+
+def FindSpike(_dataset):
+    data = _dataset.a if type(_dataset) == Acceldata else _dataset.o
+    time_series = list(filter(lambda x: x < 7, list(_dataset.t)))
+
+    magsqred = np.array(len(time_series))
+    for axisdata in data:
+        magsqred += np.square(axisdata[:len(time_series)])
+
+    mag = np.sqrt(magsqred)
+
+    abs_mag = np.absolute(mag)
+    spike_t = time_series[np.argmax(abs_mag)]
+    return spike_t
+
+def AdjustToSpike(_dataset, _spike):
+    return

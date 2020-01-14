@@ -21,9 +21,9 @@ else:
 
 ad_accel, ad_omega = SpikeAdjust(ad_accel, ad_omega)
 
-min_dat = min_lambda(lambda x:x.len, [
-    min_lambda(lambda x:x.len, ad_omega),
-    min_lambda(lambda x:x.len, ad_accel)
+min_dat = min_lambda(len, [
+    min_lambda(len, ad_omega),
+    min_lambda(len, ad_accel)
 ])
 
 for i in range(len(ad_accel)):

@@ -43,7 +43,7 @@ class TimeSeries:
         assert (isScalarArrayOfDoubles(as_t))
         self.t = as_t
 
-    def len(self) -> int:
+    def __len__(self) -> int:
         return len(self.t)
 
 class AccelData (TimeSeries):
@@ -75,7 +75,7 @@ class RotaryData (TimeSeries):
         TimeSeries.__init__(self,as_t)
 
         assert isScalarArrayOfDoubles(as_omega), "RotaryData constructor"
-        assert( len(as_omega)==self.len() )
+        assert( len(as_omega)==len(self))
         self.omega = as_omega
 
 

@@ -38,14 +38,12 @@ def Load_X(filepath = None):
     block = np.loadtxt(filepath, dtype=float, comments= ";", delimiter=',', usecols=(0,1,2,3), unpack=True)
     #a = [ax, ay, az] | t = [t]
     a = block[1:]
-    aTranspose = a.transpose()
-
     t = block[0]
     t0 = t[0]
     for y in range(len(t)):
         t[y]-=t0
 
-    return AccelData(t, aTranspose, "X")
+    return AccelData(t, a.transpose(), "X")
 
 def Load_Samsung(filepath = None):
     if(filepath == None):
@@ -60,7 +58,7 @@ def Load_Samsung(filepath = None):
         t[y]-=t0
 
     a *= 9.807    
-    return AccelData(a, t, "Samsung")
+    return AccelData(t, a.transpose(), "Samsung")
 
 def Load_X16(filepath = None):
     #Since Load_X works with X16s, it just returns Load_X()
@@ -91,7 +89,7 @@ def Load_Pocket(filepath=None):
     t0 = t[0]
     for y in range(len(t)):
         t[y] -= t0
-    return AccelData(a, t, "Pocket Lab")
+    return AccelData(t, a.transpose(), "Pocket Lab")
 
 
 
