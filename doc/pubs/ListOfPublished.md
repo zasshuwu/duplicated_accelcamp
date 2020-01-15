@@ -1,14 +1,14 @@
 # Inertial Sensing Lab - publications
 ## Peer-reviewed journals
-Larnder, C.I., \[2019\]: *Using smartphone portrait-landscape transitions to teach inclined-plane physics.* The Physics Teacher (submitted). [ [PDF](doc\pubs\published\2018 09 SmartphoneTilt.pdf) ]
+Larnder, C.I., \[2019\]: *Using smartphone portrait-landscape transitions to teach inclined-plane physics.* The Physics Teacher (submitted). [ [PDF](published/2018 09 SmartphoneTilt.pdf) ]
 
-Larnder, C.I., \[2019\]: *Acceleration discontinuities in dry-friction oscillations.* American Journal of Physics **87**, 784. [ [DOI](https://doi-org/10.1119/1.5123455) ] [ [PDF](doc\pubs\published\2019 08 AJP Discontinuities.pdf) ]
+Larnder, C.I., \[2019\]: *Acceleration discontinuities in dry-friction oscillations.* American Journal of Physics **87**, 784. [ [DOI](https://doi-org/10.1119/1.5123455) ] [ [PDF](published\2019 08 AJP Discontinuities.pdf) ]
 
-Larnder, C.I., \[2020\]: *A purely geometrical method of locating a smartphone accelerometer.* The Physics Teacher **58**, 52. [ [DOI](https://doi.org/10.1119/1.5141974) ] [ [PDF](doc\pubs\published\2020 01 TPT PurelyGeometric.pdf) ] [ [arxiv preprint](https://arxiv.org/abs/1903.11516) ]
+Larnder, C.I., \[2020\]: *A purely geometrical method of locating a smartphone accelerometer.* The Physics Teacher **58**, 52. [ [DOI](https://doi.org/10.1119/1.5141974) ] [ [PDF](published\2020 01 TPT PurelyGeometric.pdf) ] [ [arxiv preprint](https://arxiv.org/abs/1903.11516) ]
 
-Larnder, C.I. et B. Larade, \[2018\]: *On the determination of accelerometer sensor positions within host devices.* American Journal of Physics **87**, 130. [ [DOI](https://doi-org/10.1119/1.5082536) ] [ [PDF](doc\pubs\published\2019 03 AJP OnTheDetermination.pdf) ]  [ [arxiv preprint](https://arxiv.org/abs/1903.10284) ]
+Larnder, C.I. et B. Larade, \[2018\]: *On the determination of accelerometer sensor positions within host devices.* American Journal of Physics **87**, 130. [ [DOI](https://doi-org/10.1119/1.5082536) ] [ [PDF](published\2019 03 AJP OnTheDetermination.pdf) ]  [ [arxiv preprint](https://arxiv.org/abs/1903.10284) ]
 
-Hinrichsen, P. et C.I. Larnder, \[2018\]: *Combined viscous and dry friction damping of oscillatory motion.* American Journal of Physics **86**, 577. [ [DOI](https://doi-org/10.1119/1.5034345) ] [ [PDF](doc\pubs\published\2018 08 AJP CombinedViscous.pdf) ]
+Hinrichsen, P. et C.I. Larnder, \[2018\]: *Combined viscous and dry friction damping of oscillatory motion.* American Journal of Physics **86**, 577. [ [DOI](https://doi-org/10.1119/1.5034345) ] [ [PDF](published\2018 08 AJP CombinedViscous.pdf) ]
 
 ## Conferences
 
