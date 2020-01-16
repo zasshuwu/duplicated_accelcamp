@@ -3,6 +3,7 @@ from DataStructuresNew import AccelData
 
 
 def GenADot(_AccelData:AccelData):
+    """ Outputs an array of doubles that represents the first-order derivative of the acceleration data """
     adot_list = np.array([])
     dt = _AccelData.t[1]-_AccelData.t[0]
     for i in range(len(_AccelData.getSingleAxis(0))-1):
