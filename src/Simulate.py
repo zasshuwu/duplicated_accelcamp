@@ -1,4 +1,4 @@
-from DataStructures import *
+from DataStructuresNew import *
 import numpy as np
 
 
@@ -12,19 +12,18 @@ def simConstAlpha(N, dT, A=10.0, omega_0=0.0):
         omega[i] = omega[i-1]+A*dT
         time[i] = i*dT
 
-    return RotaryData(omega, time)
+    return RotaryData(time, omega)
+
 
 def convertOmegaAccel(OmegaData, radius):
     deltaT = OmegaData.t[1] - OmegaData.t[0]
-    ar = []
-    at = []
-    az = []
+    a = []
     for i in range(OmegaData.len - 1):
-        ar.append(OmegaData.omega[i] ** 2 * radius)
-        at.append(radius*(OmegaData.omega[i + 1] - OmegaData.omega[i]) / deltaT)
-        az.append(0)
-    ar = np.array(ar)
-    at = np.array(at)
-    az = np.array(az)
-    a_temp = np.array([at, ar, az])
-    return AccelData(a_temp, OmegaData.t, "synthetic data")
+        a.append([
+            OmegaData.omega[i] ** 2 * radius,
+            radius*(OmegaData.omega[i + 1] - OmegaData.omega[i]) / deltaT,
+            0
+        ])
+
+    a = np.array(a)
+    return AccelData(OmegaData.t, a, "synthetic data")
