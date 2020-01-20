@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
 # for automated testing via test_main.py
 else:
-    file="../data/2019 06 12/0 degrees/run1/"
+    file="../../data/2019 06 12/0 degrees/run1/"
 
 run = LoadRun(file)
 Plot(run["accel"],  run["omega"])
