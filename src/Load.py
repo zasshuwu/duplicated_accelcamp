@@ -85,4 +85,7 @@ def LoadRun(dirpath=None):
         print("processing "+file+"...")
         omega_data.append(Load_Omega(filepath=str(dirpath+"/"+file)))
 
+    if accels_data == [] and omega_data == []:
+        raise FileNotFoundError('No files were found.')
+
     return {"accel": accels_data, "omega": omega_data}

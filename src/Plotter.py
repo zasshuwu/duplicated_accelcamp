@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.rcParams["savefig.dpi"] = 250
-from DataStructures import *
+from DataStructuresNew import *
 import numpy as np
 from datetime import date
 
@@ -64,8 +64,8 @@ def Plot(AccelDatas, RotaryDatas):
 
     myPlotter = MultiTimeSeriesPlotter(len(AccelDatas)*2+len(RotaryDatas), tArray)
     for accel in AccelDatas:
-        myPlotter.appendSignal(accel.a[0],"$A_x (m/s^2)$", accel.model)
-        myPlotter.appendSignal(accel.a[1], "$A_y (m/s^2)$", accel.model)
+        myPlotter.appendSignal(accel.getSingleAxis(axisIndex=0),"$A_x (m/s^2)$", accel.model)
+        myPlotter.appendSignal(accel.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$", accel.model)
     for omega in RotaryDatas:
         myPlotter.appendSignal(omega.omega, "omega (rad/s)", "Pasco")
 

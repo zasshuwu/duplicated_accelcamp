@@ -1,7 +1,7 @@
 import numpy as np
 import os
 from MyFunctions import dialogOpenFilename
-from DataStructures import AccelData
+from DataStructuresNew import AccelData
 
 # structure we impose on data filenames
 file_structure = "name.type.model.csv".split(".")
@@ -43,7 +43,7 @@ def Load_X(filepath = None):
     for y in range(len(t)):
         t[y]-=t0
 
-    return AccelData(a, t, "X")
+    return AccelData(t, a.transpose(), "X")
 
 def Load_Samsung(filepath = None):
     if(filepath == None):
@@ -58,7 +58,7 @@ def Load_Samsung(filepath = None):
         t[y]-=t0
 
     a *= 9.807    
-    return AccelData(a, t, "Samsung")
+    return AccelData(t, a.transpose(), "Samsung")
 
 def Load_X16(filepath = None):
     #Since Load_X works with X16s, it just returns Load_X()
@@ -89,7 +89,7 @@ def Load_Pocket(filepath=None):
     t0 = t[0]
     for y in range(len(t)):
         t[y] -= t0
-    return AccelData(a, t, "Pocket Lab")
+    return AccelData(t, a.transpose(), "Pocket Lab")
 
 
 
