@@ -17,5 +17,5 @@ run = LoadRun(file)
 Plot(run["accel"],  run["omega"])
 
 # original code:
-#run = LoadRun(None if __name__ == "__main__" else "../data/2019 06 12/0 degrees/run1/")
+#run = LoadRun(None if __name__ == "__main__" else "../../data/2019 06 12/0 degrees/run1/")
 #Plot(run["accel"],  run["omega"])
