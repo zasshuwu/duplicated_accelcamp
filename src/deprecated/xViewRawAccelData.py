@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from MyFunctions import *
+from Tools import *
 
 def zkXLabelTime(plt):
     plt.xlabel(r'$time \ t \ \left(s\right)$')

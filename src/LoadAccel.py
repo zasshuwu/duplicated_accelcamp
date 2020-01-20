@@ -1,6 +1,6 @@
 import numpy as np
 import os
-from MyFunctions import dialogOpenFilename
+from Tools import dialogOpenFilename
 from DataStructuresNew import AccelData
 
 # structure we impose on data filenames
