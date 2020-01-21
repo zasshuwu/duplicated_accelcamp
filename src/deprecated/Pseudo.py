@@ -1,7 +1,7 @@
 import numpy as np
 import os
 import matplotlib.pyplot as plt
-from MyFunctions import *
+from Tools import *
 
 #create variable to grab sample rate
 

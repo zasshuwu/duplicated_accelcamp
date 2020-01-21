@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
 # for automated testing via test_main.py
 else:
-    dataDir = "../data/2019 06 12/0 degrees/run1/"
+    dataDir = "../../data/2019 06 12/0 degrees/run1/"
     ad_accel = [LoadAccelFile(dataDir+"run1.accel.x2.CSV")]
     ad_omega = [Load_Omega(dataDir+"run1.omega.pasco.csv")]
 

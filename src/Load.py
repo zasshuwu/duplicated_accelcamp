@@ -73,7 +73,7 @@ def LoadRun(dirpath=None):
     accels_data = []
     for file in accels_files:
         print("processing "+file+"...")
-        data = Load_Any(model=file.split(".")[model_index].capitalize(), filepath=dirpath+"/"+file)
+        data = LoadAccelFile(dirpath+"/"+file)
         if(data != "Model is not currently supported"):
             accels_data.append(data)
         else:
