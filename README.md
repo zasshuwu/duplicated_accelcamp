@@ -1,3 +1,6 @@
+Important note to developers when creating new files and folders:<br> 
+Please refrain from using spaces in naming to avoid the inconvenience of referencing those names in future development. Instead, thou art highly encouraged to use the shish-kebab style `abc-def-ghi` or camelCase `thisIsAnExampleFile` (however, we mainly use this camelCase for writing code inn Python).
+
 Note: Does not include semantically-named functions
 
 The following documentation lists all the modules (functions within the modules) and necessary dependencies installed from package managers:
