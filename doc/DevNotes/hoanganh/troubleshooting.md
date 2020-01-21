@@ -26,7 +26,7 @@ This is where probably most of your problems arise when trying to run Python fil
 
 ## a. macOS/DARWIN
 
-Running Python v3.6.3 prepackaged with macOS Catalina before applying solution. [More info](hoanganh-dev-notes/fri-nov8-19.md).
+Running Python v3.6.3 prepackaged with macOS Catalina before applying solution. [More info](pre-dev/fri-nov8-19.md).
 
 **Solution steps:**
 - Step 0: Open terminal
@@ -57,7 +57,7 @@ $ python3 -m pip install <module name 1> <module name 2> ...
 ## b. Windows
 This applies for matplotlib and .pyw dialogs depending on tkinter
 
-Running Python v3.7.x. [More info](hoanganh-dev-notes/thu-nov21-19.md).
+Running Python v3.7.x. [More info](pre-dev/thu-nov21-19.md).
 
 **If you're trying to run from a shell.**
 

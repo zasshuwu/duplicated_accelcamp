@@ -39,4 +39,4 @@ and hit Enter
 **Context of Solution:**
 [REDACTED]
 ## Proof:
-![solved](img/tkinter-solved.jpg)
+![solved](../img/tkinter-solved.jpg)
