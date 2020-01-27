@@ -4,6 +4,13 @@ import tensorflow as tf
 
 ##################################### tensorflow utilities
 
+# placeholders: elements in a cost function that will be assigned values from
+# data via dictionary assignments
+
+# variables: elements in a cost function whose value will be determined by
+# the minimization process. In the definition of a cost function, these elements
+# typically written with the prefix "param_"
+
 # simplification to run a session
 # allows us to quickly build tests of low-level tf elements
 # must be called AFTER creation of thigs like: param_phi = tf.Variable(1.0, name="phi")

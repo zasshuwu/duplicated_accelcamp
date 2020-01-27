@@ -59,6 +59,9 @@ class AccelData (TimeSeries):
         TimeSeries.__init__(self,as_t)
 
         assertIsArrayOfVec3(av3_a, context = "Accel constructor")
+        ff = len(av3_a)
+        jj = len(as_t)
+        assert len(av3_a) == len(as_t) , "accel raw data not same length as time values"
         self.a = av3_a
 
         self.model = sModelType
