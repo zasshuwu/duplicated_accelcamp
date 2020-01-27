@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.rcParams["savefig.dpi"] = 250
-from DataStructuresNew import *
+from DataStructures import *
 import numpy as np
 from datetime import date
 
