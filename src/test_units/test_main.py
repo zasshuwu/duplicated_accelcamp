@@ -1,4 +1,7 @@
 import unittest
+import os
+import sys
+sys.path.append('../')
 
 class TestOthers(unittest.TestCase):
 
@@ -33,5 +36,5 @@ class TestStringMethods(unittest.TestCase):
             s.split(2)
 
 
-#if __name__ == '__main__':
-#    unittest.main()
+if __name__ == '__main__':
+    unittest.main()

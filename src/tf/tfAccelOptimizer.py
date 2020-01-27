@@ -7,7 +7,7 @@ if(sys.path.count('../') == 0):
     sys.path.append('../')
 from Load import *
 from Plotter import *
-from DataStructures import *
+from DataStructuresNew import *
 from Simulate import *
 
 #CONFIG

@@ -28,7 +28,7 @@ if __name__ == "__main__":
 else:
     use_range = False
     use_synthetic_data = False
-    acceldat = LoadAccelFile("../data/2019 06 12/0 degrees/run1/run1.accel.x2.CSV")
+    acceldat = LoadAccelFile("../../data/2019 06 12/0 degrees/run1/run1.accel.x2.CSV")
 
 if use_range:
     mask = np.logical_not((_range[0] <= acceldat.t[:-1]) ^ (_range[1] >= acceldat.t[:-1]))

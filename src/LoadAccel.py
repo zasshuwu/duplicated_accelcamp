@@ -1,6 +1,6 @@
 import numpy as np
 import os
-from MyFunctions import dialogOpenFilename
+from Tools import dialogOpenFilename
 from DataStructuresNew import AccelData
 
 # structure we impose on data filenames
@@ -18,15 +18,18 @@ Model_Dict = {
 
 def LoadAccelFile(filename):
     modelType = filename.split("/")[-1].split(".")[model_index].capitalize()
-    accelData = Load_Any(modelType, filename)
+    try:
+        accelData = eval(Model_Dict[modelType]+"'"+filename+"')")
+    except KeyError:
+        return "Model is not currently supported"
     return accelData
 
 
-def Load_Any(model,filepath=""):
-    try:
-        return eval(Model_Dict[model]+"'"+filepath+"')")
-    except KeyError:
-        return "Model is not currently supported"
+# def Load_Any(model,filepath=""):
+#     try:
+#         return eval(Model_Dict[model]+"'"+filepath+"')")
+#     except KeyError:
+#         return "Model is not currently supported"
 
 
 ########### individual load functions for each sensor type #########################
