@@ -35,4 +35,4 @@ def convertOmegaAccel(OmegaData, radius):
         ])
 
     a = np.array(a)
-    return AccelData(OmegaData.t, a, "synthetic data")
+    return AccelData(OmegaData.t[:-1], a, "synthetic data")
