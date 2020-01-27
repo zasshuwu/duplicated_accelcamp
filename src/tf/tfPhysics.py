@@ -126,3 +126,19 @@ def runTests():
 if __name__ == "__main__":
     runTests()
 
+
+def cost_SimpleAlpha(at, alpha, r):
+    return tf.square(at-alpha*r)
+
+def cost_SimpleRadial2(ar, ar_next, at, dt, r):
+    ardot = (ar_next-ar)/dt
+    term2 = tf.square(at)/r * dt
+    term3 = 2 * at * tf.sqrt(ar/r)
+    return tf.square(ardot - term2 - term3)
+
+
+def cost_SimpleRadial(ar, ar_next, at, dt, r):
+    ardot = r * (ar_next-ar)/dt
+    term2 = tf.square(at) * dt
+    term3 = 2 * at * tf.sqrt(ar*r)
+    return tf.square(ardot - term2 - term3)
