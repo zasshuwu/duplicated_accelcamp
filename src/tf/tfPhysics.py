@@ -9,7 +9,7 @@ import tensorflow as tf
 
 # variables: elements in a cost function whose value will be determined by
 # the minimization process. In the definition of a cost function, these elements
-# typically written with the prefix "param_"
+# typically written with the prefix "param_
 
 # simplification to run a session
 # allows us to quickly build tests of low-level tf elements
@@ -74,6 +74,12 @@ def curvature(A, Anext, deltaT, param_r):
     term1 = param_r * tf.square(ardot)
     term2 = 4*A[0]*tf.square(A[1])
     return term1-term2
+
+def radiusAndAngleXY( A, Anext, deltaT, param_r, param_phi ):
+    Aprime= rot_xy(A)
+    AnextPrime = rot_xy(Anext)
+    return curvature(Aprime, AnextPrime,deltaT,param_r)
+
 
 
 
