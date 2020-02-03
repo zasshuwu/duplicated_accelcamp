@@ -60,7 +60,7 @@ class MultiTimeSeriesPlotter:
 
 
 def Plot(AccelDatas, RotaryDatas):
-    tArray = RotaryDatas[0].t
+    tArray = RotaryDatas[0].t if RotaryDatas != [] else AccelDatas[0].t
 
     myPlotter = MultiTimeSeriesPlotter(len(AccelDatas)*2+len(RotaryDatas), tArray)
     for accel in AccelDatas:
