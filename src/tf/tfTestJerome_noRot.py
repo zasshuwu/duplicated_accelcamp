@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 import tensorflow as tf
 from Simulate import *
 from Load import *
