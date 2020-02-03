@@ -1,12 +1,13 @@
-import matplotlib.pyplot as plt
 import matplotlib
+import matplotlib.pyplot as plt
+
 matplotlib.rcParams["savefig.dpi"] = 250
-from DataStructures import *
 import numpy as np
 from datetime import date
 
+
 class MultiTimeSeriesPlotter:
-    def __init__( self, _nbPlots, _tArray):
+    def __init__(self, _nbPlots, _tArray):
         self.tArray = _tArray
         self.nbPlots = _nbPlots
         self.iPlot = 0
@@ -20,16 +21,16 @@ class MultiTimeSeriesPlotter:
         plt.grid(b=True, which='major', color='0.65', linestyle='-', linewidth='1.0')
         plt.grid(b=True, which='minor', color='0.65', linestyle='-', linewidth='0.2')
 
-# yAxisLabel must be in double quotes eg "A_x ($m/s^2$)"
+    # yAxisLabel must be in double quotes eg "A_x ($m/s^2$)"
     def appendSignal(self, _array, yAxisLabel, title):
-        self.iPlot=self.iPlot+1
+        self.iPlot = self.iPlot + 1
         ax = plt.subplot(self.nbPlots, 1, self.iPlot)
 
-        undersize = np.size(self.tArray)-np.size(_array)
-        if undersize>0:
+        undersize = np.size(self.tArray) - np.size(_array)
+        if undersize > 0:
             _array = np.pad(_array, (0, undersize), 'constant', constant_values=0)
-        elif undersize<0:
-            _array = _array[:len(_array)+undersize]
+        elif undersize < 0:
+            _array = _array[:len(_array) + undersize]
             '''
             print("Error: MultiTimeSeriesPlotter: length of appendSignal > self.tArray")
             print( "Error details: label for appending signal ", yAxisLabel)
@@ -40,7 +41,7 @@ class MultiTimeSeriesPlotter:
         ax.set_title(title, loc='right', pad=-0.01, fontsize=7)
 
         self.applyStyle()
-        if(self.nbPlots != self.iPlot):
+        if (self.nbPlots != self.iPlot):
             plt.tick_params(
                 axis='x',
                 which='both',
@@ -57,21 +58,20 @@ class MultiTimeSeriesPlotter:
         plt.show()
 
 
-
-
 def Plot(AccelDatas, RotaryDatas):
     tArray = RotaryDatas[0].t
 
-    myPlotter = MultiTimeSeriesPlotter(len(AccelDatas)*2+len(RotaryDatas), tArray)
+    myPlotter = MultiTimeSeriesPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray)
     for accel in AccelDatas:
-        myPlotter.appendSignal(accel.getSingleAxis(axisIndex=0),"$A_x (m/s^2)$", accel.model)
+        myPlotter.appendSignal(accel.getSingleAxis(axisIndex=0), "$A_x (m/s^2)$", accel.model)
         myPlotter.appendSignal(accel.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$", accel.model)
     for omega in RotaryDatas:
         myPlotter.appendSignal(omega.omega, "omega (rad/s)", "Pasco")
 
     myPlotter.display()
 
-def Curv_plot(ar,at,r, loss, time):
+
+def Curv_plot(ar, at, r, loss, time):
     fig = plt.figure()
     plt.subplot(4, 1, 1)
     plt.plot(time, ar)
