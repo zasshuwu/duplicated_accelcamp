@@ -3,12 +3,7 @@ from Simulate import *
 from Load import *
 from tf.tfPhysics import cost_SimpleAlpha, cost_SimpleRadial
 
-# def cost_SimpleRadial()
-# def cost_RadialAndRotate( angle)
-#     rot_xy(a,angle)
-#     return cost_SimpleRadial()
-
-
+# region Simulation
 #config
 alpha = 1
 radius = 4
@@ -19,12 +14,9 @@ omega_0 = 5
 OmegaData = simConstAlpha(N, deltaT, alpha, omega_0)
 
 a = convertOmegaAccel(OmegaData, radius) if input('use synthetic data (y/n): ') == 'y' else LoadRun()['accel'][0]
+# endregion
 
-# for r in range(1,8):
-#     print('r ', r, 'loss ', cost_SimpleRadial2(a.a[0][1], a.a[1][0],a,a[0][1],deltaT))
-
-# tf stuff
-
+# region TensorFlow Definitions
 ph_at = tf.placeholder(tf.float32, name='at')
 ph_ar = tf.placeholder(tf.float32, name='ar')
 ph_ar_next = tf.placeholder(tf.float32, name='ar_next')
@@ -33,6 +25,7 @@ var_r = tf.Variable(1.0, name='r')
 #alpha = tf.constant(alpha, tf.float32)
 
 init = tf.global_variables_initializer()
+# endregion
 
 #cost = cost_SimpleAlpha(ph_at, alpha, var_r)
 cost = cost_SimpleRadial(ph_ar, ph_ar_next, ph_at, ph_dt, var_r)

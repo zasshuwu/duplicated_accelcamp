@@ -142,3 +142,7 @@ def cost_SimpleRadial(ar, ar_next, at, dt, r):
     term2 = tf.square(at) * dt
     term3 = 2 * at * tf.sqrt(ar*r)
     return tf.square(ardot - term2 - term3)
+
+# def cost_RadialAndRotate( angle)
+#     rot_xy(a,angle)
+#     return cost_SimpleRadial()
