@@ -143,6 +143,11 @@ def cost_SimpleRadial(ar, ar_next, at, dt, r):
     term3 = 2 * at * tf.sqrt(ar*r)
     return tf.square(ardot - term2 - term3)
 
-# def cost_RadialAndRotate( angle)
-#     rot_xy(a,angle)
-#     return cost_SimpleRadial()
+
+def cost_RadialRotation(a, a_next, dt, r, phi):
+    a = np.reshape(rot_xy(a, phi), [1, 3])
+    a_next = np.reshape(rot_xy(a_next, phi), [1, 3])
+    ardot = r * (a_next[0]-a[0])/dt
+    term2 = tf.square(a[1]) * dt
+    term3 = 2 * a[1] * tf.sqrt(a[0]*r)
+    return tf.square(ardot - term2 - term3)

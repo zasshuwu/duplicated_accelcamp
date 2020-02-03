@@ -1,6 +1,5 @@
-import numpy as np
+import Tools
 from DataStructures import *
-from tf import tfPhysics
 
 
 def simConstAlpha(N, dT, A=10.0, omega_0=0.0):
@@ -29,18 +28,16 @@ def convertOmegaAccel(OmegaData, radius, phi=0):
     deltaT = OmegaData.t[1] - OmegaData.t[0]
     a = []
     for i in range(len(OmegaData) - 1):
+        rotated = Tools.rotate_vec3(
+            [
+                OmegaData.omega[i] ** 2 * radius,
+                radius * (OmegaData.omega[i + 1] - OmegaData.omega[i]) / deltaT,
+                0
+            ],
+            phi
+        )
         a.append(
-            np.reshape(
-                tfPhysics.rot_xy(
-                    [
-                        OmegaData.omega[i] ** 2 * radius,
-                        radius * (OmegaData.omega[i + 1] - OmegaData.omega[i]) / deltaT,
-                        0
-                    ],
-                    phi
-                ),
-                (1, 3)
-            )
+            rotated.tolist()[0]
         )
 
     a = np.array(a)
