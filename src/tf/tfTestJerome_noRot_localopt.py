@@ -12,8 +12,8 @@ deltaT = 0.1
 N = 20
 omega_0 = 5
 
-OmegaData = simConstAlpha(N, deltaT, alpha, omega_0)
-#OmegaData = Load_Omega('C:\\Users\\Jerome\\Documents\\GitHub\\2019_06_AccelerationCamp\\data\\Dataset 2\\run2\\run2.omega.pasco.csv')
+#OmegaData = simConstAlpha(N, deltaT, alpha, omega_0)
+OmegaData = Load_Omega('C:\\Users\\Jerome\\Documents\\GitHub\\2019_06_AccelerationCamp\\data\\Dataset 1\\run2\\run2.omega.pasco.csv')
 
 a = convertOmegaAccel(OmegaData, radius) #if input('use synthetic data (y/n): ') == 'y' else LoadRun()['accel'][0]
 # endregion
@@ -48,19 +48,19 @@ with tf.Session() as sess:
             ph_dt: a.t[i+1] - a.t[i]
         }
         sess.run(var_r.assign(1))
-        for j in range(100):
+        for j in range(10):
             sess.run(opt_out, feed_dict=feed_dict)
         r, loss = sess.run([var_r, cost], feed_dict=feed_dict)
-        print("Radius: {0}, Loss: {1}".format(
-            r, loss
-        ))
+        # print("{2}/{3} = Radius: {0}, Loss: {1}".format(
+        #     r, loss, i, len(a)-1
+        # ))
         radii.append(r)
         losses.append(loss)
 
 myPlotter = MultiTimeSeriesPlotter(5, OmegaData.t[:-2])
-myPlotter.appendSignal(OmegaData.omega[:-2], 'Omega', '')
-myPlotter.appendSignal(a.getSingleAxis(0)[:-1], 'A_x', '')
-myPlotter.appendSignal(a.getSingleAxis(1)[:-1], 'A_y', '')
+myPlotter.appendSignal(OmegaData.omega[:-2], 'Omega', 'From Sensor')
+myPlotter.appendSignal(a.getSingleAxis(0)[:-1], 'A_x', a.model)
+myPlotter.appendSignal(a.getSingleAxis(1)[:-1], 'A_y', a.model)
 myPlotter.appendSignal(radii, 'Radius', '')
 myPlotter.appendSignal(losses, 'Loss', '')
 myPlotter.display()
