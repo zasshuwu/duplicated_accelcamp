@@ -13,7 +13,7 @@ omega_0 = 5
 
 OmegaData = simConstAlpha(N, deltaT, alpha, omega_0)
 
-a = convertOmegaAccel(OmegaData, radius) if input('use synthetic data (y/n): ') == 'y' else LoadRun()['accel'][0]
+a = convertOmegaAccel(OmegaData, radius) #if input('use synthetic data (y/n): ') == 'y' else LoadRun()['accel'][0]
 # endregion
 
 # region TensorFlow Definitions

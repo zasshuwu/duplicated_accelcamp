@@ -1,6 +1,5 @@
 import tensorflow as tf
 from Simulate import *
-from Load import *
 from tf.tfPhysics import rot_xy
 
 # region Simulation
