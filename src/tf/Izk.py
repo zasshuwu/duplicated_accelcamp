@@ -8,14 +8,14 @@ phi = 0.5
 a = 1.0
 b = a*np.sin(phi)
 
-var_phi = tf.Variable(phi, name='phi')
+var_phi = tf.Variable(1.0, name='phi')
 
 ph_a = tf.placeholder(tf.float32, name='a')
 ph_b = tf.placeholder(tf.float32, name='b')
 
 init = tf.global_variables_initializer()
 
-cost = tf.square(a - b*tf.sin(var_phi))
+cost = tf.square(b - a*tf.sin(var_phi))
 
 opt = tf.train.GradientDescentOptimizer(learning_rate=0.001)
 
@@ -24,7 +24,7 @@ opt_out = opt.minimize(cost, var_list=[var_phi])
 with tf.Session() as sess:
     sess.run(init)
 
-    sess.run(var_phi.assign(0.01))
+    sess.run(var_phi.assign(0.5))
 
     for i in range(1,10):
         feed_dict = {
