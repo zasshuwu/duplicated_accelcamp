@@ -161,5 +161,5 @@ def cost_RadialRotation(a, a_next, dt, r, phi):
     a_next = rot_xy(a_next, phi)
     ardot = r * (a_next[0]-a[0])/dt
     term2 = tf.square(a[1]) * dt
-    term3 = 2 * a[1] * tf.sqrt(a[0]*r)
+    term3 = 2 * a[1] * tf.sqrt((a[0])*r)
     return tf.square(ardot - term2 - term3)
