@@ -1,0 +1,5 @@
+#Handwriting/Alphabet Lab Development
+- Took PocketLab data in named letter forms for use with code.
+- Conversion from acceleration to position proved inaccurate when rotational motion analysed.
+    - Decided to use Plotter and premade Python file for future use to fix the Grapher and converter.
+- Will put ax, ay, vx, vy, and possibly rx and ry on the same sheet for plots.
