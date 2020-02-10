@@ -13,7 +13,7 @@ N = 10
 omega_0 = 2
 phi = 0.01
 
-OmegaData = simConstAlpha(N+1, deltaT, alpha, omega_0)
+OmegaData = simConstAlpha(N+1, deltaT, alpha, omega_0, (0,0.1))
 
 a_not_rotated = convertOmegaAccel(OmegaData, radius)
 a_rotated = convertOmegaAccel(OmegaData, radius, phi)
@@ -27,8 +27,6 @@ var_phi = tf.Variable(2.0, name='phi')
 
 init = tf.global_variables_initializer()
 # endregion
-
-#cost = tf.norm(rot_xy(ph_a, var_phi) - ph_a_not)
 
 cost = tf.square(tf.norm(rot_xy(ph_a, var_phi) - ph_a_not))
 
@@ -47,6 +45,6 @@ with tf.Session() as sess:
             ph_a_not: a_not_rotated.a[i],
         }
         _, loss, phi = sess.run([opt_out, cost, var_phi], feed_dict=feed_dict)
-        print("Angle: {0}, Loss: {1}".format(phi, loss))
+        print("Angle: {0}, Loss: {1}".format(-phi, loss))
 
-print("Angle found = {0}".format(phi))
+print("Angle found = {0}".format(-phi))

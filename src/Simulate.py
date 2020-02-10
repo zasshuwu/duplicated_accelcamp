@@ -2,12 +2,13 @@ import Tools
 from DataStructures import *
 
 
-def simConstAlpha(N, dT, A=10.0, omega_0=0.0):
+def simConstAlpha(N, dT, A=10.0, omega_0=0.0, noise=(0,0)):
     """
+    :param noise: (loc, scale)
     :param N: number of iterations
     :param dT: delta t
     :param A: alpha
-    :param omega_0: intial omega value
+    :param omega_0: initial omega value
     :return:
     """
     omega = np.array([np.double(omega_0)] * N)
@@ -16,11 +17,13 @@ def simConstAlpha(N, dT, A=10.0, omega_0=0.0):
         omega[i] = omega[i - 1] + A * dT
         time[i] = i * dT
 
-    return RotaryData(time, omega)
+    return RotaryData(time, omega + np.random.normal(noise[0], noise[1], len(omega)))
 
 
-def convertOmegaAccel(OmegaData, radius, phi=0):
+def convertOmegaAccel(OmegaData, radius, phi=0, noise=(0,0)):
     """
+    :param phi: angle of accelerometer
+    :param noise: (loc, scale)
     :param OmegaData: data to base the accel data on
     :param radius: radius of apparatus
     :return:
@@ -40,5 +43,9 @@ def convertOmegaAccel(OmegaData, radius, phi=0):
             rotated.tolist()[0]
         )
 
-    a = np.array(a)
+    a = np.array(a) + np.array([
+        np.random.normal(noise[0], noise[1], len(a)),
+        np.random.normal(noise[0], noise[1], len(a)),
+        np.random.normal(noise[0], noise[1], len(a))
+    ]).transpose()
     return AccelData(OmegaData.t[:-1], a, "synthetic data")
