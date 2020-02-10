@@ -37,9 +37,16 @@ def conceptual():
     phi = []
     r = []
     n = 100
+    loss = 1.0
 
     # generate synthetic phi and r
     for i in range(1, n):
-        phi[i] = i
+        phi.append(i)
+        # print(phi)
     for j in range(1, n):
-        r[j] = j
+        r.append(j)
+        # print(r)
+
+    # graph into polar plot
+
+conceptual()
