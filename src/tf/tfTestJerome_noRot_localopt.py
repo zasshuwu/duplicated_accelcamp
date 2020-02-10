@@ -57,7 +57,7 @@ with tf.Session() as sess:
         radii.append(r)
         losses.append(loss)
 
-myPlotter = MultiTimeSeriesPlotter(5, OmegaData.t[:-2])
+myPlotter = MultiPlotter(5, OmegaData.t[:-2])
 myPlotter.appendSignal(OmegaData.omega[:-2], 'Omega', 'From Sensor')
 myPlotter.appendSignal(a.getSingleAxis(0)[:-1], 'A_x', a.model)
 myPlotter.appendSignal(a.getSingleAxis(1)[:-1], 'A_y', a.model)

@@ -6,11 +6,15 @@ import numpy as np
 from datetime import date
 
 
-class MultiTimeSeriesPlotter:
-    def __init__(self, _nbPlots, _tArray):
+# produce mutliple plots with a shared horizontal axis
+# _xArray is an array of floats
+
+class MultiPlotter:
+    def __init__(self, _nbPlots, _tArray, _xLabel):
         self.tArray = _tArray
         self.nbPlots = _nbPlots
         self.iPlot = 0
+        self.xLabel = _xLabel
         fig = plt.figure()
         fig.suptitle(date.today())
 
@@ -35,7 +39,7 @@ class MultiTimeSeriesPlotter:
         elif undersize < 0:
             _array = _array[:len(_array) + undersize]
             '''
-            print("Error: MultiTimeSeriesPlotter: length of appendSignal > self.tArray")
+            print("Error: MultiPlotter: length of appendSignal > self.tArray")
             print( "Error details: label for appending signal ", yAxisLabel)
             exit(1)'''
 
@@ -54,7 +58,7 @@ class MultiTimeSeriesPlotter:
             )
             plt.gca().set_xticklabels([])
         else:
-            plt.xlabel("Time (s)")
+            plt.xlabel(self.xLabel)
 
     def display(self):
         plt.draw()
@@ -64,12 +68,15 @@ class MultiTimeSeriesPlotter:
 def Plot(AccelDatas, RotaryDatas):
     tArray = RotaryDatas[0].t
 
-    myPlotter = MultiTimeSeriesPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray)
+    myPlotter = MultiPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray, "Time t (s) ")
+
+    for omega in RotaryDatas:
+        myPlotter.appendSignal(omega.omega, "omega (rad/s)", "Pasco")
+
     for accel in AccelDatas:
         myPlotter.appendSignal(accel.getSingleAxis(axisIndex=0), "$A_x (m/s^2)$", accel.model)
         myPlotter.appendSignal(accel.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$", accel.model)
-    for omega in RotaryDatas:
-        myPlotter.appendSignal(omega.omega, "omega (rad/s)", "Pasco")
+
 
     myPlotter.display()
 

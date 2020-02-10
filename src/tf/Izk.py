@@ -100,7 +100,7 @@ def Test_TF_Optimize_RotXY():
 
 # plot code: produces two figures, not sure why **************
     xAxis = np.arange(1,N,dtype=np.double)
-    plotter = MultiTimeSeriesPlotter(2,TimeSeries(xAxis).t)
+    plotter = MultiPlotter(2,xAxis, "iteration #")
     plotter.setTitle("TensorFlow rotation test on a vec3")
     outLossTrim = outLoss[2:-1] # skip the first value, it is always huge not sure why ******
     plotter.appendSignal(outLossTrim,'loss','')
