@@ -14,6 +14,9 @@ class MultiTimeSeriesPlotter:
         fig = plt.figure()
         fig.suptitle(date.today())
 
+    def setTitle(self,string):
+        plt.figure().suptitle(string)
+
     def applyStyle(self):
         plt.subplots_adjust(hspace=0.2)
         plt.xlim(0, np.max(self.tArray))

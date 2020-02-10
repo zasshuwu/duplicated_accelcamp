@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 import tensorflow as tf
 from Simulate import *
 from tf.tfPhysics import rot_xy
@@ -7,7 +9,7 @@ from tf.tfPhysics import rot_xy
 alpha = 1
 radius = 4
 deltaT = 0.1
-N = 100
+N = 10
 omega_0 = 2
 phi = 0.01
 
@@ -22,8 +24,11 @@ ph_a = tf.placeholder(tf.float32, shape=(3,), name='at')
 ph_a_not = tf.placeholder(tf.float32, shape=(3,), name='ar_next')
 var_phi = tf.Variable(2.0, name='phi')
 
+
 init = tf.global_variables_initializer()
 # endregion
+
+#cost = tf.norm(rot_xy(ph_a, var_phi) - ph_a_not)
 
 cost = tf.square(tf.norm(rot_xy(ph_a, var_phi) - ph_a_not))
 
@@ -33,6 +38,8 @@ opt_out = opt.minimize(cost, var_list=[var_phi])
 
 with tf.Session() as sess:
     sess.run(init)
+
+    sess.run(var_phi.assign(0.01))
 
     for i in range(len(a_not_rotated)-1):
         feed_dict = {

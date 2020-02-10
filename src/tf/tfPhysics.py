@@ -37,8 +37,20 @@ def rot_xy(vec3, theta):
     # reshape to make tf.matmul happy ; no performance cost
     vec3 = tf.reshape(vec3, [3,1])
 
-    return tf.matmul(rot_matrix, vec3)
+    out = tf.matmul(rot_matrix, vec3)
+    trans = tf.transpose(out)
+    return trans[0]
 
+def rot_xy_noTF(vec3, theta):
+    # from https://stackoverflow.com/questions/37042748/how-to-create-a-rotation-matrix-in-tensorflow
+    rot_matrix = [[np.cos(theta), -np.sin(theta),0],
+                       [np.sin(theta), np.cos(theta),0],
+                       [0.0,0.0,0.0]]
+
+    # reshape to make tf.matmul happy ; no performance cost
+   # vec3 = tf.reshape(vec3, [3,1])
+
+    return np.matmul(rot_matrix, vec3)
 
 def rot_2D(A, param_phi):
     # from https://stackoverflow.com/questions/37042748/how-to-create-a-rotation-matrix-in-tensorflow
