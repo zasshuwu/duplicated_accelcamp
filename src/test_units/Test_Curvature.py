@@ -15,7 +15,7 @@ if __name__ == "__main__":
         if True if input("use omega file? (y/n): ") == "y" else False:
             o = LoadRun()["omega"][0]
         else:
-            o = simConstAlpha(
+            o = simAlpha(
                 int(input("Number of iterations: ")),
                 np.float32(input("Delta t: ")),
                 np.float32(input("alpha: ")),

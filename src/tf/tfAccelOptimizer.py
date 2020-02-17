@@ -59,7 +59,7 @@ def main():
         if(use_omega_file):
             o = LoadRun()["omega"][0]
         else:
-            o = simConstAlpha(
+            o = simAlpha(
                 int(input("Number of iterations: ")),
                 np.float32(input("Delta t: ")),
                 np.float32(input("alpha: ")),

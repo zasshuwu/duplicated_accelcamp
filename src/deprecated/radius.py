@@ -6,7 +6,7 @@ from tkinter import filedialog
 
 
 
-a = convertOmegaAccel(simConstAlpha(
+a = convertOmegaAccel(simAlpha(
                 int(input("Number of iterations: ")),
                 np.float32(input("Delta t: ")),
                 np.float32(input("alpha: ")),

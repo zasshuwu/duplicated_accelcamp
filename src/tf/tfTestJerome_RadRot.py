@@ -12,7 +12,7 @@ N = 100
 omega_0 = 2
 phi = 0.5
 
-OmegaData = simConstAlpha(N+1, deltaT, alpha, omega_0)
+OmegaData = simAlpha(N + 1, deltaT, alpha, omega_0)
 
 a = convertOmegaAccel(OmegaData, radius, phi)  # if input('use synthetic data (y/n):') == 'y' else LoadRun()['accel'][0]
 # endregion
@@ -31,7 +31,7 @@ cost = cost_RadialRotation(ph_a, ph_a_next, ph_dt, var_r, var_phi)
 
 opt = tf.train.GradientDescentOptimizer(learning_rate=0.001)
 grads_and_vars = opt.compute_gradients(cost, var_list=[var_phi])
-clipped_grads_and_vars = [(tf.clip_by_value(grad, -1, 1), var) for grad, var in grads_and_vars]
+clipped_grads_and_vars = [(tf.clip_by_value(grad, -1, 1), var) for grad, var in grads_and_vars if grad is not None]
 opt_out = opt.compute_gradients(clipped_grads_and_vars)
 
 # opt_out = opt.minimize(cost, var_list=[var_phi])

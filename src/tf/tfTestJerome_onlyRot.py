@@ -13,7 +13,7 @@ N = 10
 omega_0 = 2
 phi = 0.01
 
-OmegaData = simConstAlpha(N+1, deltaT, alpha, omega_0, (0,0.1))
+OmegaData = simAlpha(N + 1, deltaT, alpha, omega_0, (0, 0.1))
 
 a_not_rotated = convertOmegaAccel(OmegaData, radius)
 a_rotated = convertOmegaAccel(OmegaData, radius, phi)
