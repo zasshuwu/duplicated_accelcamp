@@ -1,39 +1,68 @@
 import Tools
 from DataStructures import *
+import math
 
-main:
+
+# region Generic AlphaSim Functions
 def AlphaSim_ConstOmegaPositive():
     return
 
+
 def AlphaSim_ConstOmegaChangesSign():
+    return
 
-def AlphaSim_Piecewise1( time ):
-    sdfsdf
-    return alphaValue
 
-def AlphaSim_Piecewise2( time ):
-    return alphaValue
+def AlphaSim_Piecewise1(t):
+    if t < 0:
+        return 1
+    elif 0 <= t < 0.5:
+        return 0.5
+    elif 0.5 <= t < 1:
+        return 0.25
+    elif 1 <= t:
+        return 0.5
 
-def AlphaSim_Sinusoidal1( )
-    A=sss
-    omega=sss
-    phaseConstant = sss
-    return math.sin(t)
 
-def AlphaSim_GenerateAlphaArray( alphaFunc, N, deltaT):
+def AlphaSim_Piecewise2(t):
+    if t < -2:
+        return t * 1.5
+    elif -2 <= t < 5:
+        return math.sin(t)
+    elif 5 <= t < 7:
+        return 0.5
+    elif 7 <= t:
+        return math.cos(t)
+
+
+def AlphaSim_Sinusoidal1(t):
+    A = 2
+    omega = 1
+    phaseConstant = 0
+    return A * math.sin(omega * t + phaseConstant)
+
+
+def AlphaSim_GenerateAlphaArray(alphaFunc, N, deltaT):
+    typeofA = 'f'
+    try:
+        alphaFunc(0)
+        typeofA = 'f'
+    except:
+        try:
+            alphaFunc = float(alphaFunc)
+            typeofA = 'n'
+        except:
+            raise ValueError('A must be a function or a number')
+
+    array = []
+    for i in range(N):
+        array.append(alphaFunc(i * deltaT) if typeofA == 'f' else alphaFunc)
     return array
 
-test:
-alphaFunction = AlphaSim_Piecewise1
 
-alphaArray = Generate( alphaFunction, N, deltaT)
-rotData = simAlpha(... alpha .. )
-accelData = convertOmegaAccel(rotData)
-
-Plot
+# endregion
 
 
-
+# region Module Functions
 def simAlpha(N, dT, A, omega_0=0.0, noise=(0, 0)):
     """
     :param noise: (loc, scale)
@@ -57,13 +86,13 @@ def simAlpha(N, dT, A, omega_0=0.0, noise=(0, 0)):
     omega = np.array([np.double(omega_0)] * N)
     time = np.array([np.double(0.0)] * N)
     for i in range(1, N):
-        omega[i] = omega[i - 1] + (A if typeofA == 'n' else A(i*dT)) * dT
+        omega[i] = omega[i - 1] + (A if typeofA == 'n' else A(i * dT)) * dT
         time[i] = i * dT
 
     return RotaryData(time, omega + np.random.normal(noise[0], noise[1], len(omega)))
 
 
-def convertOmegaAccel(OmegaData, radius, phi=0, noise=(0,0)):
+def convertOmegaAccel(OmegaData, radius, phi=0, noise=(0, 0)):
     """
     :param phi: angle of accelerometer
     :param noise: (loc, scale)
@@ -80,7 +109,7 @@ def convertOmegaAccel(OmegaData, radius, phi=0, noise=(0,0)):
             radius = float(radius)
             typeofrad = 'n'
         except:
-            raise ValueError('A must be a function or a number')
+            raise ValueError('radius must be a function or a number')
 
     deltaT = OmegaData.t[1] - OmegaData.t[0]
     a = []
@@ -103,3 +132,4 @@ def convertOmegaAccel(OmegaData, radius, phi=0, noise=(0,0)):
         np.random.normal(noise[0], noise[1], len(a))
     ]).transpose()
     return AccelData(OmegaData.t[:-1], a, "synthetic data")
+# endregion
