@@ -22,11 +22,19 @@ magnitude = [[] for i in range(3)]
 
 shift_x = 0
 shift_y = 0
+# For when the data starts at (2,1)
 if file_path.split('/')[lastIndex].split('.')[2] == "pocket":
     shift_x = 2
     shift_y = 1
     error = 0.3
     fToA = 1
+# For when the data starts at (0,0)
+elif file_path.split('/')[lastIndex].split('.')[2] == "pocket_mobile":
+    shift_x = 0
+    shift_y = 0
+    error = 0.3
+    fToA = 1
+# For when the data starts at (1,0)
 elif file_path.split('/')[lastIndex].split('.')[2] == "android":
     shift_x = 0
     shift_y = 1
