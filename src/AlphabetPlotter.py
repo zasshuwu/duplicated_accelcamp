@@ -74,6 +74,12 @@ for j in range(3):
 
 fig, axs = plt.subplots(3)
 axs[0].plot(time, acceleration[0])
+axs[0].set_xlabel('Time (s)')
+axs[0].set_ylabel('AccelerationX (m/s^2)')
 axs[1].plot(time, acceleration[1])
+axs[1].set_xlabel('Time (s)')
+axs[1].set_ylabel('AccelerationY (m/s^2)')
 axs[2].plot(position[0], position[1])
+axs[2].set_xlabel('PositionX')
+axs[2].set_ylabel('PositionY')
 plt.show()
