@@ -66,7 +66,7 @@ class MultiPlotter:
 
 
 def Plot(AccelDatas, RotaryDatas):
-    tArray = RotaryDatas[0].t
+    tArray = RotaryDatas[0].t if RotaryDatas != [] else AccelDatas[0].t
 
     myPlotter = MultiPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray, "Time t (s) ")
 

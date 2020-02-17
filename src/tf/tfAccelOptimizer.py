@@ -68,14 +68,14 @@ def main():
         ad = convertOmegaAccel(o, np.float32(input("Radius: ")))
     deltaT = ad.t[1] - ad.t[0]
     minner = minimizer_curvature_noRot(deltaT)
-    length = ad.len - 1
+    length = len(ad) - 1
     output = outputData(length)
     for i in range(length):
-        A= ad.vec3[i]
-        ANext = ad.vec3[i+1]
+        A= ad.a[i]
+        ANext = ad.a[i+1]
         output.r[i], output.loss[i] = minner.run(A, ANext)
-        print(str(i)+"/"+str(ad.len) + " = Radius: " + str(output.r[i])+", Loss: " + str(output.loss[i]))
-    Curv_plot(ad.a[0][:length], ad.a[1][:length], output.r, output.loss, ad.t[:length])
+        print(str(i)+"/"+str(len(ad)) + " = Radius: " + str(output.r[i])+", Loss: " + str(output.loss[i]))
+    Curv_plot(ad.getSingleAxis(0)[:length],ad.getSingleAxis(1)[:length],output.r, output.loss, ad.t[:length])
 
 
 if __name__ == "__main__":
