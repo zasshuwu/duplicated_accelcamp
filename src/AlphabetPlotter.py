@@ -22,11 +22,19 @@ magnitude = [[] for i in range(3)]
 
 shift_x = 0
 shift_y = 0
+# For when the data starts at (2,1)
 if file_path.split('/')[lastIndex].split('.')[2] == "pocket":
     shift_x = 2
     shift_y = 1
     error = 0.3
     fToA = 1
+# For when the data starts at (0,0)
+elif file_path.split('/')[lastIndex].split('.')[2] == "pocket_mobile":
+    shift_x = 0
+    shift_y = 0
+    error = 0.3
+    fToA = 1
+# For when the data starts at (1,0)
 elif file_path.split('/')[lastIndex].split('.')[2] == "android":
     shift_x = 0
     shift_y = 1
@@ -66,6 +74,12 @@ for j in range(3):
 
 fig, axs = plt.subplots(3)
 axs[0].plot(time, acceleration[0])
+axs[0].set_xlabel('Time (s)')
+axs[0].set_ylabel('AccelerationX (m/s^2)')
 axs[1].plot(time, acceleration[1])
+axs[1].set_xlabel('Time (s)')
+axs[1].set_ylabel('AccelerationY (m/s^2)')
 axs[2].plot(position[0], position[1])
+axs[2].set_xlabel('PositionX')
+axs[2].set_ylabel('PositionY')
 plt.show()
