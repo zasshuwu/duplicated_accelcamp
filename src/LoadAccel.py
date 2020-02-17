@@ -8,18 +8,12 @@ file_structure = "name.type.model.csv".split(".")
 type_index = file_structure.index("type")
 model_index = file_structure.index("model")
 
-# mapping of accelerometer sensor types to the names of the functions that load them
-Model_Dict = {
-    "X2":"Load_X2(",
-    "X16":"Load_X16(",
-    "Samsung":"Load_Samsung(",
-    "Pocket":"Load_Pocket("
-}
+
 
 def LoadAccelFile(filename):
     modelType = filename.split("/")[-1].split(".")[model_index].capitalize()
     try:
-        accelData = eval(Model_Dict[modelType]+"'"+filename+"')")
+        accelData = Model_Dict[modelType](filename)
     except KeyError:
         return "Model is not currently supported"
     return accelData
@@ -85,6 +79,19 @@ def Load_Pocket(filepath=None):
     if (filepath == None):
         filepath = dialogOpenFilename()
 
+    block = np.loadtxt(filepath, dtype=float, delimiter=',', usecols=(2, 3, 4, 5), unpack=True, skiprows=1)
+    # a = [ax, ay, az] | t = [t]
+    a = block[1:]
+    t = block[0]
+    t0 = t[0]
+    for y in range(len(t)):
+        t[y] -= t0
+    return AccelData(t, a.transpose(), "Pocket Lab")
+
+def Load_PocketMobile(filepath=None):
+    if (filepath == None):
+        filepath = dialogOpenFilename()
+
     block = np.loadtxt(filepath, dtype=float, delimiter=',', usecols=(0, 1, 2, 3), unpack=True, skiprows=1)
     # a = [ax, ay, az] | t = [t]
     a = block[1:]
@@ -94,5 +101,12 @@ def Load_Pocket(filepath=None):
         t[y] -= t0
     return AccelData(t, a.transpose(), "Pocket Lab")
 
-
+# mapping of accelerometer sensor types to the names of the functions that load them
+Model_Dict = {
+    "X2":Load_X2,
+    "X16":Load_X16,
+    "Samsung":Load_Samsung,
+    "Pocket":Load_Pocket,
+    "Pocket_mobile":Load_PocketMobile
+}
 
