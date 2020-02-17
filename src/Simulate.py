@@ -1,6 +1,38 @@
 import Tools
 from DataStructures import *
 
+main:
+def AlphaSim_ConstOmegaPositive():
+    return
+
+def AlphaSim_ConstOmegaChangesSign():
+
+def AlphaSim_Piecewise1( time ):
+    sdfsdf
+    return alphaValue
+
+def AlphaSim_Piecewise2( time ):
+    return alphaValue
+
+def AlphaSim_Sinusoidal1( )
+    A=sss
+    omega=sss
+    phaseConstant = sss
+    return math.sin(t)
+
+def AlphaSim_GenerateAlphaArray( alphaFunc, N, deltaT):
+    return array
+
+test:
+alphaFunction = AlphaSim_Piecewise1
+
+alphaArray = Generate( alphaFunction, N, deltaT)
+rotData = simAlpha(... alpha .. )
+accelData = convertOmegaAccel(rotData)
+
+Plot
+
+
 
 def simAlpha(N, dT, A, omega_0=0.0, noise=(0, 0)):
     """
