@@ -7,7 +7,7 @@ if(sys.path.count('../') == 0):
     sys.path.append('../')
 from Load import *
 from Plotter import *
-from DataStructuresNew import *
+from DataStructures import *
 from Simulate import *
 
 #CONFIG
@@ -59,7 +59,7 @@ def main():
         if(use_omega_file):
             o = LoadRun()["omega"][0]
         else:
-            o = simConstAlpha(
+            o = simAlpha(
                 int(input("Number of iterations: ")),
                 np.float32(input("Delta t: ")),
                 np.float32(input("alpha: ")),

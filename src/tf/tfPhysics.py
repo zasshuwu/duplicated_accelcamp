@@ -44,8 +44,20 @@ def rot_xy(vec3, theta):
     # reshape to make tf.matmul happy ; no performance cost
     vec3 = tf.reshape(vec3, [3,1])
 
-    return tf.matmul(rot_matrix, vec3)
+    out = tf.matmul(rot_matrix, vec3)
+    trans = tf.transpose(out)
+    return trans[0]
 
+def rot_xy_noTF(vec3, theta):
+    # from https://stackoverflow.com/questions/37042748/how-to-create-a-rotation-matrix-in-tensorflow
+    rot_matrix = [[np.cos(theta), -np.sin(theta),0],
+                       [np.sin(theta), np.cos(theta),0],
+                       [0.0,0.0,0.0]]
+
+    # reshape to make tf.matmul happy ; no performance cost
+   # vec3 = tf.reshape(vec3, [3,1])
+
+    return np.matmul(rot_matrix, vec3)
 
 def rot_2D(A, param_phi):
     # from https://stackoverflow.com/questions/37042748/how-to-create-a-rotation-matrix-in-tensorflow
@@ -139,3 +151,28 @@ def runTests():
 if __name__ == "__main__":
     runTests()
 
+
+def cost_SimpleAlpha(at, alpha, r):
+    return tf.square(at-alpha*r)
+
+def cost_SimpleRadial2(ar, ar_next, at, dt, r):
+    ardot = (ar_next-ar)/dt
+    term2 = tf.square(at)/r * dt
+    term3 = 2 * at * tf.sqrt(ar/r)
+    return tf.square(ardot - term2 - term3)
+
+
+def cost_SimpleRadial(ar, ar_next, at, dt, r):
+    ardot = r * (ar_next-ar)/dt
+    term2 = tf.square(at) * dt
+    term3 = 2 * at * tf.sqrt(ar*r)
+    return tf.square(ardot - term2 - term3)
+
+
+def cost_RadialRotation(a, a_next, dt, r, phi):
+    a = rot_xy(a, phi)
+    a_next = rot_xy(a_next, phi)
+    ardot = r * (a_next[0]-a[0])/dt
+    term2 = tf.square(a[1]) * dt
+    term3 = 2 * a[1] * tf.sqrt((a[0])*r)
+    return tf.square(ardot - term2 - term3)

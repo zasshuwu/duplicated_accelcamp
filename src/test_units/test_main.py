@@ -6,8 +6,8 @@ sys.path.append('../')
 class TestOthers(unittest.TestCase):
 
     def test_DataStructures(self):
-        import DataStructuresNew
-        DataStructuresNew.test_DataStructures()
+        import DataStructures
+        DataStructures.test_DataStructures()
 
     def test_spike(self):
         import Test_SpikePlot

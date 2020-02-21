@@ -50,7 +50,7 @@ The following documentation lists all the modules (functions within the modules)
   - dialogOpenFilename()
   - min_lambda()
 - Plotter.py
-  - MultiTimeSeriesPlotter (class)
+  - MultiPlotter (class)
     - applyStyle()
     - appendSignal()
     - display()

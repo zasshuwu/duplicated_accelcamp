@@ -1,5 +1,5 @@
 import numpy as np
-from DataStructuresNew import *
+from DataStructures import *
 from scipy.signal import resample
 from Tools import min_lambda
 

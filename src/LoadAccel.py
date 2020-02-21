@@ -1,7 +1,7 @@
 import numpy as np
 import os
 from Tools import dialogOpenFilename
-from DataStructuresNew import AccelData
+from DataStructures import AccelData
 
 # structure we impose on data filenames
 file_structure = "name.type.model.csv".split(".")
@@ -9,11 +9,10 @@ type_index = file_structure.index("type")
 model_index = file_structure.index("model")
 
 
-
 def LoadAccelFile(filename):
     modelType = filename.split("/")[-1].split(".")[model_index].capitalize()
     try:
-        accelData = Model_Dict[modelType](filename)
+        accelData = eval(Model_Dict[modelType] + "'" + filename + "')")
     except KeyError:
         return "Model is not currently supported"
     return accelData
@@ -28,50 +27,53 @@ def LoadAccelFile(filename):
 
 ########### individual load functions for each sensor type #########################
 
-def Load_X(filepath = None):
-    if(filepath == None):
+def Load_X(filepath=None):
+    if filepath is None:
         filepath = dialogOpenFilename()
-    
-    block = np.loadtxt(filepath, dtype=float, comments= ";", delimiter=',', usecols=(0,1,2,3), unpack=True)
-    #a = [ax, ay, az] | t = [t]
+
+    block = np.loadtxt(filepath, dtype=float, comments=";", delimiter=',', usecols=(0, 1, 2, 3), unpack=True)
+    # a = [ax, ay, az] | t = [t]
     a = block[1:]
     t = block[0]
     t0 = t[0]
     for y in range(len(t)):
-        t[y]-=t0
+        t[y] -= t0
 
     return AccelData(t, a.transpose(), "X")
 
-def Load_Samsung(filepath = None):
-    if(filepath == None):
+
+def Load_Samsung(filepath=None):
+    if filepath is None:
         filepath = dialogOpenFilename()
-    
-    block = np.loadtxt(filepath, dtype=float, delimiter=',', usecols=(0,1,2,3), unpack=True, skiprows=1)
-    #a = [ax, ay, az] | t = [t]
+
+    block = np.loadtxt(filepath, dtype=float, delimiter=',', usecols=(0, 1, 2, 3), unpack=True, skiprows=1)
+    # a = [ax, ay, az] | t = [t]
     a = block[1:]
     t = block[0]
     t0 = t[0]
     for y in range(len(t)):
-        t[y]-=t0
+        t[y] -= t0
 
-    a *= 9.807    
+    a *= 9.807
     return AccelData(t, a.transpose(), "Samsung")
 
-def Load_X16(filepath = None):
-    #Since Load_X works with X16s, it just returns Load_X()
+
+def Load_X16(filepath=None):
+    # Since Load_X works with X16s, it just returns Load_X()
     data = Load_X(filepath)
     data.model = "X16"
     return data
 
-def Load_X2(filepath = None):
-    #Since Load_X works with X2s, it just returns Load_X()
-    #Assuming X2 has High Gain (counts/13108)
+
+def Load_X2(filepath=None):
+    # Since Load_X works with X2s, it just returns Load_X()
+    # Assuming X2 has High Gain (counts/13108)
     data = Load_X(filepath)
 
     data.a /= 13108
     data.a *= 9.807
     data.model = "X2"
-    
+
     return data
 
 
@@ -109,4 +111,3 @@ Model_Dict = {
     "Pocket":Load_Pocket,
     "Pocket_mobile":Load_PocketMobile
 }
-
