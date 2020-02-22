@@ -1,22 +1,21 @@
 import unittest
-import os
 import sys
 sys.path.append('../')
 
 class TestOthers(unittest.TestCase):
 
     def test_DataStructures(self):
-        import DataStructures
+        from modules import DataStructures
         DataStructures.test_DataStructures()
 
     def test_spike(self):
-        import Test_SpikePlot
+        pass
 
     def test_loadplot(self):
-        import TestLoadPlot
+        pass
 
     def test_curvature(self):
-        import Test_Curvature
+        pass
 
 class TestStringMethods(unittest.TestCase):
 

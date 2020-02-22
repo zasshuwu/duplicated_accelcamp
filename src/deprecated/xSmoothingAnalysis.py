@@ -1,7 +1,5 @@
-import numpy as np
-import os
 import matplotlib.pyplot as plt
-from Tools import *
+from modules.Tools import *
 
 # -- open file --
 myOpts = {}

@@ -1,8 +1,8 @@
 import sys
 sys.path.append('../')
 import tensorflow as tf
-from Simulate import *
-from tf.tfPhysics import rot_xy
+from modules.Simulate import *
+from tests.tfPhysics import rot_xy
 
 # region Simulation
 #config

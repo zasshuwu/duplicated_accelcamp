@@ -2,12 +2,11 @@ import sys
 
 sys.path.append('../')
 
-from tf.tfPhysics import rot_xy
-from tf.tfPhysics import rot_xy_noTF
+from tests.tfPhysics import rot_xy
+from tests.tfPhysics import rot_xy_noTF
 import tensorflow as tf
-import numpy as np
-from Plotter import *
-from DataStructures import *
+from modules.Plotter import *
+from modules.DataStructures import *
 
 
 def tfTest_CosineScalar():

@@ -7,5 +7,3 @@
 """
 
 # import dependencies
-from Curvature import *
-from DataStructures import *

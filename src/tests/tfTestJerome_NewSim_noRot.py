@@ -1,5 +1,5 @@
-from Simulate import *
-from Plotter import *
+from modules.Simulate import *
+from modules.Plotter import *
 import tensorflow as tf
 from tfPhysics import cost_SimpleRadial
 

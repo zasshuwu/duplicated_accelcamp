@@ -1,12 +1,7 @@
-import matplotlib.pyplot as plt
-import numpy as np
-from mpl_toolkits.mplot3d import Axes3D
-import os
 import tkinter as tk
-from tkinter import filedialog
-from Load import *
-from Tools import *
-from Plotter import *
+from modules.Load import *
+from modules.Tools import *
+from modules.Plotter import *
 
 defaultdir = "../../doc/Alphabet/data"
 root = tk.Tk()

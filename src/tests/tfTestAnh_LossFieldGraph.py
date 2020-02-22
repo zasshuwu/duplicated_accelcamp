@@ -2,10 +2,7 @@ import sys
 
 sys.path.append("../")
 
-import matplotlib.pyplot as plt
-from DataStructures import *
-from tf.tfPhysics import *
-from tf.Izk import *
+from tests.Izk import *
 import numpy as np
 
 

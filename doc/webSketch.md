@@ -2,7 +2,7 @@
 
 ## 3 main sections
 - pedagogical
-    - student laboratroy activities
+    - student laboratory activities
 - 3D print
     - online access to 3D files
     - 3D print instructions

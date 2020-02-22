@@ -1,14 +1,12 @@
-import numpy as np
 import tensorflow as tf
 from tfPhysics import *
 
 import sys
 if(sys.path.count('../') == 0):
     sys.path.append('../')
-from Load import *
-from Plotter import *
-from DataStructures import *
-from Simulate import *
+from modules.Load import *
+from modules.Plotter import *
+from modules.Simulate import *
 
 #CONFIG
 use_synthetic_data = True if input("use synthetic data? (y/n): ") == "y" else False

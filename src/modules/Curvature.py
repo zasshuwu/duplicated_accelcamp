@@ -1,5 +1,5 @@
 import numpy as np
-from DataStructures import AccelData
+from modules.DataStructures import AccelData
 
 
 def GenADot(_AccelData:AccelData):
