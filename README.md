@@ -108,24 +108,3 @@ The project stems from the basic trait of humans: curiosity. `Please add content
 MIT or Creative Commons. Your choice. ``TBA``
 
 </div>
-
-<style>
-.header h1 {
-  color: #32a852;
-}
-
-h1 {
-  color: #007e8a;
-}
-
-.block {
-  display: inline;
-  background: grey;
-  font-size: 8pt;
-  color: black;
-  text-transform: uppercase;
-  padding: 0.1rem;
-  text-align: center;
-}
-
-</style>
