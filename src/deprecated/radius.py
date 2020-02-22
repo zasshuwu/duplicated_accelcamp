@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
-from Simulate import *
-from Curvature import *
+from modules.Simulate import *
+from modules.Curvature import *
 import numpy as np
 from tkinter import filedialog
 

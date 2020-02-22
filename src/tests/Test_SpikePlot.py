@@ -1,8 +1,6 @@
-from Load import *
-from SpikeTracker import *
-from Plotter import *
-
-from unittest import *
+from modules.Load import *
+from modules.SpikeTracker import *
+from modules.Plotter import *
 
 # test via manual selection of data source ( explicit run of this file alone )
 if __name__ == "__main__":

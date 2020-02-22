@@ -1,7 +1,6 @@
 import numpy as np
-import os
-from Tools import dialogOpenFilename
-from DataStructures import AccelData
+from modules.Tools import dialogOpenFilename
+from modules.DataStructures import AccelData
 
 # structure we impose on data filenames
 file_structure = "name.type.model.csv".split(".")

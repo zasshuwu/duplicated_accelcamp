@@ -1,7 +1,6 @@
-import numpy as np
-from DataStructures import *
+from modules.DataStructures import *
 from scipy.signal import resample
-from Tools import min_lambda
+from modules.Tools import min_lambda
 
 adjust = 0.5
 

@@ -1,9 +1,8 @@
 import sys
 sys.path.append('../')
 import tensorflow as tf
-from Simulate import *
-from Load import *
-from tf.tfPhysics import cost_SimpleAlpha, cost_SimpleRadial
+from modules.Simulate import *
+from tests.tfPhysics import cost_SimpleRadial
 
 # region Simulation
 #config

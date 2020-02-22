@@ -1,6 +1,5 @@
-from LoadAccel import *
-from LoadOmega import *
-import numpy as np
+from modules.LoadAccel import *
+from modules.LoadOmega import *
 import os
 from tkinter import *
 

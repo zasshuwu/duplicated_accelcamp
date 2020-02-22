@@ -1,7 +1,6 @@
-from Load import *
-from Plotter import *
-from Curvature import *
-from Simulate import *
+from modules.Load import *
+from modules.Curvature import *
+from modules.Simulate import *
 import matplotlib.pyplot as plt
 
 _range = [13, 18]

@@ -1,5 +1,5 @@
-import Tools
-from DataStructures import *
+from modules import Tools
+from modules.DataStructures import *
 import math
 
 

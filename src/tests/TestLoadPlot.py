@@ -1,8 +1,5 @@
-import numpy as np
-import os
-from Load import *
-from Tools import *
-from Plotter import *
+from modules.Load import *
+from modules.Plotter import *
 
 file=None
 

@@ -1,7 +1,7 @@
-from Load import *
+from modules.Load import *
 import os
 
-data_dir = "../data/"
+data_dir = "../../data/"
 
 files = os.walk(data_dir)
 
