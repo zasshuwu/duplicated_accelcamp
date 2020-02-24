@@ -2,8 +2,8 @@ import sys
 
 sys.path.append('../')
 
-from tests.tfPhysics import rot_xy
-from tests.tfPhysics import rot_xy_noTF
+from modules.tfPhysics import rot_xy
+from modules.tfPhysics import rot_xy_noTF
 import tensorflow as tf
 from modules.Plotter import *
 from modules.DataStructures import *

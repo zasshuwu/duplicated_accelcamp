@@ -1,7 +1,7 @@
 from modules.Simulate import *
 from modules.Plotter import *
 import tensorflow as tf
-from tfPhysics import cost_SimpleRadial
+from modules.tfPhysics import cost_SimpleRadial
 
 activate_console_menu = True
 # region Console Menu Config

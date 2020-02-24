@@ -1,6 +1,6 @@
 import tensorflow as tf
 from modules.Simulate import *
-from tests.tfPhysics import cost_RadialRotation
+from modules.tfPhysics import cost_RadialRotation
 
 # region Simulation
 #config

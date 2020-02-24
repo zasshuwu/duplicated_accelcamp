@@ -1,7 +1,7 @@
 import tensorflow as tf
 from modules.Simulate import *
 from modules.Load import *
-from tests.tfPhysics import cost_SimpleRadial
+from modules.tfPhysics import cost_SimpleRadial
 from modules.Plotter import *
 
 # region Simulation
