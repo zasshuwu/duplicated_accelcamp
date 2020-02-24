@@ -15,11 +15,11 @@ class MultiPlotter:
         self.nbPlots = _nbPlots
         self.iPlot = 0
         self.xLabel = _xLabel
-        fig = plt.figure()
-        fig.suptitle(date.today())
+        self.fig = plt.figure()
+        self.fig.text(0.1,0.9,date.today())
 
     def setTitle(self,string):
-        plt.figure().suptitle(string)
+        self.fig.suptitle(string)
 
     def applyStyle(self):
         plt.subplots_adjust(hspace=0.2)
@@ -29,7 +29,7 @@ class MultiPlotter:
         plt.grid(b=True, which='minor', color='0.65', linestyle='-', linewidth='0.2')
 
     # yAxisLabel must be in double quotes eg "A_x ($m/s^2$)"
-    def appendSignal(self, _array, yAxisLabel, title):
+    def appendSignal(self, _array, yAxisLabel="", title=""):
         self.iPlot = self.iPlot + 1
         ax = plt.subplot(self.nbPlots, 1, self.iPlot)
 
@@ -66,7 +66,7 @@ class MultiPlotter:
 
 
 def Plot(AccelDatas, RotaryDatas):
-    tArray = RotaryDatas[0].t if RotaryDatas != [] else AccelDatas[0].t
+    tArray = RotaryDatas[0].t
 
     myPlotter = MultiPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray, "Time t (s) ")
 
