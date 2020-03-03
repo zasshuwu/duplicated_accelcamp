@@ -10,13 +10,14 @@ from datetime import date
 # _xArray is an array of floats
 
 class MultiPlotter:
-    def __init__(self, _nbPlots, _tArray, _xLabel):
+    def __init__(self, _nbPlots, _tArray, _xLabel, txt=""):
         self.tArray = _tArray
         self.nbPlots = _nbPlots
         self.iPlot = 0
         self.xLabel = _xLabel
         self.fig = plt.figure()
         self.fig.text(0.1,0.9,date.today())
+        self.caption = txt
 
     def setTitle(self,string):
         self.fig.suptitle(string)
@@ -69,7 +70,7 @@ class MultiPlotter:
 
     # displayed under the last graph
     def addCaption(self, txt):
-        plt.figtext(0.5, 0.075, txt, ha="center")
+        plt.figtext(0.5, 0.01, txt, ha="center")
         return
 
     # dict is a dictionary of ( string, float )
@@ -78,7 +79,7 @@ class MultiPlotter:
         return
 
 
-def Plot(AccelDatas, RotaryDatas):
+def Plot(AccelDatas, RotaryDatas, txt=""):
     tArray = RotaryDatas[0].t
 
     myPlotter = MultiPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray, "Time t (s) ")
@@ -90,6 +91,7 @@ def Plot(AccelDatas, RotaryDatas):
         myPlotter.appendSignal(accel.getSingleAxis(axisIndex=0), "$A_x (m/s^2)$", accel.model)
         myPlotter.appendSignal(accel.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$", accel.model)
 
+    myPlotter.addCaption(txt)
 
     myPlotter.display()
 
