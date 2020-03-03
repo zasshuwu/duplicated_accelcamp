@@ -64,6 +64,18 @@ class MultiPlotter:
         plt.draw()
         plt.show()
 
+    def dumpToCSVFile(self, filename):
+        return
+
+    # displayed under the last graph
+    def addCaption(self, txt ):
+        return
+
+    # dict is a dictionary of ( string, float )
+    # that will be displayed in a caption
+    def appendCaptionValues(self, dict):
+        return
+
 
 def Plot(AccelDatas, RotaryDatas):
     tArray = RotaryDatas[0].t
