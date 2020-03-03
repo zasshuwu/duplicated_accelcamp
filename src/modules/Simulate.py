@@ -60,6 +60,15 @@ def AlphaSim_GenerateAlphaArray(alphaFunc, N, deltaT):
 
 # endregion
 
+# alphaFn is always a function
+# constant-value alpha is accomplished by feeding a const-value function
+# return a RotaryData object
+def RotaryData_CreateFromAlphaFunction( alphaFn,  N, deltaT, omegaInitial=0, ):
+    return
+
+# returns nothing: rotData itself is modified
+def RotaryData_AddNoise( rotData: RotaryData, magnitude: float ):
+    return
 
 # region Module Functions
 def simAlpha(N, dT, A, omega_0=0.0, noise=(0, 0)):
@@ -93,6 +102,19 @@ def simAlpha(N, dT, A, omega_0=0.0, noise=(0, 0)):
 
     return RotaryData(time, omega + np.random.normal(noise[0], noise[1], len(omega)))
 
+# generate simulated AccelData for a sensor at radial distance of "radius"
+# starting from a rotary-sensor signal "omegaData"
+# returns a AccelData object
+def AccelData_CreateFromRotary( rotData : RotaryData, radius : float):
+    return
+
+# rotate all vectors counterclockwise by an amount "angle"
+def AccelData_Rotate( ad : AccelData, angle : float ):
+    return
+
+# add gaussian noise to the components on all 3 axes
+def AccelDat_AddNoise( magnitude ):
+    return
 
 def convertOmegaAccel(OmegaData, radius, phi=0, noise=(0, 0)):
     """
