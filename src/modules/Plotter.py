@@ -68,7 +68,8 @@ class MultiPlotter:
         return
 
     # displayed under the last graph
-    def addCaption(self, txt ):
+    def addCaption(self, txt):
+        plt.figtext(0.5, 0.075, txt, ha="center")
         return
 
     # dict is a dictionary of ( string, float )
