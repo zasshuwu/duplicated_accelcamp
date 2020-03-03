@@ -64,11 +64,31 @@ def AlphaSim_GenerateAlphaArray(alphaFunc, N, deltaT):
 # constant-value alpha is accomplished by feeding a const-value function
 # return a RotaryData object
 def RotaryData_CreateFromAlphaFunction( alphaFn,  N, deltaT, omegaInitial=0, ):
-    return
+    typeofA = 'f'
+    # This variable is a flag for the type of the variable A
+    # 'f' means that A is of type 'function'
+    # 'n' means that A is a number (float, int, double, ...)
+    try:
+        alphaFn(0) # if A is callable, this won't raise an Error
+        typeofA = 'f'
+    except:
+        try:
+            alphaFn = float(alphaFn) # if A can be converted to a float, this won't raise an Error
+            typeofA = 'n'
+        except:
+            raise ValueError('alphaFn must be a function or a number')
+
+    omega = np.array([np.double(omegaInitial)] * N)
+    time = np.array([np.double(0.0)] * N)
+    for i in range(1, N):
+        omega[i] = omega[i - 1] + (alphaFn if typeofA == 'n' else alphaFn(i * deltaT)) * deltaT # small check to verify the value of typeofA
+        time[i] = i * deltaT
+
+    return RotaryData(time, omega)
 
 # returns nothing: rotData itself is modified
 def RotaryData_AddNoise( rotData: RotaryData, magnitude: float ):
-    return
+    return RotaryData(rotData.t, rotData.omega + np.random.normal(noise[0], noise[1], len(omega))) 
 
 # region Module Functions
 def simAlpha(N, dT, A, omega_0=0.0, noise=(0, 0)):
@@ -106,15 +126,34 @@ def simAlpha(N, dT, A, omega_0=0.0, noise=(0, 0)):
 # starting from a rotary-sensor signal "omegaData"
 # returns a AccelData object
 def AccelData_CreateFromRotary( rotData : RotaryData, radius : float):
-    return
+    deltaT = rotData.t[1] - rotData.t[0]
+    a = []
+    for i in range(len(rotData) - 1):
+        a.append([
+                rotData.omega[i] ** 2 * radius, 
+                radius * (rotData.omega[i + 1] - rotData.omega[i]) / deltaT,
+                0
+        ])
+    a = np.array(a)
+    return AccelData(rotData.t[:-1], a, "synthetic data")
 
 # rotate all vectors counterclockwise by an amount "angle"
 def AccelData_Rotate( ad : AccelData, angle : float ):
-    return
+    a = ad.a
+    for i in range(len(a)):
+        a[i] = Tools.rotate_vec3(a[i], angle).tolist()[0]
+        
+    ad.a = a
+    return ad
 
 # add gaussian noise to the components on all 3 axes
-def AccelDat_AddNoise( magnitude ):
-    return
+def AccelDat_AddNoise( ad : AccelData, magnitude : float  ):
+    ad.a += np.array([
+        np.random.normal(0, magnitude, len(a)),
+        np.random.normal(0, magnitude, len(a)),
+        np.random.normal(0, magnitude, len(a))
+    ]).transpose()
+    return ad
 
 def convertOmegaAccel(OmegaData, radius, phi=0, noise=(0, 0)):
     """
