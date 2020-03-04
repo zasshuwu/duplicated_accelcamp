@@ -88,7 +88,7 @@ def RotaryData_CreateFromAlphaFunction( alphaFn,  N, deltaT, omegaInitial=0, ):
 
 # returns nothing: rotData itself is modified
 def RotaryData_AddNoise( rotData: RotaryData, magnitude: float ):
-    return RotaryData(rotData.t, rotData.omega + np.random.normal(noise[0], noise[1], len(omega))) 
+    return RotaryData(rotData.t, rotData.omega + np.random.normal(0, magnitude, len(rotData))) 
 
 # region Module Functions
 def simAlpha(N, dT, A, omega_0=0.0, noise=(0, 0)):
