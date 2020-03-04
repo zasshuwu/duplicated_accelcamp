@@ -37,12 +37,12 @@ N = 100
 omega_0 = 0.1
 omega_noise = (0, 0)
 
-radiusFunction = 4
+radius = 4
 accel_noise = (0, 0)
 
-OmegaData = simAlpha(N, deltaT, alphaFunction, omega_0, noise=(0, 0))
+OmegaData = RotaryData_CreateFromAlphaFunction(alphaFunction, N, deltaT, omega_0)
 
-a = convertOmegaAccel(OmegaData, radiusFunction, noise=accel_noise)
+a = AccelData_CreateFromRotary(OmegaData, radius)
 # endregion
 
 alphaArray = AlphaSim_GenerateAlphaArray(alphaFunction, N, deltaT)

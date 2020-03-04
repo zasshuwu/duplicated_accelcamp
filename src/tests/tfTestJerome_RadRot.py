@@ -11,9 +11,9 @@ N = 500
 omega_0 = 2
 phi = 0.5
 
-OmegaData = simAlpha(N + 1, deltaT, alpha, omega_0)
+OmegaData = RotaryData_CreateFromAlphaFunction(alpha, N + 1, deltaT, omega_0)
 
-a = convertOmegaAccel(OmegaData, radius, phi)  # if input('use synthetic data (y/n):') == 'y' else LoadRun()['accel'][0]
+a = AccelData_Rotate(AccelData_CreateFromRotary(OmegaData, radius), phi)
 # endregion
 
 # region TensorFlow Definitions

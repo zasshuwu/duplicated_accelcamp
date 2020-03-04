@@ -11,10 +11,10 @@ N = 10
 omega_0 = 2
 phi = 0.01
 
-OmegaData = simAlpha(N + 1, deltaT, alpha, omega_0, (0, 0.1))
+OmegaData = RotaryData_CreateFromAlphaFunction(alpha, N + 1, deltaT, omega_0)
 
-a_not_rotated = convertOmegaAccel(OmegaData, radius)
-a_rotated = convertOmegaAccel(OmegaData, radius, phi)
+a_not_rotated = AccelData_CreateFromRotary(OmegaData, radius)
+a_rotated = AccelData_Rotate(AccelData_CreateFromRotary(OmegaData, radius), phi)
 # endregion
 
 # region TensorFlow Definitions

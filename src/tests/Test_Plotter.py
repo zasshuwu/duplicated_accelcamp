@@ -11,12 +11,12 @@ if __name__ == "__main__":  # manually choose run file
 
     # caption injection via variable
     test_omega2 = Load_Omega()
-    test_accel2 = convertOmegaAccel(test_omega2, random.randint(0, 10), random.randint(0, 2))
+    test_accel2 = AccelData_Rotate(AccelData_CreateFromRotary(test_omega2, random.randint(0, 10)), random.randint(0, 2))
     Plot([test_accel2], [test_omega2], txt)
 
     # direct caption injection
     test_omega = Load_Omega()
-    test_accel = convertOmegaAccel(test_omega, random.randint(0, 10), random.uniform(0, 5))
+    test_accel = AccelData_Rotate(AccelData_CreateFromRotary(test_omega, random.randint(0, 10)), random.uniform(0, 5))
     Plot([test_accel], [test_omega], "This is some caption texts that has been yeeted here by default")
 
 else:  # default run file
@@ -24,10 +24,16 @@ else:  # default run file
 
     # caption injection via variable
     test_omega2 = Load_Omega("../../data/Dataset 3/run1/run1.omega.pasco.csv")
-    test_accel2 = convertOmegaAccel(Load_Omega("../../data/Dataset 3/run1/run1.omega.pasco.csv"), 20, 2)
+    test_accel2 = AccelData_Rotate(
+        AccelData_CreateFromRotary(
+            Load_Omega("../../data/Dataset 3/run1/run1.omega.pasco.csv"),
+            20
+        ),
+        2
+    )
     Plot([test_accel2], [test_omega2], txt)
 
     # direct caption injection
     test_omega = Load_Omega("../../data/Dataset 2/run1/run1.omega.pasco.csv")
-    test_accel = convertOmegaAccel(test_omega, 10, 0)
+    test_accel = AccelData_Rotate(AccelData_CreateFromRotary(test_omega, 10), 0)
     Plot([test_accel], [test_omega], "Caption 2 lorem ipsum lorem ipsum")

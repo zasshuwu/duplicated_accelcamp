@@ -70,6 +70,13 @@ class AccelData (TimeSeries):
     def getSingleAxis(self, axisIndex):
         return self.a[:,axisIndex]
 
+    def AddNoise(self, magnitude):
+        for i in range(len(self)):
+            self.a[i] += np.array([
+                np.random.normal(0, magnitude, len(a)),
+                np.random.normal(0, magnitude, len(a)),
+                np.random.normal(0, magnitude, len(a))
+            ]).transpose()
 
 class RotaryData (TimeSeries):
 
@@ -80,6 +87,9 @@ class RotaryData (TimeSeries):
         assert isScalarArrayOfDoubles(as_omega), "RotaryData constructor"
         assert( len(as_omega)==len(self))
         self.omega = as_omega
+
+    def AddNoise(self, magnitude):
+        self.omega += np.random.normal(0, magnitude, len(self))
 
 
 ################ test ################

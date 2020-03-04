@@ -6,10 +6,10 @@ from tkinter import filedialog
 
 
 
-a = convertOmegaAccel(simAlpha(
+a = AccelData_CreateFromRotary(RotaryData_CreateFromAlphaFunction(
+                np.float32(input("alpha: ")),
                 int(input("Number of iterations: ")),
                 np.float32(input("Delta t: ")),
-                np.float32(input("alpha: ")),
                 np.float32(input("omega at t=0: "))
             ), np.float32(input("Radius: ")))
 

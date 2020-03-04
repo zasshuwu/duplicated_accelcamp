@@ -10,9 +10,9 @@ deltaT = 0.1
 N = 20
 omega_0 = 5
 
-OmegaData = simAlpha(N, deltaT, alpha, omega_0)
+OmegaData = RotaryData_CreateFromAlphaFunction(alpha, N, deltaT, omega_0)
 
-a = convertOmegaAccel(OmegaData, radius) #if input('use synthetic data (y/n): ') == 'y' else LoadRun()['accel'][0]
+a = AccelData_CreateFromRotary(OmegaData, radius)
 # endregion
 
 # region TensorFlow Definitions
