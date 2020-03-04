@@ -70,7 +70,7 @@ class MultiPlotter:
 
     # displayed under the last graph
     def addCaption(self, txt):
-        plt.figtext(0.5, 0.01, txt, ha="center")
+        plt.figtext(0.5, 0.01, txt, ha="center")  # figtext(x_float, y_float, caption, ...)
         return
 
     # dict is a dictionary of ( string, float )
@@ -91,7 +91,7 @@ def Plot(AccelDatas, RotaryDatas, txt=""):
         myPlotter.appendSignal(accel.getSingleAxis(axisIndex=0), "$A_x (m/s^2)$", accel.model)
         myPlotter.appendSignal(accel.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$", accel.model)
 
-    myPlotter.addCaption(txt)
+    myPlotter.addCaption(txt)  # txt is blank by default until specified.
 
     myPlotter.display()
 
