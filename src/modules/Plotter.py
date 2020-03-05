@@ -2,6 +2,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 matplotlib.rcParams["savefig.dpi"] = 250
+matplotlib.rcParams["figure.figsize"] = 8, 7
 import numpy as np
 from datetime import date
 
@@ -10,14 +11,13 @@ from datetime import date
 # _xArray is an array of floats
 
 class MultiPlotter:
-    def __init__(self, _nbPlots, _tArray, _xLabel, txt=""):
+    def __init__(self, _nbPlots, _tArray, _xLabel):
         self.tArray = _tArray
         self.nbPlots = _nbPlots
         self.iPlot = 0
         self.xLabel = _xLabel
         self.fig = plt.figure()
         self.fig.text(0.1,0.9,date.today())
-        self.caption = txt
 
     def setTitle(self,string):
         self.fig.suptitle(string)
@@ -70,12 +70,12 @@ class MultiPlotter:
 
     # displayed under the last graph
     def addCaption(self, txt):
-        plt.figtext(0.5, 0.01, txt, ha="center")  # figtext(x_float, y_float, caption, ...)
+        plt.figtext(0.5, 0.01, txt, ha="center", va="bottom", fontsize=9, wrap=True, zorder=-1)  # figtext(x_float, y_float, caption, ...)
         return
 
     # dict is a dictionary of ( string, float )
     # that will be displayed in a caption
-    def appendCaptionValues(self, dict):
+    def appendCaptionValues(self, value_dict):
         return
 
 
@@ -92,7 +92,6 @@ def Plot(AccelDatas, RotaryDatas, txt=""):
         myPlotter.appendSignal(accel.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$", accel.model)
 
     myPlotter.addCaption(txt)  # txt is blank by default until specified.
-
     myPlotter.display()
 
 
