@@ -41,15 +41,33 @@ The project stems from the basic trait of humans: curiosity. `Please add content
 5. etc
 
 # Getting Started
-`TBA`
+### Understanding the workflow 
+*(Steps are both listed chronologically and in order of importance)*
+- For those who are unfamiliar with our git workflow, totally new to git, or those who need a gentle reminder, this is how:
+1. Assuming that you already have the repository cloned some time in the past on your device by either downloading and extracting the .zip or using the CLI.
+2. Always, before start working on the codes for whatever branch, pull changes from remote branch first: `$ git pull` or click on pull function in the Github GUI.
+3. After a session of adding, changing, tweaking. Always initiate a `$ git pull` before the next step to resolve incoming conflicts. (instructions on how to resolve conflicts can be found on https://git-scm.com/)
+4. To add and commit changes: `$ git add . && git commit -m "<commit message>"`
+5. Switch branch by `$ git checkout <branch_name>`
+6. If you messed up somewhere along the way, have a backup of your changes somewhere outside the repository folder and initiate `$ git rebase` (again, website for more info).
 
 ## Prerequisites
+- Intermediate knowledge of using a computer.
+- Familiar with Python and computer programming flow.
+- PyCharm IDE (optional for advanced users).
+- Visual Code editor installed on a system with Python, Anaconda, pip. (optional for beginners).
 
 ## Installations
+1. Python 3.7.x from https://python.org/ or Anaconda Python 3.7 from https://anaconda.org/distributions/ In terms of specific usage, differs with respect to OS.
+2. PyCharm IDE by JetBrains. Package installation and run script are way easier with PyCharm if you are not versed in CLI.  
 
 ## Dependencies
+- matplotlib
+- tensorflow v1.15.0 (v2.0 WILL NOT WORK with current project syntax)
+- numpy
 
 ## Troubleshooting
+- Please temporarily refer to [troubleshooting.md](doc/DevNotes/hoanganh/troubleshooting.md)
 
 # Project Structure
 ```
