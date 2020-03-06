@@ -80,10 +80,11 @@ class MultiPlotter:
         i = 0.150
         k = 0.5
         for item in value_dict:
-            plt.figtext(k, i, item + ": " + str(value_dict[item]) + ";", color='salmon', fontsize="large")
+            # This figtext value-bound string print method is exactly how print in python2.7 works
+            plt.figtext(k, i, item + ": " + str("%.1f" % value_dict[item]) + ";", color='salmon', fontsize="large")
             k += 0.250
             if k >= 1:
-                k = 0.75
+                k = 0.50
                 i += 0.025
         return
 
@@ -141,6 +142,10 @@ def Plot(AccelDatas, RotaryDatas, txt="", _dict=""):
     value_dict = {
         "alpha": 10,
         "r": 11,
+        "accel": 1293.123,
+        "omega": 123476.231,
+        "faux1": 63453.36158,
+        "faux2": 5649846213,
     }
 
     myPlotter = MultiPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray, "Time t (s) ")
