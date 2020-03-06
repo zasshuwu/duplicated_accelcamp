@@ -24,7 +24,7 @@ class MultiPlotter:
         self.fig.suptitle(string, loc=loc)
 
     def applyStyle(self):
-        plt.subplots_adjust(hspace=0.2, bottom=.3)
+        plt.subplots_adjust(hspace=0.2, bottom=.3)  # bottom value and caption area has positive linear relationship
         plt.xlim(0, np.max(self.tArray))
         plt.minorticks_on()
         plt.grid(b=True, which='major', color='0.65', linestyle='-', linewidth='1.0')
@@ -77,13 +77,21 @@ class MultiPlotter:
     # dict is a dictionary of ( string, float )
     # that will be displayed in a caption
     def appendCaptionValues(self, value_dict):
+        i = 0.200
+        for item in value_dict:
+            plt.figtext(0.75, i, item + ": " + str(value_dict[item]), color='salmon', fontsize="large")
+            i -= 0.025
         return
 
 
-def Plot(AccelDatas, RotaryDatas, txt=""):
+def Plot(AccelDatas, RotaryDatas, txt="", _dict=""):
     tArray = RotaryDatas[0].t
 
     # define keypair dict for parameters
+    '''
+    i have no idea how to extract alpha and r values from the (simulated) data, 
+    but basically got it to print out the dict
+    '''
     value_dict = {
         "alpha": 10,
         "r": 11,
@@ -99,7 +107,7 @@ def Plot(AccelDatas, RotaryDatas, txt=""):
         myPlotter.appendSignal(accel.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$", accel.model)
 
     myPlotter.addCaption(txt)  # txt is blank by default until specified.
-    # myPlotter.appendCaptionValues(value_dict) # print parameter list
+    myPlotter.appendCaptionValues(value_dict) # print parameter list
     myPlotter.display()
 
 def Curv_plot(ar, at, r, loss, time):
