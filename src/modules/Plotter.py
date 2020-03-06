@@ -6,9 +6,9 @@ import numpy as np
 from datetime import date
 
 
+
 # produce mutliple plots with a shared horizontal axis
 # _xArray is an array of floats
-
 class MultiPlotter:
     def __init__(self, _nbPlots, _tArray, _xLabel, txt=""):
         self.tArray = _tArray
@@ -77,6 +77,47 @@ class MultiPlotter:
     # that will be displayed in a caption
     def appendCaptionValues(self, dict):
         return
+
+
+#------------------------------------------
+# new interface for MultiPlotter,
+# for now provided as a wrapper to the original
+#-------------------------------------------
+
+
+class MPSignal:
+    def __init__(self, array, yLabel):
+        self.array = array
+        self.yLabel = yLabel
+        return
+
+class MultiPlotterNew:
+    def __init__(self, tArray, xLabel):
+        self.tArray = tArray
+        self.xLabel = xLabel
+        self.signals = []
+        return
+
+# signals will be displayed in the order in which they are created via
+# newSignal() or bindSignal()
+    def newSignal(self, yLabel ):
+        array = []
+        self.signals.append( MPSignal(array,yLabel) )
+        return array
+
+    def bindSignal(self, array, yLabel):
+        self.signals.append(MPSignal(array, yLabel))
+        return array
+
+    def display(self):
+        N = len(self.signals)
+        mp = MultiPlotter(N,self.tArray,self.xLabel)
+        for i in range( N ):
+            s = self.signals[i]
+            mp.appendSignal(s.array, s.yLabel)
+
+        mp.display()
+
 
 
 def Plot(AccelDatas, RotaryDatas, txt=""):
