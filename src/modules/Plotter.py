@@ -77,10 +77,14 @@ class MultiPlotter:
     # dict is a dictionary of ( string, float )
     # that will be displayed in a caption
     def appendCaptionValues(self, value_dict):
-        i = 0.200
+        i = 0.150
+        k = 0.5
         for item in value_dict:
-            plt.figtext(0.75, i, item + ": " + str(value_dict[item]), color='salmon', fontsize="large")
-            i -= 0.025
+            plt.figtext(k, i, item + ": " + str(value_dict[item]) + ";", color='salmon', fontsize="large")
+            k += 0.250
+            if k >= 1:
+                k = 0.75
+                i += 0.025
         return
 
 
