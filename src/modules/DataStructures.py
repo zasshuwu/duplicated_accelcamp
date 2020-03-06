@@ -46,6 +46,9 @@ class TimeSeries:
     def __len__(self) -> int:
         return len(self.t)
 
+    def delta_t(self, i : int ):
+        return self.t[i+1]-self.t[i]
+
 class AccelData (TimeSeries):
 
     # self.a is an array of vec3's  ; i.e. a[i] is an array of length 3 holding the acceleration vector at time t[i]
