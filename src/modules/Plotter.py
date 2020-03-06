@@ -2,7 +2,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 matplotlib.rcParams["savefig.dpi"] = 250
-matplotlib.rcParams["figure.figsize"] = 8, 7
+matplotlib.rcParams["figure.figsize"] = 9, 7
+
 import numpy as np
 from datetime import date
 
@@ -19,11 +20,11 @@ class MultiPlotter:
         self.fig = plt.figure()
         self.fig.text(0.1,0.9,date.today())
 
-    def setTitle(self,string):
-        self.fig.suptitle(string)
+    def setTitle(self,string, loc):
+        self.fig.suptitle(string, loc=loc)
 
     def applyStyle(self):
-        plt.subplots_adjust(hspace=0.2)
+        plt.subplots_adjust(hspace=0.2, bottom=.3)
         plt.xlim(0, np.max(self.tArray))
         plt.minorticks_on()
         plt.grid(b=True, which='major', color='0.65', linestyle='-', linewidth='1.0')
@@ -70,7 +71,7 @@ class MultiPlotter:
 
     # displayed under the last graph
     def addCaption(self, txt):
-        plt.figtext(0.5, 0.01, txt, ha="center", va="bottom", fontsize=9, wrap=True, zorder=-1)  # figtext(x_float, y_float, caption, ...)
+        plt.figtext(0.1, 0.05, txt, fontsize=9)  # figtext(x_float, y_float, caption, ...)
         return
 
     # dict is a dictionary of ( string, float )
@@ -82,6 +83,12 @@ class MultiPlotter:
 def Plot(AccelDatas, RotaryDatas, txt=""):
     tArray = RotaryDatas[0].t
 
+    # define keypair dict for parameters
+    value_dict = {
+        "alpha": 10,
+        "r": 11,
+    }
+
     myPlotter = MultiPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray, "Time t (s) ")
 
     for omega in RotaryDatas:
@@ -92,8 +99,8 @@ def Plot(AccelDatas, RotaryDatas, txt=""):
         myPlotter.appendSignal(accel.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$", accel.model)
 
     myPlotter.addCaption(txt)  # txt is blank by default until specified.
+    # myPlotter.appendCaptionValues(value_dict) # print parameter list
     myPlotter.display()
-
 
 def Curv_plot(ar, at, r, loss, time):
     fig = plt.figure()

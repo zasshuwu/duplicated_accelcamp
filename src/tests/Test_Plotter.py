@@ -7,8 +7,7 @@ selection = False  # File selection with tkinter on macOS is not working as expe
 
 if __name__ == "__main__" and selection is True:  # manually choose run file
 
-    txt = input("Drop your fire caption: ")
-    txt += " (user input by variable)"
+    txt = input("Drop your fire caption: ") + " (user input by variable)"
     # use convertOmegaAccel because Load_Accel is not working correctly
 
     # caption injection via variable
@@ -22,10 +21,11 @@ if __name__ == "__main__" and selection is True:  # manually choose run file
     Plot([test_accel], [test_omega], "This is some caption texts that has been yeeted here by default")
 
     # dictionary injection
+
     
 
 else:  # default run file
-    txt = "Caption 1 lorem ipsum lorem ipsum"
+    txt = "Caption 1 lorem ipsum lorem ipsum\nLorem ipsum on another line.\nYet again another lorem ipsum."
 
     # caption injection via variable
     test_omega2 = Load_Omega("../../data/Dataset 3/run1/run1.omega.pasco.csv")
