@@ -141,7 +141,16 @@ class MultiPlotterNew:
                 i += 0.025
         return
 
-    def display(self, txt, value_dict):
+    value_dict = {
+        "alpha": 10,
+        "r": 11,
+        "accel": 1293.123,
+        "omega": 123476.231,
+        "faux1": 63453.36158,
+        "faux2": 5649846213,
+    }
+
+    def display(self, txt="", value_dict={}):
         N = len(self.signals)
         mp = MultiPlotter(N,self.tArray,self.xLabel)
         for i in range( N ):
@@ -151,7 +160,7 @@ class MultiPlotterNew:
         mp.appendCaptionValues(value_dict)
         mp.display()
 
-def Plot(AccelDatas, RotaryDatas, txt="", _dict=""):
+def Plot(AccelDatas, RotaryDatas, txt="", _dict={}):
 
     tArray = RotaryDatas[0].t
 
@@ -168,8 +177,6 @@ def Plot(AccelDatas, RotaryDatas, txt="", _dict=""):
         "faux1": 63453.36158,
         "faux2": 5649846213,
     }
-
-    _dict = value_dict
 
    # myPlotter = MultiPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray, "Time t (s) ")
     myPlotter = MultiPlotterNew(tArray, "Time, t(s) ")
