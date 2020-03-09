@@ -150,7 +150,7 @@ class MultiPlotterNew:
         "faux2": 5649846213,
     }
 
-    def display(self, txt="", value_dict={}):
+    def display(self, txt="", value_dict=value_dict):
         N = len(self.signals)
         mp = MultiPlotter(N,self.tArray,self.xLabel)
         for i in range( N ):
