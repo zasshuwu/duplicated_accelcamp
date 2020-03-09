@@ -1,12 +1,16 @@
-import sys
 
-sys.path.append('../')
-
-from tests.tfPhysics import rot_xy
-from tests.tfPhysics import rot_xy_noTF
+#----------------------
+# various tests collected here, used as needed, mostly for dev purposes
+#----------------------
+from modules.tfPhysics import rot_xy
+from modules.tfPhysics import rot_xy_noTF
 import tensorflow as tf
 from modules.Plotter import *
 from modules.DataStructures import *
+
+from modules.Simulate import *
+from modules.Plotter import *
+from modules.Cluster import *
 
 
 def tfTest_CosineScalar():
@@ -110,8 +114,41 @@ def Test_TF_Optimize_RotXY():
     plotter.appendSignal(outPhiTrim, "phi (radians)", "phi value")
     plotter.display()
 
+def test_Simulate():
+
+    # simulation parameters
+    deltaT = 0.1
+    N = 100
+    omega_0 = 100
+    alphaFunction = AlphaSim_Sinusoidal1
+    # alphaFunction = AlphaSim_S
+    realRadius = 4
+
+    rd = RotaryData_CreateFromAlphaFunction(alphaFunction, N, deltaT, omega_0)
+    ad = AccelData_CreateFromRotary(rd, realRadius)
+
+    mp = MultiPlotterNew( rd.t[:-2], 'Time')
+
+    cost = mp.newSignal("cost")
+    v = mp.newSignal("v")
+    v2Predict = mp.newSignal("vnext predict")
+    v2Data = mp.newSignal("vnext")
+
+    for i in range(len(ad) - 1):
+        cluster = Cluster_CreateFromAccelData(ad, i)
+
+
+        cost.append(cluster.costDeltaV(realRadius))
+        v.append(cluster.cell.v_UsingRadius(realRadius))
+        v2Predict.append(cluster.cell.v_next_PredictedUsingRadius(realRadius))
+        v2Data.append(cluster.v_next_UsingRadius(realRadius))
+
+    mp.display()
+    return
 
 # ----------------------- main -----------------
 
 # tfTest_CosineScalar()
-Test_TF_Optimize_RotXY()
+#Test_TF_Optimize_RotXY()
+
+test_Simulate()

@@ -2,7 +2,6 @@ from modules import Tools
 from modules.DataStructures import *
 import math
 
-
 # region Generic AlphaSim Functions
 def AlphaSim_ConstOmegaPositive():
     return
@@ -61,75 +60,63 @@ def AlphaSim_GenerateAlphaArray(alphaFunc, N, deltaT):
 
 # endregion
 
-
-# region Module Functions
-def simAlpha(N, dT, A, omega_0=0.0, noise=(0, 0)):
-    """
-    :param noise: (loc, scale)
-    :param N: number of iterations
-    :param dT: delta t
-    :param A: alpha *can be either a float or a function*
-    :param omega_0: initial omega value
-    :return:
-    """
-    typeofA = 'f'
+# alphaFn is always a function
+# constant-value alpha is accomplished by feeding a const-value function
+# return a RotaryData object
+def RotaryData_CreateFromAlphaFunction( alphaFn,  N, deltaT, omegaInitial=0, ):
     try:
-        A(0)
-        typeofA = 'f'
+        float(alphaFn(0))  # if A can be converted to a float, this won't raise an Error
     except:
-        try:
-            A = float(A)
-            typeofA = 'n'
-        except:
-            raise ValueError('A must be a function or a number')
+        raise ValueError('alphaFn must be a function that returns a single number')
 
-    omega = np.array([np.double(omega_0)] * N)
+    omega = np.array([np.double(omegaInitial)] * N)
     time = np.array([np.double(0.0)] * N)
     for i in range(1, N):
-        omega[i] = omega[i - 1] + (A if typeofA == 'n' else A(i * dT)) * dT
-        time[i] = i * dT
+        omega[i] = omega[i - 1] + alphaFn(i * deltaT) * deltaT  # small check to verify the value of typeofA
+        time[i] = i * deltaT
 
-    return RotaryData(time, omega + np.random.normal(noise[0], noise[1], len(omega)))
+    return RotaryData(time, omega)
 
+# returns nothing: rotData itself is modified
+def RotaryData_AddNoise( rotData: RotaryData, magnitude: float ):
+    return RotaryData(rotData.t, rotData.omega + np.random.normal(0, magnitude, len(rotData))) 
 
-def convertOmegaAccel(OmegaData, radius, phi=0, noise=(0, 0)):
-    """
-    :param phi: angle of accelerometer
-    :param noise: (loc, scale)
-    :param OmegaData: data to base the accel data on
-    :param radius: radius of apparatus
-    :return:
-    """
-    typeofrad = 'f'
-    try:
-        radius(0)
-        typeofrad = 'f'
-    except:
-        try:
-            radius = float(radius)
-            typeofrad = 'n'
-        except:
-            raise ValueError('radius must be a function or a number')
-
-    deltaT = OmegaData.t[1] - OmegaData.t[0]
+# generate simulated AccelData for a sensor at radial distance of "radius"
+# starting from a rotary-sensor signal "omegaData"
+# returns a AccelData object
+def AccelData_CreateFromRotary( rotData : RotaryData, radius : float):
+    deltaT = rotData.t[1] - rotData.t[0]
     a = []
-    for i in range(len(OmegaData) - 1):
-        rotated = Tools.rotate_vec3(
-            [
-                OmegaData.omega[i] ** 2 * (radius if typeofrad == 'n' else radius(OmegaData.t[i])),
-                radius * (OmegaData.omega[i + 1] - OmegaData.omega[i]) / deltaT,
+    for i in range(len(rotData) - 1):
+        a.append([
+                rotData.omega[i] ** 2 * radius, 
+                radius * (rotData.omega[i + 1] - rotData.omega[i]) / deltaT,
                 0
-            ],
-            phi
-        )
-        a.append(
-            rotated.tolist()[0]
-        )
+        ])
+    a = np.array(a)
+    return AccelData(rotData.t[:-1], a, "synthetic data")
 
-    a = np.array(a) + np.array([
-        np.random.normal(noise[0], noise[1], len(a)),
-        np.random.normal(noise[0], noise[1], len(a)),
-        np.random.normal(noise[0], noise[1], len(a))
+# rotate all vectors counterclockwise by an amount "angle"
+def AccelData_Rotate( ad : AccelData, angle : float ):
+    a = ad.a
+    for i in range(len(a)):
+        a[i] = Tools.rotate_vec3(a[i], angle).tolist()[0]
+        
+    ad.a = a
+    return ad
+
+# add gaussian noise to the components on all 3 axes
+def AccelDat_AddNoise( ad : AccelData, magnitude : float  ):
+    ad.a += np.array([
+        np.random.normal(0, magnitude, len(a)),
+        np.random.normal(0, magnitude, len(a)),
+        np.random.normal(0, magnitude, len(a))
     ]).transpose()
-    return AccelData(OmegaData.t[:-1], a, "synthetic data")
-# endregion
+    return ad
+
+# ======================== Example for radius and alpha functions ========================
+def example_radius(x): # the function must have only one input which is a number
+    out = 4*x
+    # stuff happens here...
+    return out # the function must return a single numerical value
+

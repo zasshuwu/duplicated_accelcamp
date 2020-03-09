@@ -1,19 +1,19 @@
 import tensorflow as tf
 from modules.Simulate import *
-from tests.tfPhysics import cost_RadialRotation
+from modules.tfPhysics import cost_RadialRotation, rot_xy
 
 # region Simulation
 #config
 alpha = 1
 radius = 4
 deltaT = 0.1
-N = 100
+N = 500
 omega_0 = 2
 phi = 0.5
 
-OmegaData = simAlpha(N + 1, deltaT, alpha, omega_0)
+OmegaData = RotaryData_CreateFromAlphaFunction(alpha, N + 1, deltaT, omega_0)
 
-a = convertOmegaAccel(OmegaData, radius, phi)  # if input('use synthetic data (y/n):') == 'y' else LoadRun()['accel'][0]
+a = AccelData_Rotate(AccelData_CreateFromRotary(OmegaData, radius), phi)
 # endregion
 
 # region TensorFlow Definitions
@@ -26,12 +26,18 @@ var_phi = tf.Variable(.01, name='phi', dtype=tf.float32)
 init = tf.global_variables_initializer()
 # endregion
 
-cost = cost_RadialRotation(ph_a, ph_a_next, ph_dt, var_r, var_phi)
+cost = tf.cond(
+    rot_xy(ph_a, var_phi)[0] > 0,
+    true_fn=lambda: cost_RadialRotation(ph_a, ph_a_next, ph_dt, var_r, var_phi),
+    false_fn=lambda: tf.square(rot_xy(ph_a, var_phi)[0])*1e6
+)
 
-opt = tf.train.GradientDescentOptimizer(learning_rate=0.001)
+# cost = tf.nn.l2_loss(cost_RadialRotation(ph_a, ph_a_next, ph_dt, var_r, var_phi))
+
+opt = tf.train.GradientDescentOptimizer(learning_rate=1e-3)
 grads_and_vars = opt.compute_gradients(cost, var_list=[var_phi])
-clipped_grads_and_vars = [(tf.clip_by_value(grad, -1, 1), var) for grad, var in grads_and_vars if grad is not None]
-opt_out = opt.compute_gradients(clipped_grads_and_vars)
+clipped_grads_and_vars = [(grad, var) for grad, var in grads_and_vars]
+opt_out = opt.apply_gradients(clipped_grads_and_vars)
 
 # opt_out = opt.minimize(cost, var_list=[var_phi])
 
@@ -47,9 +53,8 @@ with tf.Session() as sess:
 
         _, loss, r, phi = sess.run([opt_out, cost, var_r, var_phi], feed_dict=feed_dict)
         print("{0}/{1} = Radius: {2}, Angle: {3}, Loss: {4}".format(i, len(a), r, phi, loss))
+        # _, grad, loss, r, phi = sess.run([opt_out, grads_and_vars[0][0], cost, var_r, var_phi], feed_dict=feed_dict)
+        # print("{0}/{1} = Radius: {2}, Angle: {3}, Loss: {4}, Grad: {5}".format(i, len(a), r, phi, loss, grad))
 
 print("Radius found = {0}".format(r))
 print("Angle found = {0}".format(phi))
-
-
-

@@ -1,11 +1,9 @@
-import sys
-sys.path.append('../')
 import tensorflow as tf
 from modules.Simulate import *
-from tests.tfPhysics import rot_xy
+from modules.tfPhysics import rot_xy
 
 # region Simulation
-#config
+# config
 alpha = 1
 radius = 4
 deltaT = 0.1
@@ -13,10 +11,10 @@ N = 10
 omega_0 = 2
 phi = 0.01
 
-OmegaData = simAlpha(N + 1, deltaT, alpha, omega_0, (0, 0.1))
+OmegaData = RotaryData_CreateFromAlphaFunction(alpha, N + 1, deltaT, omega_0)
 
-a_not_rotated = convertOmegaAccel(OmegaData, radius)
-a_rotated = convertOmegaAccel(OmegaData, radius, phi)
+a_not_rotated = AccelData_CreateFromRotary(OmegaData, radius)
+a_rotated = AccelData_Rotate(AccelData_CreateFromRotary(OmegaData, radius), phi)
 # endregion
 
 # region TensorFlow Definitions
@@ -28,7 +26,11 @@ var_phi = tf.Variable(2.0, name='phi')
 init = tf.global_variables_initializer()
 # endregion
 
-cost = tf.square(tf.norm(rot_xy(ph_a, var_phi) - ph_a_not))
+cost = tf.cond(
+    rot_xy(ph_a, var_phi)[0] > 0,
+    true_fn=lambda: tf.square(tf.norm(rot_xy(ph_a, var_phi) - ph_a_not)),
+    false_fn=lambda: 1e10
+)
 
 opt = tf.train.GradientDescentOptimizer(learning_rate=0.001)
 

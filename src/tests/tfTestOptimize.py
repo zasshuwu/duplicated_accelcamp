@@ -1,7 +1,8 @@
 
 import numpy as np
 import tensorflow as tf
-from tfPhysics import *
+from modules.tfPhysics import *
+
 
 def rotate(A, param_phi):
     # from https://stackoverflow.com/questions/37042748/how-to-create-a-rotation-matrix-in-tensorflow
@@ -36,19 +37,24 @@ def simpleTest2():
 
     print( sess.run(func_rotate, feed_dict=myFeed_dict ))
 
+
 def simpleTest():
+    print( "simpleTest 1")
     vec3 = np.array([1.0,0.0,0.0])
     ph_vec3 = tf.placeholder(tf.float32, vec3.shape)
     func_add = add(ph_vec3,ph_vec3)
     myFeed_dict = {ph_vec3:vec3}
 
-    sess = tfSessionInitRun()
-    print( sess.run(add, feed_dict=myFeed_dict ))
+    sess = tfSessionInit()
+    print( sess.run(func_add, feed_dict=myFeed_dict ))
 
 
+    print( "END simpleTest 1")
+    return
 
 
 def run():
+    simpleTest()
     simpleTest2()
 
     # TODO : Generate a sanity check that makes sense.
