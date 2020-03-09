@@ -51,7 +51,7 @@ def PlotCost():
 def MultiPlotCost(_AccelData, step:int=1):
     trialRadii = np.arange(0, 30, .1)
     mp = MultiPlotterNew(trialRadii, 'Radius')
-    for ri in range(0, len(_AccelData), step):
+    for ri in range(0, len(_AccelData)-1, step):
         index = ri
         current_cluster = Cluster_CreateFromAccelData(_AccelData, index)
         cost = np.empty(trialRadii.size)
@@ -81,6 +81,7 @@ if __name__ == "__main__":
         def alphaF(x):
             return 1
         test_data = AccelData_CreateFromRotary(RotaryData_CreateFromAlphaFunction(alphaF, 52, 0.1), 4)
+        # test_data.AddNoise(0.1)
     else:
         test_data = LoadAccelFile()
     MultiPlotCost(test_data, 10)
