@@ -62,10 +62,6 @@ class MultiPlotter:
         else:
             plt.xlabel(self.xLabel)
 
-    def display(self):
-        plt.draw()
-        plt.show()
-
     def dumpToCSVFile(self, filename):
         return
 
@@ -88,7 +84,9 @@ class MultiPlotter:
                 i += 0.025
         return
 
-
+    def display(self):
+        plt.draw()
+        plt.show()
 
 
 
@@ -114,20 +112,43 @@ class MultiPlotterNew:
 # newSignal() or bindSignal()
     def newSignal(self, yLabel ):
         array = []
-        self.signals.append( MPSignal(array,yLabel) )
+        self.signals.append(MPSignal(array,yLabel))
         return array
 
     def bindSignal(self, array, yLabel):
         self.signals.append(MPSignal(array, yLabel))
         return array
 
-    def display(self):
+    def dumpToCSVFile(self, filename):
+        return
+
+    # displayed under the last graph
+    def addCaption(self, txt):
+        plt.figtext(0.1, 0.05, txt, fontsize=9)  # figtext(x_float, y_float, caption, ...)
+        return
+
+    # dict is a dictionary of ( string, float )
+    # that will be displayed in a caption
+    def appendCaptionValues(self, value_dict):
+        i = 0.150
+        k = 0.5
+        for item in value_dict:
+            # This figtext value-bound string print method is exactly how print in python2.7 works
+            plt.figtext(k, i, item + ": " + str("%.1f" % value_dict[item]) + ";", color='salmon', fontsize="large")
+            k += 0.250
+            if k >= 1:
+                k = 0.50
+                i += 0.025
+        return
+
+    def display(self, txt, value_dict):
         N = len(self.signals)
         mp = MultiPlotter(N,self.tArray,self.xLabel)
         for i in range( N ):
             s = self.signals[i]
             mp.appendSignal(s.array, s.yLabel)
-
+        mp.addCaption(txt)
+        mp.appendCaptionValues(value_dict)
         mp.display()
 
 def Plot(AccelDatas, RotaryDatas, txt="", _dict=""):
@@ -148,6 +169,8 @@ def Plot(AccelDatas, RotaryDatas, txt="", _dict=""):
         "faux2": 5649846213,
     }
 
+    _dict = value_dict
+
    # myPlotter = MultiPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray, "Time t (s) ")
     myPlotter = MultiPlotterNew(tArray, "Time, t(s) ")
     for omega in RotaryDatas:
@@ -157,9 +180,9 @@ def Plot(AccelDatas, RotaryDatas, txt="", _dict=""):
         myPlotter.bindSignal(accel.getSingleAxis(axisIndex=0), "$A_x (m/s^2)$") #, accel.model)
         myPlotter.bindSignal(accel.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$")#, accel.model)
 
-   # myPlotter.addCaption(txt)  # txt is blank by default until specified.
-    #myPlotter.appendCaptionValues(value_dict) # print parameter list
-    myPlotter.display()
+    # myPlotter.display().addCaption(txt)  # txt is blank by default until specified.
+    # myPlotter.display().appendCaptionValues(value_dict) # print parameter list
+    myPlotter.display(txt, _dict)
 
 def Curv_plot(ar, at, r, loss, time):
     fig = plt.figure()
