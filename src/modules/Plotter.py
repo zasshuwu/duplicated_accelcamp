@@ -148,17 +148,17 @@ def Plot(AccelDatas, RotaryDatas, txt="", _dict=""):
         "faux2": 5649846213,
     }
 
-    myPlotter = MultiPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray, "Time t (s) ")
-
+   # myPlotter = MultiPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray, "Time t (s) ")
+    myPlotter = MultiPlotterNew(tArray, "Time, t(s) ")
     for omega in RotaryDatas:
-        myPlotter.appendSignal(omega.omega, "omega (rad/s)", "Pasco")
+        myPlotter.bindSignal(omega.omega, "omega (rad/s)") #, "Pasco")
 
     for accel in AccelDatas:
-        myPlotter.appendSignal(accel.getSingleAxis(axisIndex=0), "$A_x (m/s^2)$", accel.model)
-        myPlotter.appendSignal(accel.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$", accel.model)
+        myPlotter.bindSignal(accel.getSingleAxis(axisIndex=0), "$A_x (m/s^2)$") #, accel.model)
+        myPlotter.bindSignal(accel.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$")#, accel.model)
 
-    myPlotter.addCaption(txt)  # txt is blank by default until specified.
-    myPlotter.appendCaptionValues(value_dict) # print parameter list
+   # myPlotter.addCaption(txt)  # txt is blank by default until specified.
+    #myPlotter.appendCaptionValues(value_dict) # print parameter list
     myPlotter.display()
 
 def Curv_plot(ar, at, r, loss, time):
