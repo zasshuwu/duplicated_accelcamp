@@ -78,7 +78,8 @@ for i in range(len(acceleration[2])):
     if abs(velocity[2][i]) > errorZ:
         position[0][i] = 0
         position[1][i] = 0
-fig, axs = plt.subplots(6)
+'''
+fig, axs = plt.subplots(1)
 axs[0].scatter(time, acceleration[0])
 axs[0].set_xlabel('Time (s)')
 axs[0].set_ylabel('AccelerationX (m/s^2)')
@@ -94,7 +95,10 @@ axs[3].set_ylabel('VelocityZ (m/s)')
 axs[4].scatter(time, position[2])
 axs[4].set_xlabel('Time (s)')
 axs[4].set_ylabel('PositionZ (m)')
-axs[5].scatter(position[0], position[1], marker = ".")
-axs[5].set_xlabel('PositionX')
-axs[5].set_ylabel('PositionY')
+
+axs.scatter(position[0], position[1], marker = "_", linewidth = 70)
+axs.set_xlabel('PositionX')
+axs.set_ylabel('PositionY')
+'''
+plt.plot(position[0], position[1], marker = '_', markersize = 30, linewidth = 3, markeredgewidth = 10)
 plt.show()  
