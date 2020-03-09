@@ -1,6 +1,7 @@
 import numpy as np
 from modules.Cluster import *
 from modules.Plotter import *
+from modules.LoadAccel import *
 from modules.Simulate import *
 
 # set conditions: this is for ratio = 0.1
@@ -46,13 +47,12 @@ def PlotCost():
     # NOT IMPLEMNETED: plotter.addCaptionValues( captionString='', dict )
     return
 
-def MultiPlotCost(_AccelData):
-    trialRadii = np.arange(1, 30, .1)
+
+def MultiPlotCost(_AccelData, step:int=1):
+    trialRadii = np.arange(0, 30, .1)
     mp = MultiPlotterNew(trialRadii, 'Radius')
-    for ri in range(0, 98):
-        # for index in range(0, len(_AccelData), 5):
+    for ri in range(0, len(_AccelData), step):
         index = ri
-            # print(index)
         current_cluster = Cluster_CreateFromAccelData(_AccelData, index)
         cost = np.empty(trialRadii.size)
         for i in range(len(trialRadii)):
@@ -61,16 +61,10 @@ def MultiPlotCost(_AccelData):
 
     for signal in mp.signals:
         plt.plot(mp.tArray, signal.array)
-    plt.ylim(-10, 200)
+    plt.ylim(0, 200)
+    plt.xlim(0,8)
     plt.show()
 
-
-
-def test_CostFunction2():
-
-    radii = np.arange(2,8,.1)
-
-    return
 
 # fn is a function taking one argument
 # which is the values in array range
@@ -81,10 +75,13 @@ def plotCostFunction( cluster, radii ):
         cost[i]=cluster.cost(radii[i])
         i=i+1
 
-
+load = False
 if __name__ == "__main__":
-    def alphaF(x):
-        return 1
-    test_data = AccelData_CreateFromRotary(RotaryData_CreateFromAlphaFunction(alphaF, 102, 0.1), 4)
-    MultiPlotCost(test_data)
+    if not load:
+        def alphaF(x):
+            return 1
+        test_data = AccelData_CreateFromRotary(RotaryData_CreateFromAlphaFunction(alphaF, 52, 0.1), 4)
+    else:
+        test_data = LoadAccelFile()
+    MultiPlotCost(test_data, 10)
     # PlotCost()
