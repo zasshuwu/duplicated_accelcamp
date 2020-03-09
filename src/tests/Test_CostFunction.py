@@ -37,7 +37,7 @@ def PlotCost():
         i=i+1
 
     plotter = MultiPlotter( 1, trialRadius, "radius")
-    plotter.setTitle( "kickstart regime. Ratio = " + str(cluster.delta_v_over_v(radius)) + " angle: " + str(cluster.cell.accelAngle()) + " degrees" )
+    # plotter.setTitle( "kickstart regime. Ratio = " + str(cluster.delta_v_over_v(radius)) + " angle: " + str(cluster.cell.accelAngle()) + " degrees" )
 
     plotter.appendSignal( cost, "C O S T" )
     plotter.display()
