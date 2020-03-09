@@ -2,34 +2,36 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 matplotlib.rcParams["savefig.dpi"] = 250
+matplotlib.rcParams["figure.figsize"] = 9, 7
+
 import numpy as np
 from datetime import date
 
 
+
 # produce mutliple plots with a shared horizontal axis
 # _xArray is an array of floats
-
 class MultiPlotter:
     def __init__(self, _nbPlots, _tArray, _xLabel):
         self.tArray = _tArray
         self.nbPlots = _nbPlots
         self.iPlot = 0
         self.xLabel = _xLabel
-        fig = plt.figure()
-        fig.suptitle(date.today())
+        self.fig = plt.figure()
+        self.fig.text(0.1,0.9,date.today())
 
-    def setTitle(self,string):
-        plt.figure().suptitle(string)
+    def setTitle(self,string, loc):
+        self.fig.suptitle(string, loc=loc)
 
     def applyStyle(self):
-        plt.subplots_adjust(hspace=0.2)
+        plt.subplots_adjust(hspace=0.2, bottom=.3)  # bottom value and caption area has positive linear relationship
         plt.xlim(0, np.max(self.tArray))
         plt.minorticks_on()
         plt.grid(b=True, which='major', color='0.65', linestyle='-', linewidth='1.0')
         plt.grid(b=True, which='minor', color='0.65', linestyle='-', linewidth='0.2')
 
     # yAxisLabel must be in double quotes eg "A_x ($m/s^2$)"
-    def appendSignal(self, _array, yAxisLabel, title):
+    def appendSignal(self, _array, yAxisLabel="", title=""):
         self.iPlot = self.iPlot + 1
         ax = plt.subplot(self.nbPlots, 1, self.iPlot)
 
@@ -64,9 +66,87 @@ class MultiPlotter:
         plt.draw()
         plt.show()
 
+    def dumpToCSVFile(self, filename):
+        return
 
-def Plot(AccelDatas, RotaryDatas):
-    tArray = RotaryDatas[0].t if RotaryDatas != [] else AccelDatas[0].t
+    # displayed under the last graph
+    def addCaption(self, txt):
+        plt.figtext(0.1, 0.05, txt, fontsize=9)  # figtext(x_float, y_float, caption, ...)
+        return
+
+    # dict is a dictionary of ( string, float )
+    # that will be displayed in a caption
+    def appendCaptionValues(self, value_dict):
+        i = 0.150
+        k = 0.5
+        for item in value_dict:
+            # This figtext value-bound string print method is exactly how print in python2.7 works
+            plt.figtext(k, i, item + ": " + str("%.1f" % value_dict[item]) + ";", color='salmon', fontsize="large")
+            k += 0.250
+            if k >= 1:
+                k = 0.50
+                i += 0.025
+        return
+
+
+
+
+
+# new interface for MultiPlotter,
+# for now provided as a wrapper to the original
+#-------------------------------------------
+
+
+class MPSignal:
+    def __init__(self, array, yLabel):
+        self.array = array
+        self.yLabel = yLabel
+        return
+
+class MultiPlotterNew:
+    def __init__(self, tArray, xLabel):
+        self.tArray = tArray
+        self.xLabel = xLabel
+        self.signals = []
+        return
+
+# signals will be displayed in the order in which they are created via
+# newSignal() or bindSignal()
+    def newSignal(self, yLabel ):
+        array = []
+        self.signals.append( MPSignal(array,yLabel) )
+        return array
+
+    def bindSignal(self, array, yLabel):
+        self.signals.append(MPSignal(array, yLabel))
+        return array
+
+    def display(self):
+        N = len(self.signals)
+        mp = MultiPlotter(N,self.tArray,self.xLabel)
+        for i in range( N ):
+            s = self.signals[i]
+            mp.appendSignal(s.array, s.yLabel)
+
+        mp.display()
+
+def Plot(AccelDatas, RotaryDatas, txt="", _dict=""):
+
+    tArray = RotaryDatas[0].t
+
+    # define keypair dict for parameters
+    '''
+    i have no idea how to extract alpha and r values from the (simulated) data, 
+    but basically got it to print out the dict
+    '''
+    value_dict = {
+        "alpha": 10,
+        "r": 11,
+        "accel": 1293.123,
+        "omega": 123476.231,
+        "faux1": 63453.36158,
+        "faux2": 5649846213,
+    }
 
     myPlotter = MultiPlotter(len(AccelDatas) * 2 + len(RotaryDatas), tArray, "Time t (s) ")
 
@@ -77,9 +157,9 @@ def Plot(AccelDatas, RotaryDatas):
         myPlotter.appendSignal(accel.getSingleAxis(axisIndex=0), "$A_x (m/s^2)$", accel.model)
         myPlotter.appendSignal(accel.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$", accel.model)
 
-
+    myPlotter.addCaption(txt)  # txt is blank by default until specified.
+    myPlotter.appendCaptionValues(value_dict) # print parameter list
     myPlotter.display()
-
 
 def Curv_plot(ar, at, r, loss, time):
     fig = plt.figure()

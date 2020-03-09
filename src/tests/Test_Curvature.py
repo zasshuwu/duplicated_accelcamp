@@ -14,13 +14,13 @@ if __name__ == "__main__":
         if True if input("use omega file? (y/n): ") == "y" else False:
             o = LoadRun()["omega"][0]
         else:
-            o = simAlpha(
-                int(input("Number of iterations: ")),
-                np.float32(input("Delta t: ")),
-                np.float32(input("alpha: ")),
-                np.float32(input("omega at t=0: "))
+            o = RotaryData_CreateFromAlphaFunction(
+                N=int(input("Number of iterations: ")),
+                deltaT=np.float32(input("Delta t: ")),
+                alphaFn=np.float32(input("alpha: ")),
+                omegaInitial=np.float32(input("omega at t=0: "))
             )
-        acceldat = convertOmegaAccel(o, np.float32(input("Radius: ")))
+        acceldat = AccelData_CreateFromRotary(o, np.float32(input("Radius: ")))
     else:
         acceldat = LoadRun()["accel"][0]
 
