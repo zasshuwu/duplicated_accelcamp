@@ -45,6 +45,21 @@ def PlotCost():
     # NOT IMPLEMNETED: plotter.addCaptionValues( captionString='', dict )
     return
 
+def test_CostFunction2():
+
+    radii = np.arange(2,8,.1)
+
+    return
+
+# fn is a function taking one argument
+# which is the values in array range
+def plotCostFunction( cluster, radii ):
+    cost = np.empty(trialRadius.size)
+    i=0
+    for r in radii:
+        cost[i]=cluster.cost(radii[i])
+        i=i+1
+
 
 if __name__ == "__main__":
     PlotCost()

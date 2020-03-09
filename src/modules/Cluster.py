@@ -6,6 +6,9 @@
 
 from modules.DataStructures import *
 
+def test_foo():
+    return
+
 # acceleration data and associated operations
 # for a single time step
 # does NOT include radius as a permanent member:
@@ -109,7 +112,9 @@ class Cluster:
         v_initial = np.sqrt(trialRadius* self.cell.ar)
         v_final = np.sqrt(trialRadius* self.ar_next)
         deltaV2 = v_final - v_initial
-        return np.square(deltaV1-deltaV2)
+        diff = deltaV2-deltaV1
+        avg = ( deltaV1+deltaV2)/2
+        return np.square(diff/avg)
 
 
 
