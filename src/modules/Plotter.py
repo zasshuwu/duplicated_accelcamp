@@ -182,7 +182,7 @@ def Plot(AccelDatas, RotaryDatas, txt="", _dict=""):
 
     # myPlotter.display().addCaption(txt)  # txt is blank by default until specified.
     # myPlotter.display().appendCaptionValues(value_dict) # print parameter list
-    myPlotter.display(txt, _dict)
+    myPlotter.display(txt, value_dict)
 
 def Curv_plot(ar, at, r, loss, time):
     fig = plt.figure()
