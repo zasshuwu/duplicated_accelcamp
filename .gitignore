@@ -22,3 +22,5 @@ src/__pycache__/Simulate.cpython-37.pyc
 *.pyc
 .DS_Store
 .idea/
+.vs/
+.vscode/

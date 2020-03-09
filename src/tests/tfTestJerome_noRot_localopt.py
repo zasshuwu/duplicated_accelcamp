@@ -1,7 +1,7 @@
 import tensorflow as tf
 from modules.Simulate import *
 from modules.Load import *
-from tests.tfPhysics import cost_SimpleRadial
+from modules.tfPhysics import cost_SimpleRadial
 from modules.Plotter import *
 
 # region Simulation
@@ -12,10 +12,10 @@ deltaT = 0.1
 N = 20
 omega_0 = 5
 
-#OmegaData = simAlpha(N, deltaT, alpha, omega_0)
+#OmegaData = RotaryData_CreateFromAlphaFunction(alpha, N, deltaT, omega_0)
 OmegaData = Load_Omega('C:\\Users\\Jerome\\Documents\\GitHub\\2019_06_AccelerationCamp\\data\\Dataset 1\\run2\\run2.omega.pasco.csv')
 
-a = convertOmegaAccel(OmegaData, radius) #if input('use synthetic data (y/n): ') == 'y' else LoadRun()['accel'][0]
+a = AccelData_CreateFromRotary(OmegaData, radius)
 # endregion
 
 # region TensorFlow Definitions
