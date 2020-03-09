@@ -1,6 +1,7 @@
 import numpy as np
 from modules.Cluster import *
 from modules.Plotter import *
+from modules.Simulate import *
 
 # set conditions: this is for ratio = 0.1
 at = 2
@@ -45,6 +46,26 @@ def PlotCost():
     # NOT IMPLEMNETED: plotter.addCaptionValues( captionString='', dict )
     return
 
+def MultiPlotCost(_AccelData):
+    trialRadii = np.arange(1, 30, .1)
+    mp = MultiPlotterNew(trialRadii, 'Radius')
+    for ri in range(0, 98):
+        # for index in range(0, len(_AccelData), 5):
+        index = ri
+            # print(index)
+        current_cluster = Cluster_CreateFromAccelData(_AccelData, index)
+        cost = np.empty(trialRadii.size)
+        for i in range(len(trialRadii)):
+            cost[i] = current_cluster.cost(trialRadii[i])
+        mp.bindSignal(cost, 'Cost for t = ' + str(_AccelData.t[index]))
+
+    for signal in mp.signals:
+        plt.plot(mp.tArray, signal.array)
+    plt.ylim(-10, 200)
+    plt.show()
+
+
+
 def test_CostFunction2():
 
     radii = np.arange(2,8,.1)
@@ -62,4 +83,8 @@ def plotCostFunction( cluster, radii ):
 
 
 if __name__ == "__main__":
-    PlotCost()
+    def alphaF(x):
+        return 1
+    test_data = AccelData_CreateFromRotary(RotaryData_CreateFromAlphaFunction(alphaF, 102, 0.1), 4)
+    MultiPlotCost(test_data)
+    # PlotCost()

@@ -160,6 +160,11 @@ class MultiPlotterNew:
         mp.appendCaptionValues(value_dict)
         mp.display()
 
+    def displayPoly(self):
+        for signal in self.signals:
+            plt.plot(self.tArray, signal.array)
+        plt.show()
+
 def Plot(AccelDatas, RotaryDatas, txt="", _dict={}):
 
     tArray = RotaryDatas[0].t

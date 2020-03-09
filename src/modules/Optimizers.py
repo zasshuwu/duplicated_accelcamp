@@ -17,12 +17,16 @@ class Optimizer:
     def Optimize(self, *params):
         return 'Ichi-byo Keika!'
 
+    def CallFunction(self, *values):
+        return self.fn(*values, *self.params)
+
 
 class AdamOptimizer1D(Optimizer):
     def __init__(self, fn):
         Optimizer.__init__(self, fn)
         self.configs['N'] = 1000
         self.configs['x0'] = 0
+        self.configs['grad_approx'] = 0.00001
 
 
     def Optimize(self, alpha, beta1, beta2, e=1e-8):
@@ -30,7 +34,10 @@ class AdamOptimizer1D(Optimizer):
         v = [0]*self.configs['N']
         x = [self.configs['x0']]*self.configs['N']
 
-        for i in range(self.configs['N']):
-
-
-
+        for t in range(1, self.configs['N']):
+            grad = (
+                    self.CallFunction(x[t - 1] + self.configs['grad_approx'])
+                    -
+                    self.CallFunction(x[t - 1] - self.configs['grad_approx'])
+            )/(2 * self.configs['grad_approx'])
+            m[t] = beta1*m[t-1] + (1 - beta1)*grad
