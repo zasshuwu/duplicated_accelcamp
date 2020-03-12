@@ -65,4 +65,9 @@ else:  # diagnostics to eventually dump the data to CSV file.
     print(", ".join("%s: %s" % item for item in attr.items()))
 
     dump_file = open("../../data/DumpCSV/test_dump.txt", "w")
-    dump_file.write(str("%s" % attr.items()))
+    dump_file.write(str("%s" % attr['t']))
+    dump_file = open("../../data/DumpCSV/test_dump.txt", "a")
+    dump_file.write(str("%s" % attr['omega']))
+
+    with open("../../data/DumpCSV/test_dump.txt") as reimport:
+        print(reimport)
