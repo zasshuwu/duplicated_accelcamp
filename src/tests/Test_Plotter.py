@@ -1,11 +1,18 @@
 from modules.Plotter import *
 from modules.LoadOmega import *
 from modules.Simulate import *
+from modules.Cluster import *
+from modules.LoadAccel import *
+import csv
+
+
+import matplotlib.animation as anime
+from matplotlib import style
 import random
 
-selection = False  # File selection with tkinter on macOS is not working as expected therefore use default direct path to data file
+selection = 3     # File selection with tkinter on macOS is not working as expected therefore use default direct path to data file
 
-if __name__ == "__main__" and selection is True:  # manually choose run file
+if __name__ == "__main__" and selection is 1:  # manually choose run file
 
     txt = input("Drop your fire caption: ") + " (user input by variable)"
     # use convertOmegaAccel because Load_Accel is not working correctly
@@ -24,7 +31,7 @@ if __name__ == "__main__" and selection is True:  # manually choose run file
 
     
 
-else:  # default run file
+elif __name__ == "__main__" and selection is 2:  # default run file
     txt = "Caption 1 lorem ipsum lorem ipsum\nLorem ipsum on another line.\nYet again another lorem ipsum."
 
     # caption injection via variable
@@ -42,3 +49,20 @@ else:  # default run file
     test_omega = Load_Omega("../../data/Dataset 2/run1/run1.omega.pasco.csv")
     test_accel = AccelData_Rotate(AccelData_CreateFromRotary(test_omega, 10), 0)
     Plot([test_accel], [test_omega], "Caption 2 lorem ipsum lorem ipsum")
+
+else:  # diagnostics to eventually dump the data to CSV file.
+
+    test_omega = Load_Omega("../../data/Dataset 3/run1/run1.omega.pasco.csv")
+    test_accel = AccelData_Rotate(
+        AccelData_CreateFromRotary(
+            Load_Omega("../../data/Dataset 3/run1/run1.omega.pasco.csv"),
+            20
+        ),
+        2
+    )
+
+    attr = vars(test_omega)
+    print(", ".join("%s: %s" % item for item in attr.items()))
+
+    dump_file = open("../../data/DumpCSV/test_dump.txt", "w")
+    dump_file.write(str("%s" % attr.items()))
