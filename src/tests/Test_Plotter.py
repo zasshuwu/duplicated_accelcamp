@@ -61,13 +61,28 @@ else:  # diagnostics to eventually dump the data to CSV file.
         2
     )
 
-    attr = vars(test_omega)
-    print(", ".join("%s: %s" % item for item in attr.items()))
+    attr_omega = vars(test_omega)
+    attr_accel = vars(test_accel)
+    print(type(attr_omega['t']))
+    print(attr_accel['a'])
 
-    dump_file = open("../../data/DumpCSV/test_dump.txt", "w")
-    dump_file.write(str("%s" % attr['t']))
-    dump_file = open("../../data/DumpCSV/test_dump.txt", "a")
-    dump_file.write(str("%s" % attr['omega']))
 
-    with open("../../data/DumpCSV/test_dump.txt") as reimport:
-        print(reimport)
+    # Just to clear up the file
+    dump_file_accel = open("../../data/DumpCSV/accel_dump.txt.txt", "w")
+    dump_file_accel.write("")
+    dump_file_omega = open("../../data/DumpCSV/omega_dump.txt", "w")
+    dump_file_omega.write("")
+
+    # Writing the files
+    dump_file = open("../../data/DumpCSV/accel_dump.txt", "a")
+    dump_file.write(str("TIME: \n" + " %s, " % attr_accel['t']))
+    dump_file = open("../../data/DumpCSV/accel_dump.txt", "a")
+    dump_file.write(str("\nACCEL: \n" + " %s, " % attr_accel['a']))
+
+    dump_file = open("../../data/DumpCSV/omega_dump.txt", "a")
+    dump_file.write(str("TIME: \n" + " %s, " % attr_omega['t']))
+    dump_file = open("../../data/DumpCSV/omega_dump.txt", "a")
+    dump_file.write(str("\nOMEGA: \n" + " %s, " % attr_omega['omega']))
+
+    # with open("../../data/DumpCSV/accel_dump.txt") as reimport:
+    #     print(reimport)
