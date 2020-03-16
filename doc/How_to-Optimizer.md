@@ -24,12 +24,17 @@ This class also has a few functions that are overwritten by the classes that inh
     - Do not put values that stay constant in `*values`. 
     Use `Optimizer.FillParameters(*params)` for those.
     - Executes `Optimizer.fn(*values, *params)`
+    
+- `Optimizer.GradientApprox(x)`:
+    - Approximate gradient around `x` of `Optimizer.fn` with approximation
+    quality `.configs['grad_approx']`
+    - __Object must have `.configs['grad_approx']` for this to be usable__
 
-##AdamAlgorithm1D class
+##AdamAlgorithm_1D class
 This class inherits from the `Optimizer` class and, therefore, has a lot of the same properties
 but implements and changes some of the functions and properties. This class only optimizes for __1__ variable.
 
-The `AdamAlgorithm1D` class has the following `.configs`:
+The `AdamAlgorithm_1D` class has the following `.configs`:
 - `.configs['N']` contains the number of iterations the optimizer should do on one run. `Default: 1000`
 - `.configs['x0']` contains the starting point of the optimization. `Default: 0`
 - `.configs['grad_approx']` contains the quality of the approximation. The smaller
@@ -40,5 +45,19 @@ This class implements the `Optimize(...)` function from `Optimizer`. Its paramet
 - `beta1`: exponential decay rate for `m`. `Recommended Value: 0.9`
 - `beta2`: exponential decay rate for `v`. `Recommended Value: 0.999`
 - `e`: epsilon `Default: 1e-8`
+- `return_array`: if `True`, the functions returns all the optimization steps. else
+it returns only the final value.
+
+##SGD_1D
+This class implements the SGD algorithm with one variable
+
+The `SGD_1D` class  has the following `.configs`:
+- `.configs['N']` contains the number of iterations the optimizer should do on one run. `Default: 1000`
+- `.configs['x0']` contains the starting point of the optimization. `Default: 0`
+- `.configs['grad_approx']` contains the quality of the approximation. The smaller
+it is the better the approximation. `Default:0.00001`
+
+This class implements the `Optimize(...)` function from `Optimizer`. Its parameters are:
+- `alpha`: the learning rate. `Recommended Value Range: 0.01 - 0.001`
 - `return_array`: if `True`, the functions returns all the optimization steps. else
 it returns only the final value.

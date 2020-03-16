@@ -22,8 +22,17 @@ class Optimizer:
     def CallFunction(self, *values):
         return self.fn(*values, *self.params)
 
+    def GradientApprox(self, x):
+        try:
+            self.configs['grad_approx']
+        except KeyError:
+            raise KeyError('Instance of Optimizer class does not contain the required config value: grad_approx')
 
-class AdamOptimizer1D(Optimizer):
+        return (self.CallFunction(x + self.configs['grad_approx']) - self.CallFunction(
+            x - self.configs['grad_approx'])) / (2 * self.configs['grad_approx'])
+
+
+class AdamOptimizer_1D(Optimizer):
     def __init__(self, fn):
         Optimizer.__init__(self, fn)
         self.configs['N'] = 1000
@@ -38,11 +47,7 @@ class AdamOptimizer1D(Optimizer):
         grads = []
 
         for t in range(1, self.configs['N']):
-            grad = (
-                           self.CallFunction(x[t - 1] + self.configs['grad_approx'])
-                           -
-                           self.CallFunction(x[t - 1] - self.configs['grad_approx'])
-                   ) / (2 * self.configs['grad_approx'])
+            grad = self.GradientApprox(x[t - 1])
             grads.append(grad)
             m[t] = beta1 * m[t - 1] + (1 - beta1) * grad
             v[t] = beta2 * v[t - 1] + (1 - beta2) * pow(grad, 2)
@@ -52,4 +57,25 @@ class AdamOptimizer1D(Optimizer):
 
         self.x = x
         self.grads = grads
-        return x[:-1] if return_array else x
+        return x[-1] if return_array else x
+
+
+class SGD_1D(Optimizer):
+    def __init__(self, fn):
+        Optimizer.__init__(self, fn)
+        self.configs['N'] = 1000
+        self.configs['x0'] = 0
+        self.configs['grad_approx'] = 0.00001
+
+    def Optimize(self, alpha, return_array=False):
+        x = [self.configs['x0']] * self.configs['N']
+        grads = []
+
+        for t in range(self.configs['N'] - 1):
+            grad = self.GradientApprox(x[t])
+            grads.append(grad)
+            x[t + 1] = x[t] - alpha * grad
+
+        self.x = x
+        self.grads = grads
+        return x[-1] if return_array else x

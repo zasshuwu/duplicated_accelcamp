@@ -37,7 +37,7 @@ parameters = {
     'dt': acc_data.delta_t(index)
 }
 
-Adam = AdamOptimizer1D(cost_SimpleRadial)
+Adam = AdamOptimizer_1D(cost_SimpleRadial)
 Adam.config(['x0', 2])
 Adam.FillParameters(*list(parameters.values()))
 x = Adam.Optimize(alpha=0.01, beta1=0.9, beta2=0.999, return_array=True)

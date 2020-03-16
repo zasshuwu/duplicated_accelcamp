@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 fn = np.sin
 
-Adam = AdamOptimizer1D(fn)
+Adam = AdamOptimizer_1D(fn)
 
 x = Adam.Optimize(alpha=0.01, beta1=0.9, beta2=0.999, return_array=True)
 
