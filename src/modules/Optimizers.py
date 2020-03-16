@@ -7,6 +7,7 @@ class Optimizer:
         self.params = []
         self.configs = {}
         self.x = None
+        self.grads = None
 
     def FillParameters(self, *params):
         self.params = [*params]
@@ -50,4 +51,5 @@ class AdamOptimizer1D(Optimizer):
             x[t] = x[t - 1] - alpha * mc / (np.sqrt(vc) + e)
 
         self.x = x
+        self.grads = grads
         return x[:-1] if return_array else x
