@@ -6,10 +6,12 @@
 <div class="body">
 
 # The short version
-Collegial research on real life and pedagogical applications of specialized accelerometers and mobile-embedded accelerometers. `Please add content`
+Collegial research on real life and pedagogical applications of specialized accelerometers and mobile-embedded accelerometers.
 
 # The long version
-The project stems from the basic trait of humans: curiosity. `Please add content`
+Professor Larnder initially started this project to find and further study many applications with accelerometers in mobile devices. With the newfound knowledge of how these accelerometers function in the experimental settings, we can hope to computationally develop tools from such knowledge with Python and to create new ways to teach introductory Physics for college students who can relate well with the mobile devices being at the center of the demonstrative experiment.
+
+The research project also aims to introduce college students from basic to intermediate programming concepts and computer interactions, both of which the Cegep/college-level specifically and the university-level more generally programs currently lack thereof. These few first impressions can help potential future computer science/engineering students realize their interests and passions early on during their mileage at university. And let's be honest, in today's society, knowing, maybe only a little bit, about computer and programming can help further one's education and career path a very long way.
 
 # Contents
 - [Features](#features)
@@ -91,8 +93,8 @@ The project stems from the basic trait of humans: curiosity. `Please add content
       | ...
     | tests
       | __init__.py
-      | Test # not tf-related
-      | tfTest # tf-related
+      | Test  # general tests
+      | tfTest  # tf-related
     | __init__.py
     | index.py
   | tools
@@ -105,7 +107,6 @@ The project stems from the basic trait of humans: curiosity. `Please add content
 - New folders (technical term: `Packages`) created under `/src` folder must initialized with a blank `__init__.py` file.
 - Refrain from using `space` when naming any file or folder, as it could confuse whatever OS you are developing with. Use CamelCase or underscore_style instead.
 - Use PEP8 as a guideline for formating thy codes.
-- More `TBA`
 
 ## Creating Modules and Defining Functions:
 - Follow PEP8 naming conventions.
@@ -113,14 +114,15 @@ The project stems from the basic trait of humans: curiosity. `Please add content
 - The function of the function. For example, to simulate a dataset or to simply process what data.
 - Use comprehensive, short and descriptive name. Because not naming your cat  ``Asdfjhsv xyqwe`` follows the same logic.
 - Must declare in comment functions that utilize classes and methods from other modules for easy maintenance and debugging.
-- Example: `TBA`
 
 ## Defining local and global variables:
 - Follow PEP8 naming conventions
 - Again, same with defining functions, remember to document the type and how it is used within your codes.
 
 # How to contribute
-`Please add content`
+- Contributions from non-members can be made by forking the repository and requesting pull once you are done completing the new feature.
+- Team members will review your pull request, resolve any possible conflicts, and decide either to accept or reject your request.
+- Forking and pull requesting information can be found on GitHub documentations.
 
 # License
 MIT or Creative Commons. Your choice. ``TBA``
