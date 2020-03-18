@@ -6,6 +6,9 @@
 
 from modules.DataStructures import *
 
+def test_foo():
+    return
+
 # acceleration data and associated operations
 # for a single time step
 # does NOT include radius as a permanent member:
@@ -109,7 +112,21 @@ class Cluster:
         v_initial = np.sqrt(trialRadius* self.cell.ar)
         v_final = np.sqrt(trialRadius* self.ar_next)
         deltaV2 = v_final - v_initial
-        return np.square(deltaV1-deltaV2)
+        diff = deltaV2-deltaV1
+        avg = ( deltaV1+deltaV2)/2
+        return np.square(diff/avg)
+
+    def omega(self, trialRadius: float):
+        return np.sqrt(self.cell.ar/trialRadius)
+
+    def omegaNext(self, trialRadius: float):
+        return np.sqrt(self.ar_next/trialRadius)
+
+    def costDeltaOmega(self, trialRadius: float):
+        deltaOmega = self.cell.at/trialRadius*self.cell.delta_t
+        deltaOmega2 = self.omegaNext(trialRadius) - self.omega(trialRadius)
+        # print('{0}: {1} - {2}'.format(trialRadius, deltaOmega, deltaOmega2))
+        return np.square(deltaOmega-deltaOmega2)
 
 
 
@@ -127,7 +144,7 @@ def Cluster_CreateFromCell( cell : Cell, radius: float ):
 
 def Cluster_CreateFromAccelData( ad : AccelData, i : int):
     cell = Cell(ad.a[i][0],ad.a[i][1],ad.delta_t(i))
-    return Cluster_CreateFromCell(cell,ad.a[i+1][0])
+    return Cluster_CreateFromCellAndFloat(cell, ad.a[i+1][0])
 
 def AccelData_CreateFromRotary_Tmp( rotData : RotaryData, radius : float):
     #a = np.ndarray( len(rotData), 3 )

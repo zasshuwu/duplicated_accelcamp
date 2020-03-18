@@ -8,8 +8,8 @@ class TestOthers(unittest.TestCase):
         from modules import DataStructures
         DataStructures.test_DataStructures()
 
-    def test_spike(self):
-        pass
+ #   def test_spike(self):
+   #     pass
 
     def test_loadplot(self):
         pass

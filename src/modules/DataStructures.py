@@ -74,12 +74,12 @@ class AccelData (TimeSeries):
         return self.a[:,axisIndex]
 
     def AddNoise(self, magnitude):
-        for i in range(len(self)):
-            self.a[i] += np.array([
-                np.random.normal(0, magnitude, len(a)),
-                np.random.normal(0, magnitude, len(a)),
-                np.random.normal(0, magnitude, len(a))
-            ]).transpose()
+        # for i in range(len(self)):
+        self.a += np.array([
+            np.random.normal(0, magnitude, len(self)),
+            np.random.normal(0, magnitude, len(self)),
+            np.random.normal(0, magnitude, len(self))
+        ]).transpose()
 
 class RotaryData (TimeSeries):
 

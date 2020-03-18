@@ -3,7 +3,11 @@ from modules.Plotter import *
 import tensorflow as tf
 from modules.tfPhysics import cost_SimpleRadial
 
-activate_console_menu = True
+if __name__ == "__main__":
+    activate_console_menu = True
+
+else:
+    activate_console_menu = False
 # region Console Menu Config
 alphaFunction = 10.0
 function_dict = {

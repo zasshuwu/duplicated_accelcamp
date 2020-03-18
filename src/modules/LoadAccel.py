@@ -8,10 +8,12 @@ type_index = file_structure.index("type")
 model_index = file_structure.index("model")
 
 
-def LoadAccelFile(filename):
+def LoadAccelFile(filename=None):
+    if filename is None:
+        filename = dialogOpenFilename()
     modelType = filename.split("/")[-1].split(".")[model_index].capitalize()
     try:
-        accelData = eval(Model_Dict[modelType] + "'" + filename + "')")
+        accelData = Model_Dict[modelType](filename)
     except KeyError:
         return "Model is not currently supported"
     return accelData

@@ -1,5 +1,6 @@
 from modules import Tools
 from modules.DataStructures import *
+from modules.Cluster import *
 import math
 
 # region Generic AlphaSim Functions
@@ -95,6 +96,32 @@ def AccelData_CreateFromRotary( rotData : RotaryData, radius : float):
         ])
     a = np.array(a)
     return AccelData(rotData.t[:-1], a, "synthetic data")
+
+
+def AccelData_CreateFromRotary2( rotData : RotaryData, radius : float):
+    deltaT = rotData.t[1] - rotData.t[0]
+    a = []
+    for i in range(len(rotData) - 1):
+        arfoo = rotData.omega[i] ** 2 * radius
+        arnextfoo = rotData.omega[i+1] ** 2 * radius
+        atfoo = radius * (rotData.omega[i + 1] - rotData.omega[i]) / deltaT
+        cluster = Cluster_CreateFromCell(Cell(arfoo,atfoo,deltaT), radius)
+        # print(cluster.ar_next - arnextfoo)
+        # print(cluster.costDeltaOmega(4))
+        a.append([
+                arfoo,
+                atfoo,
+                0
+        ])
+
+    aout = np.array(a)
+    for i in range(len(a)-1):
+        cluster2 = Cluster_CreateFromAccelData(AccelData(rotData.t[:-1], aout, "synthetic data"), i)
+        print(cluster2.ar_next-a[i+1][0])
+        print(cluster2.costDeltaOmega(4))
+    return AccelData(rotData.t[:-1], aout, "synthetic data")
+
+
 
 # rotate all vectors counterclockwise by an amount "angle"
 def AccelData_Rotate( ad : AccelData, angle : float ):
