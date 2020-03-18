@@ -67,8 +67,8 @@ else:  # diagnostics to eventually dump the data to CSV file.
     print(attr_accel['a'])
 
 
-    # Just to clear up the file
-    dump_file_accel = open("../../data/DumpCSV/accel_dump.txt.txt", "w")
+    # Just to clear up the file for demo
+    dump_file_accel = open("../../data/DumpCSV/accel_dump.txt", "w")
     dump_file_accel.write("")
     dump_file_omega = open("../../data/DumpCSV/omega_dump.txt", "w")
     dump_file_omega.write("")
@@ -83,6 +83,14 @@ else:  # diagnostics to eventually dump the data to CSV file.
     dump_file.write(str("TIME: \n" + " %s, " % attr_omega['t']))
     dump_file = open("../../data/DumpCSV/omega_dump.txt", "a")
     dump_file.write(str("\nOMEGA: \n" + " %s, " % attr_omega['omega']))
+
+    # Writing the files as csv and compare
+
+    dump_csv_omega = np.asarray(attr_omega['omega'], dtype=np.float32)
+    dump_csv_time = np.asarray(attr_omega['t'], dtype=np.float32)
+    np.savetxt('../../data/DumpCSV/test_dump.csv', np.c_[dump_csv_time, dump_csv_omega], delimiter=",", fmt="%1.3f")
+    print("File dumped to CSV successfully")
+
 
     # with open("../../data/DumpCSV/accel_dump.txt") as reimport:
     #     print(reimport)
