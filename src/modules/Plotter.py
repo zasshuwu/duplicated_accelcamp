@@ -63,6 +63,11 @@ class MultiPlotter:
             plt.xlabel(self.xLabel)
 
     def dumpToCSVFile(self, filename):
+        with open('../../data/DumpCSV/'+filename+'.csv', 'w', newline='') as dumpcsv:
+            return
+        dump_omega_self = np.asarray(omega['omega'], dtype=np.float32)
+        dump_omega_time = np.asarray(omega['t'], dtype=float32)
+        np.savetxt('../../data/DumpCSV/'+filename+'')
         return
 
     # displayed under the last graph
