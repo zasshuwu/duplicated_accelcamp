@@ -62,9 +62,10 @@ class MultiPlotter:
         else:
             plt.xlabel(self.xLabel)
 
-    def dumpToCSVFile(self, filename):
+    def dumpToCSVFile(self, filename=input("Enter file name: ")):
         with open('../../data/DumpCSV/'+filename+'.csv', 'w', newline='') as dumpcsv:
             return
+        # This is not complete...
         dump_omega_self = np.asarray(omega['omega'], dtype=np.float32)
         dump_omega_time = np.asarray(omega['t'], dtype=float32)
         np.savetxt('../../data/DumpCSV/'+filename+'')
