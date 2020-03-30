@@ -10,7 +10,7 @@ def rotate_vec3(vec3, theta):
     # reshape to make tf.matmul happy ; no performance cost
     vec3 = np.matrix(np.reshape(vec3, [3, 1]))
 
-    return np.reshape(rot_matrix*vec3, [1, 3])
+    return np.reshape(np.array(rot_matrix*vec3), (3,))
 
 
 def plottest():

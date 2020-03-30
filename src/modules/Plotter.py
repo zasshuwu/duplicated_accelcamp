@@ -202,7 +202,7 @@ def Plot(AccelDatas, RotaryDatas, txt="", _dict={}):
     # myPlotter.display().appendCaptionValues(value_dict) # print parameter list
     myPlotter.display(txt, value_dict)
 
-def Curv_plot(ar, at, r, loss, time):
+# def Curv_plot(ar, at, r, loss, time):
     fig = plt.figure()
     plt.subplot(4, 1, 1)
     plt.plot(time, ar)
