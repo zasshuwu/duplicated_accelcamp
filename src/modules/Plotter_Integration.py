@@ -125,5 +125,5 @@ def PPPlot(xarray, *yarrays):
 
     plot = MultiPlotter.MultiPlotterAggregator(xarray, "X")
     for yarray in yarrays:
-        plot.quitbindSignal(yarray, '')
+        plot.bindSignal(yarray, '')
     plot.displayPoly()
