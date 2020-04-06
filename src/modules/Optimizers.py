@@ -62,15 +62,15 @@ class AdamOptimizer_1D(Optimizer):
             mc = m[t] / (1 - pow(beta1, t))
             vc = v[t] / (1 - pow(beta2, t))
             x[t] = x[t - 1] - alpha * mc / (np.sqrt(vc) + e)
-            # The Following Code is problematic
-            # Purpose: NaN Failsafe and looping limits
-            if np.isnan(x[t]) or self.limits[0] < x[t] < self.limits[1]:
-                if grad > 0:
-                    x[t] = self.limits[1]
-                elif grad < 0:
-                    x[t] = self.limits[0]
-                else:
-                    x[t] = x[t-1]
+            # # The Following Code is problematic
+            # # Purpose: NaN Failsafe and looping limits
+            # if np.isnan(x[t]) or self.limits[0] < x[t] < self.limits[1]:
+            #     if grad > 0:
+            #         x[t] = self.limits[1]
+            #     elif grad < 0:
+            #         x[t] = self.limits[0]
+            #     else:
+            #         x[t] = x[t-1]
 
         self.x = x
         self.grads = grads
