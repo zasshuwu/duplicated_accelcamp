@@ -52,6 +52,7 @@ if out[-1] != x[-1]:
     out.append(x[-1])
 
 out = np.array(out)
+print(out[-1], out[0])
 time = np.arange(out[-1] - 3, out[0] + 3, 0.1) if out[-1] < out[0] else np.arange(out[0] - 3, out[-1] + 3, 0.1)
 
 plt.plot(time, fn(time, *list(parameters.values())), color='blue')
