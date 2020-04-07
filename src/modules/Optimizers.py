@@ -1,4 +1,5 @@
 import numpy as np
+from sys import float_info
 
 
 class Optimizer:
@@ -8,6 +9,7 @@ class Optimizer:
         self.configs = {}
         self.x = None
         self.grads = None
+        self.limits = [-float_info.max, float_info.max]
 
     def FillParameters(self, *params):
         self.params = [*params]
@@ -18,6 +20,12 @@ class Optimizer:
 
     def Optimize(self, *params):
         return 'Ichi-byo Keika!'
+
+    def SetLimits(self, _min=None, _max=None):
+        self.limits = [
+            _min if _min != None else self.limits[0],
+            _max if _max != None else self.limits[1]
+        ]
 
     def CallFunction(self, *values):
         return self.fn(*values, *self.params)
@@ -54,10 +62,19 @@ class AdamOptimizer_1D(Optimizer):
             mc = m[t] / (1 - pow(beta1, t))
             vc = v[t] / (1 - pow(beta2, t))
             x[t] = x[t - 1] - alpha * mc / (np.sqrt(vc) + e)
+            # # The Following Code is problematic
+            # # Purpose: NaN Failsafe and looping limits
+            # if np.isnan(x[t]) or self.limits[0] < x[t] < self.limits[1]:
+            #     if grad > 0:
+            #         x[t] = self.limits[1]
+            #     elif grad < 0:
+            #         x[t] = self.limits[0]
+            #     else:
+            #         x[t] = x[t-1]
 
         self.x = x
         self.grads = grads
-        return x[-1] if return_array else x
+        return x if return_array else x[-1]
 
 
 class SGD_1D(Optimizer):
@@ -78,4 +95,4 @@ class SGD_1D(Optimizer):
 
         self.x = x
         self.grads = grads
-        return x[-1] if return_array else x
+        return x if return_array else x[-1]
