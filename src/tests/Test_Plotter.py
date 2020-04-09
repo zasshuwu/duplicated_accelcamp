@@ -9,7 +9,7 @@ import matplotlib.animation as anime
 from matplotlib import style
 import random
 
-selection = 3     # File selection with tkinter on macOS is not working as expected therefore use default direct path to data file
+selection = 2 # File selection with tkinter on macOS is not working as expected therefore use default direct path to data file
 
 if __name__ == "__main__" and selection is 1:  # manually choose run file
     from modules.Plotter import *
@@ -26,7 +26,6 @@ if __name__ == "__main__" and selection is 1:  # manually choose run file
     test_accel = AccelData_Rotate(AccelData_CreateFromRotary(test_omega, random.randint(0, 10)), random.uniform(0, 5))
     Plot([test_accel], [test_omega], "This is some caption texts that has been yeeted here by default")
 
-    # dictionary injection
 
     
 
@@ -50,7 +49,7 @@ elif __name__ == "__main__" and selection is 2:  # default run file
     test_accel = AccelData_Rotate(AccelData_CreateFromRotary(test_omega, 10), 0)
     Plot([test_accel], [test_omega], "Caption 2 lorem ipsum lorem ipsum")
 
-else:  # diagnostics to eventually dump the data to CSV file.
+    # Dumping csv file
 
     test_omega = Load_Omega("../../data/Dataset 3/run1/run1.omega.pasco.csv")
     test_accel = AccelData_Rotate(
