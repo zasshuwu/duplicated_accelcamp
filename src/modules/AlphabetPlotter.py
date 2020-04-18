@@ -3,7 +3,7 @@ from tkinter import filedialog
 import csv
 import matplotlib.pyplot as plt
 
-root = tk.Tk()
+root = tk.Tk(screenName=':0.0')
 root.withdraw()
 
 file_path = filedialog.askopenfilename()
