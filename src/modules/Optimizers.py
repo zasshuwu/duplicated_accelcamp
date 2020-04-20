@@ -80,3 +80,29 @@ class SGD_1D(Optimizer):
         self.x = x
         self.grads = grads
         return x if return_array else x[-1]
+
+
+class SGD_2D(Optimizer):
+    def __init__(self, fn):
+        Optimizer.__init__(self, fn)
+        self.configs['N'] = 1000
+        self.configs['x0'] = [0, 0]
+        self.configs['grad_approx'] = 0.00001
+
+    def GradientApprox(self, x):
+        x_grad = (self.CallFunction(x[0] + self.configs['grad_approx'], x[1]) - self.CallFunction(x[0] - self.configs['grad_approx'], x[1])) / (2 * self.configs['grad_approx'])
+        y_grad = (self.CallFunction(x[0], x[1] + self.configs['grad_approx']) - self.CallFunction(x[0], x[1] - self.configs['grad_approx'])) / (2 * self.configs['grad_approx'])
+        return np.array([x_grad, y_grad])
+
+    def Optimize(self, alpha, return_array=False):
+        x = np.array([self.configs['x0']] * self.configs['N'])
+        grads = []
+
+        for t in range(self.configs['N'] - 1):
+            grad = self.GradientApprox(x[t])
+            grads.append(grad)
+            x[t + 1] = x[t] - alpha * grad
+
+        self.x = x
+        self.grads = grads
+        return x if return_array else x[-1]
