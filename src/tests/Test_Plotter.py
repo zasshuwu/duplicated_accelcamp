@@ -4,7 +4,6 @@ from modules.Cluster import *
 from modules.LoadAccel import *
 import csv
 
-
 import matplotlib.animation as anime
 from matplotlib import style
 import random
@@ -96,10 +95,13 @@ elif __name__ == "__main__" and selection is 2:  # default run file
     # The shortened method can be seen below ################
 
     # Generalizing the dictionary call and create blank csv file for output:
-    filename = input("Enter file name: ")
-    with open("../../data/DumpCSV/" +filename+".csv", 'w', newline='') as csv_file:
-        print("Dump file "+filename+" created...")
-    np.savetxt('../../data/DumpCSV/'+filename+".csv", np.c_[np.asarray(vars(test_omega)["omega"], dtype=np.float32), np.asarray(vars(test_omega)["t"], dtype=np.float32)], delimiter=",", fmt="%1.3f")
+
+    if (input("Do you want to dump a CSV~? y/n") == "y"):
+
+        filename = input("Enter file name: ")   
+        with open("../../data/DumpCSV/" +filename+".csv", 'w', newline='') as csv_file:
+            print("Dump file "+filename+" created...")
+        np.savetxt('../../data/DumpCSV/'+filename+".csv", np.c_[np.asarray(vars(test_omega)["omega"], dtype=np.float32), np.asarray(vars(test_omega)["t"], dtype=np.float32)], delimiter=", ", fmt="%1.3f")
 
     # with open("../../data/DumpCSV/accel_dump.txt") as reimport:
     #     print(reimport)

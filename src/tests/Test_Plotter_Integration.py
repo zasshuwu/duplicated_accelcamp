@@ -15,7 +15,7 @@ else:
     try:
         omega = LoadOmega.Load_Omega()
     except:
-        print("No files were chosen. Exiting with code 69-420-247")
+        print("No files were chosen. Exiting with code 69-420-247...")
 
 accel = Simulate.AccelData_Rotate(Simulate.AccelData_CreateFromRotary(omega, random.randint(0, 10)),
                                   random.randint(0, 2))

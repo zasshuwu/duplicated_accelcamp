@@ -9,7 +9,6 @@ class Optimizer:
         self.configs = {}
         self.x = None
         self.grads = None
-        self.limits = [-float_info.max, float_info.max]
 
     def FillParameters(self, *params):
         self.params = [*params]
@@ -20,12 +19,6 @@ class Optimizer:
 
     def Optimize(self, *params):
         return 'Ichi-byo Keika!'
-
-    def SetLimits(self, _min=None, _max=None):
-        self.limits = [
-            _min if _min != None else self.limits[0],
-            _max if _max != None else self.limits[1]
-        ]
 
     def CallFunction(self, *values):
         return self.fn(*values, *self.params)
@@ -62,15 +55,6 @@ class AdamOptimizer_1D(Optimizer):
             mc = m[t] / (1 - pow(beta1, t))
             vc = v[t] / (1 - pow(beta2, t))
             x[t] = x[t - 1] - alpha * mc / (np.sqrt(vc) + e)
-            # # The Following Code is problematic
-            # # Purpose: NaN Failsafe and looping limits
-            # if np.isnan(x[t]) or self.limits[0] < x[t] < self.limits[1]:
-            #     if grad > 0:
-            #         x[t] = self.limits[1]
-            #     elif grad < 0:
-            #         x[t] = self.limits[0]
-            #     else:
-            #         x[t] = x[t-1]
 
         self.x = x
         self.grads = grads
@@ -86,6 +70,32 @@ class SGD_1D(Optimizer):
 
     def Optimize(self, alpha, return_array=False):
         x = [self.configs['x0']] * self.configs['N']
+        grads = []
+
+        for t in range(self.configs['N'] - 1):
+            grad = self.GradientApprox(x[t])
+            grads.append(grad)
+            x[t + 1] = x[t] - alpha * grad
+
+        self.x = x
+        self.grads = grads
+        return x if return_array else x[-1]
+
+
+class SGD_2D(Optimizer):
+    def __init__(self, fn):
+        Optimizer.__init__(self, fn)
+        self.configs['N'] = 1000
+        self.configs['x0'] = [0, 0]
+        self.configs['grad_approx'] = 0.00001
+
+    def GradientApprox(self, x):
+        x_grad = (self.CallFunction(x[0] + self.configs['grad_approx'], x[1]) - self.CallFunction(x[0] - self.configs['grad_approx'], x[1])) / (2 * self.configs['grad_approx'])
+        y_grad = (self.CallFunction(x[0], x[1] + self.configs['grad_approx']) - self.CallFunction(x[0], x[1] - self.configs['grad_approx'])) / (2 * self.configs['grad_approx'])
+        return np.array([x_grad, y_grad])
+
+    def Optimize(self, alpha, return_array=False):
+        x = np.array([self.configs['x0']] * self.configs['N'])
         grads = []
 
         for t in range(self.configs['N'] - 1):

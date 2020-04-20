@@ -3,14 +3,17 @@ import numpy as np
 
 
 def rotate_vec3(vec3, theta):
-    rot_matrix = np.matrix([[np.cos(theta), -np.sin(theta), 0],
+    # from https://stackoverflow.com/questions/37042748/how-to-create-a-rotation-matrix-in-tensorflow
+    rot_matrix = [[np.cos(theta), -np.sin(theta), 0],
                   [np.sin(theta), np.cos(theta), 0],
-                  [0.0, 0.0, 0.0]])
+                  [0.0, 0.0, 0.0]]
 
     # reshape to make tf.matmul happy ; no performance cost
-    vec3 = np.matrix(np.reshape(vec3, [3, 1]))
+    vec3 = np.reshape(vec3, [3, 1])
 
-    return np.reshape(np.array(rot_matrix*vec3), (3,))
+    out = np.matmul(rot_matrix, vec3)
+    trans = np.transpose(out)
+    return trans[0]
 
 
 def plottest():
