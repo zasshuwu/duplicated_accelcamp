@@ -26,7 +26,7 @@ X_test = X_test.reshape(10000,784)
 
 print("Extracted our samples and divided our training and testing data sets")
 
-mlp2 = MLPClassifier(hidden_layer_sizes=(100,100,100,100,100,), max_iter=50, alpha=1e-4,
+mlp2 = MLPClassifier(hidden_layer_sizes=(150,150,150,150,150,), max_iter=50, alpha=1e-4,
                     solver='sgd', verbose=10, tol=1e-4, random_state=1,
                     learning_rate_init=0.1)
 
