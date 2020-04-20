@@ -26,7 +26,7 @@ print("Extracted our samples and divided our training and testing data sets")
 
 mlp2 = MLPClassifier(hidden_layer_sizes=(100,100,100,), max_iter=50, alpha=1e-1,
                     solver='sgd', verbose=10, tol=1e-4, random_state=1,
-                    learning_rate_init=0.8)
+                    learning_rate_init=0.6)
 
 mlp2.fit(X_train, y_train)
 print("Training set score: %f" % mlp2.score(X_train, y_train))
