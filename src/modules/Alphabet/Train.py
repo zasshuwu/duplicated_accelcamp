@@ -8,8 +8,6 @@ from sklearn.neural_network import MLPClassifier
 import cv2
 import pickle
 
-path, dirs, files = next(os.walk("./letters_mod"))
-files.sort()
 X, y = extract_training_samples('letters')
 name = input("Name your model")
 
@@ -33,12 +31,6 @@ mlp2 = MLPClassifier(hidden_layer_sizes=(150,150,150,150,150,), max_iter=50, alp
 mlp2.fit(X_train, y_train)
 print("Training set score: %f" % mlp2.score(X_train, y_train))
 print("Test set score: %f" % mlp2.score(X_test, y_test))
-
-# Processes all the scanned images and adds them to the handwritten_story
-handwritten_story = []
-for i in range(len(files)):
-    img = cv2.imread("./letters_mod/" + files[i], cv2.IMREAD_GRAYSCALE)
-    handwritten_story.append(img)
 
 # Save the model
 with open( "models/" + name + ".pickle", "wb") as f:
