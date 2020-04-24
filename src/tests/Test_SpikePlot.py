@@ -4,7 +4,7 @@ from modules.Plotter import *
 
 # test via manual selection of data source ( explicit run of this file alone )
 if __name__ == "__main__":
-    run = LoadRun()
+    run = LoadMultiRun()
     ad_accel = run["accel"]
     ad_omega = run["omega"]
 

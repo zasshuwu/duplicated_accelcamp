@@ -5,11 +5,11 @@
 from modules.tfPhysics import rot_xy
 from modules.tfPhysics import rot_xy_noTF
 import tensorflow as tf
-from modules.Plotter import *
+from modules.PlotterIzk import *
 from modules.DataStructures import *
 
 from modules.Simulate import *
-from modules.Plotter import *
+from modules.PlotterIzk import *
 from modules.Cluster import *
 
 
@@ -127,7 +127,7 @@ def test_Simulate():
     rd = RotaryData_CreateFromAlphaFunction(alphaFunction, N, deltaT, omega_0)
     ad = AccelData_CreateFromRotary(rd, realRadius)
 
-    mp = MultiPlotterNew( rd.t[:-2], 'Time')
+    mp = MultiPlotter( rd.t[:-2], 'Time')
 
     cost = mp.newSignal("cost")
     v = mp.newSignal("v")

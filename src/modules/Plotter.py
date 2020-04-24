@@ -62,7 +62,8 @@ class MultiPlotter:
         else:
             plt.xlabel(self.xLabel)
 
-    def dumpToCSVFile(self, filename=input("Enter file name: ")):
+    def dumpToCSVFile(self, filename ):
+#    def dumpToCSVFile(self, filename=input("Enter file name: ")#):
         with open('../../data/DumpCSV/'+filename+'.csv', 'w', newline='') as dumpcsv:
             return
         # This is not complete...

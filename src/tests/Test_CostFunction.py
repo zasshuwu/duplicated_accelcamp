@@ -1,6 +1,6 @@
 import numpy as np
 from modules.Cluster import *
-from modules.Plotter import *
+from modules.PlotterIzk import *
 from modules.LoadAccel import *
 from modules.Simulate import *
 
@@ -49,21 +49,21 @@ def PlotCost():
 
 def MultiPlotCost(_AccelData, step: int = 1):
     trialRadii = np.arange(0, 30, .1)
-    mp = MultiPlotterNew(trialRadii, 'Radius')
+    mp = MultiPlotter( trialRadii, "Radius")
+    mp.setCaptionText("caption here")
     for ri in range(0, len(_AccelData) - 1, step):
         index = ri
         current_cluster = Cluster_CreateFromAccelData(_AccelData, index)
         cost = np.empty(trialRadii.size)
         for i in range(len(trialRadii)):
             cost[i] = current_cluster.cost(trialRadii[i])
-        mp.bindSignal(cost, 'Cost for t = ' + str(_AccelData.t[index]))
+        mp.bindSignal(cost)
 
-    for signal in mp.signals:
-        plt.plot(mp.tArray, signal.array)
+    # customize the x-y range before calling display()
     plt.ylim(0, 200)
     plt.xlim(0, 8)
-    plt.show()
 
+    mp.displayPoly()
 
 # fn is a function taking one argument
 # which is the values in array range
@@ -86,5 +86,6 @@ if __name__ == "__main__":
         # test_data.AddNoise(0.1)
     else:
         test_data = LoadAccelFile()
+
     MultiPlotCost(test_data, 10)
     # PlotCost()

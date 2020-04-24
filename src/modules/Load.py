@@ -38,8 +38,18 @@ def LoadDataSet(dirpath=None):
     return runs_data
 
 
-        
+# load a single AccelData object and RotaryData object
+# simpler front-end for LoadRun()
+def LoadSingleRun( dirpath=None):
+    run = LoadRun(dirpath)
+    return { "accel": run["accel"][0], "omega": run["omega"][0]}
+
+# deprecated:
 def LoadRun(dirpath=None):
+    return LoadMultiRun(dirpath)
+
+# Load multiple runs as a list of AccelData objects and list of RotaryData objects
+def LoadMultiRun(dirpath=None):
     if(dirpath==None):
         root = Tk()
         root.withdraw()
