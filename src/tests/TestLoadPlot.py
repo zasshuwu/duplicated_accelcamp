@@ -1,5 +1,5 @@
 from modules.Load import *
-from modules.PlotterIzk import *
+from modules.Plotter import *
 
 file=None
 

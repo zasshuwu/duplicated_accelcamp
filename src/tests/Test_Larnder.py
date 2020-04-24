@@ -5,11 +5,10 @@
 from modules.tfPhysics import rot_xy
 from modules.tfPhysics import rot_xy_noTF
 import tensorflow as tf
-from modules.PlotterIzk import *
+from modules.Plotter import *
 from modules.DataStructures import *
 
 from modules.Simulate import *
-from modules.PlotterIzk import *
 from modules.Cluster import *
 
 

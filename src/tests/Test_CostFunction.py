@@ -1,6 +1,6 @@
 import numpy as np
 from modules.Cluster import *
-from modules.PlotterIzk import *
+from modules.Plotter import *
 from modules.LoadAccel import *
 from modules.Simulate import *
 
@@ -63,7 +63,7 @@ def MultiPlotCost(_AccelData, step: int = 1):
     plt.ylim(0, 200)
     plt.xlim(0, 8)
 
-    mp.displayPoly()
+    mp.displayPoly("cost")
 
 # fn is a function taking one argument
 # which is the values in array range

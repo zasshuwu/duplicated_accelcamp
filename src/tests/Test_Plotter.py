@@ -2,7 +2,7 @@ from modules.LoadOmega import *
 from modules.Simulate import *
 from modules.Cluster import *
 from modules.LoadAccel import *
-from modules.PlotterIzk import *
+from modules.Plotter import *
 import csv
 
 import matplotlib.animation as anime
