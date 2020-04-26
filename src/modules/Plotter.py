@@ -144,8 +144,8 @@ class MultiPlotter:
 
     #   need a default value for its "loc" location..
     def setTitle(self,string):
+        plt.suptitle(string)
         return
-        # fig.suptitle(string, loc=location)
 
 # --------- extra service functions ------------
 from modules.DataStructures import *
