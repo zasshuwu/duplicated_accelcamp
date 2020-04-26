@@ -25,7 +25,6 @@ class MultiPlotter:
         self.captionText = ""
         return
 
-
     def applyStyle(self):
         plt.subplots_adjust(hspace=0.2, bottom=.3)  # bottom value and caption area has positive linear relationship
         plt.xlim(0, np.max(self.tArray))
@@ -33,14 +32,14 @@ class MultiPlotter:
         plt.grid(b=True, which='major', color='0.65', linestyle='-', linewidth='1.0')
         plt.grid(b=True, which='minor', color='0.65', linestyle='-', linewidth='0.2')
 
-# signals will be displayed in the order in which they are created via
-# newSignal() or bindSignal()
-    def newSignal(self, yLabel ):
+    # signals will be displayed in the order in which they are created via
+    # newSignal() or bindSignal()
+    def newSignal(self, yLabel):
         array = []
-        self.signals.append(MPSignal(array,yLabel))
+        self.signals.append(MPSignal(array, yLabel))
         return array
 
-#   when using displayPoly() , yLabel ignored
+    #   when using displayPoly() , yLabel ignored
     def bindSignal(self, array, yLabel=""):
         self.signals.append(MPSignal(array, yLabel))
         return array
@@ -80,8 +79,6 @@ class MultiPlotter:
         plt.grid(b=True, which='major', color='0.65', linestyle='-', linewidth='1.0')
         plt.grid(b=True, which='minor', color='0.65', linestyle='-', linewidth='0.2')
 
-
-
     # yAxisLabel must be in double quotes eg "A_x ($m/s^2$)"
     def internal_plotSignal(self, _array, yAxisLabel="", title=""):
         self.iPlot = self.iPlot + 1
@@ -114,10 +111,10 @@ class MultiPlotter:
         else:
             plt.xlabel(self.xLabel)
 
-    def display(self ):
+    def display(self):
         N = len(self.signals)
 
-        for i in range( N ):
+        for i in range(N):
             s = self.signals[i]
             self.internal_plotSignal(s.array, s.yLabel)
 
@@ -126,8 +123,7 @@ class MultiPlotter:
         plt.draw()
         plt.show()
 
-
-    def displayPoly(self, yAxisLabel ):
+    def displayPoly(self, yAxisLabel):
         for signal in self.signals:
             plt.plot(self.tArray, signal.array)
         plt.show()
@@ -143,16 +139,18 @@ class MultiPlotter:
         return
 
     #   need a default value for its "loc" location..
-    def setTitle(self,string):
+    def setTitle(self, string):
         plt.suptitle(string)
         return
+
 
 # --------- extra service functions ------------
 from modules.DataStructures import *
 
-def MultiPlotter_CreateFromRotaryAndAccel( rd : RotaryData, ad : AccelData ):
-    mp = MultiPlotter( rd.t, "time t (s)")
-    mp.bindSignal(rd.omega, "omega (rad/s)") #, "Pasco")
-    mp.bindSignal(ad.getSingleAxis(axisIndex=0), "$A_x (m/s^2)$") #, accel.model)
-    mp.bindSignal(ad.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$")#, accel.model)
+
+def MultiPlotter_CreateFromRotaryAndAccel(rd: RotaryData, ad: AccelData):
+    mp = MultiPlotter(rd.t, "time t (s)")
+    mp.bindSignal(rd.omega, "omega (rad/s)")  # , "Pasco")
+    mp.bindSignal(ad.getSingleAxis(axisIndex=0), "$A_x (m/s^2)$")  # , accel.model)
+    mp.bindSignal(ad.getSingleAxis(axisIndex=1), "$A_y (m/s^2)$")  # , accel.model)
     return mp
