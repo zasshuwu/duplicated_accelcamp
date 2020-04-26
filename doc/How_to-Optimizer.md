@@ -61,3 +61,19 @@ This class implements the `Optimize(...)` function from `Optimizer`. Its paramet
 - `alpha`: the learning rate. `Recommended Value Range: 0.01 - 0.001`
 - `return_array`: if `True`, the functions returns all the optimization steps. else
 it returns only the final value.
+
+##SGD_2D
+This class implements the SGD algorithm with two variables
+
+The `SGD_2D` class  has the following `.configs`:
+- `.configs['N']` contains the number of iterations the optimizer should do on one run. `Default: 1000`
+- `.configs['x0']` contains the starting point of the optimization. `Default: [0, 0]`
+- `.configs['grad_approx']` contains the quality of the approximation. The smaller
+it is the better the approximation. `Default:0.00001`
+
+This class implements the `Optimize(...)` function from `Optimizer`. Its parameters are:
+- `alpha`: the learning rate. `Recommended Value Range: 0.01 - 0.001`
+- `return_array`: if `True`, the functions returns all the optimization steps. else
+it returns only the final value.
+
+It also has its own version of Grad_Approx which supports 2 variable gradients

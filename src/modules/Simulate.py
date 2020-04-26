@@ -127,17 +127,17 @@ def AccelData_CreateFromRotary2( rotData : RotaryData, radius : float):
 def AccelData_Rotate( ad : AccelData, angle : float ):
     a = ad.a
     for i in range(len(a)):
-        a[i] = Tools.rotate_vec3(a[i], angle).tolist()[0]
-        
+        a[i] = Tools.rotate_vec3(a[i], angle)
+
     ad.a = a
     return ad
 
 # add gaussian noise to the components on all 3 axes
 def AccelDat_AddNoise( ad : AccelData, magnitude : float  ):
     ad.a += np.array([
-        np.random.normal(0, magnitude, len(a)),
-        np.random.normal(0, magnitude, len(a)),
-        np.random.normal(0, magnitude, len(a))
+        np.random.normal(0, magnitude, len(ad.a)),
+        np.random.normal(0, magnitude, len(ad.a)),
+        np.random.normal(0, magnitude, len(ad.a))
     ]).transpose()
     return ad
 

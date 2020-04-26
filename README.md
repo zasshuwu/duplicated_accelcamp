@@ -32,15 +32,16 @@ The research project also aims to introduce college students from basic to inter
 - [License](#license)
 
 # Features
-`Please add content`
+`[In progress]`
+1. Graph Host Object Position in 3D space
+2. Handwriting Prediction
+3. Object Shape Prediction
 
 # Examples
-`TBA`
 1. ### Latin alphabetical handwrite grapher
 2. ### SpinLab
 3. ### Retrieve rotational motion parameters: alpha, r, omega
 4. ### Optimize r using gradient descent method
-5. etc
 
 # Getting Started
 ### Understanding the workflow 
@@ -88,7 +89,7 @@ The research project also aims to introduce college students from basic to inter
     | ...
   | src
     | deprecated # we should review the modules and remove the folder soon
-    | modules
+    | modules # all functionalities are in here
       | __init__.py
       | ...
     | tests
@@ -125,6 +126,6 @@ The research project also aims to introduce college students from basic to inter
 - Forking and pull requesting information can be found on GitHub documentations.
 
 # License
-MIT or Creative Commons. Your choice. ``TBA``
+``TBA``
 
 </div>
