@@ -1,0 +1,26 @@
+When unittest module is installed,
+under pycharm can be run via drop-down menu.
+
+When it runs, it automatically picks up the following types of files:
+- filename must be of form *Test*.py
+
+- inside such files:
+  1. must have something that runs at the global scope, and not ifdef'ed to be main, i.e.
+    a file with
+
+if __name__ == "__main__":
+    run()
+
+will NOT be included, but a file with just
+    run()
+WILL be included.
+
+2. If the code breaks ( syntax ), then it will be considered a failed test
+If it passes, but funciton name is not of the form *test*() , then
+ignored, not considered as a test
+
+3. Another mechanism for including a test is to import unittest,
+and derive a class from Class UnitTest
+
+4. Tests that derive from unittest will be listed with a green check mark when they pass
+Tests that are run only because of filename, will NOT be listed anywhere if they pass.
